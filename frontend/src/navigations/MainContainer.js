@@ -12,6 +12,13 @@ import MeScreen from "../screens/MeScreen";
 import ChargingStationDetails from "../screens/ChargingStationDetailsScreen";
 import DirectionsScreen from "../screens/DirectionsScreen";
 
+
+import JoinScreen from "../screens/JoinScreen";
+import FAQScreen from "../screens/FAQScreen";
+import TermsOfUseScreen from "../screens/TermsOfUseScreen";
+import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
+
+
 // Screen Names
 const homeName = "Map";
 const tripsName = "Trips";
@@ -104,6 +111,30 @@ const MainNavigator = () => (
         headerTintColor: "white",
       }}
     />
+    <Stack.Screen
+  name="Join"
+  component={JoinScreen}
+  options={{ headerTitle: "Join", headerStyle: { backgroundColor: "#000C66" }, headerTintColor: "white" }}
+/>
+
+<Stack.Screen
+  name="FAQ"
+  component={FAQScreen}
+  options={{ headerTitle: "FAQ", headerStyle: { backgroundColor: "#000C66" }, headerTintColor: "white" }}
+/>
+
+<Stack.Screen
+  name="TermsOfUse"
+  component={TermsOfUseScreen}
+  options={{ headerTitle: "Terms of Use", headerStyle: { backgroundColor: "#000C66" }, headerTintColor: "white" }}
+/>
+
+<Stack.Screen
+  name="PrivacyPolicy"
+  component={PrivacyPolicyScreen}
+  options={{ headerTitle: "Privacy Policy", headerStyle: { backgroundColor: "#000C66" }, headerTintColor: "white" }}
+/>
+
   </Stack.Navigator>
 );
 
