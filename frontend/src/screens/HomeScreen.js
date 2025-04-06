@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import ScrollableBar from "../../components/ScrollableBar";
-import MainMap from "../../components/MainMap";
+import BottomBar from "../components/BottomBar";
+import MainMap from "../components/MainMap";
 
 const HomeScreen = () => {
   return (
@@ -10,7 +10,7 @@ const HomeScreen = () => {
 
       {/* Scrollable Bar Positioned Above Bottom Navigation */}
       <View style={styles.barContainer}>
-        <ScrollableBar />
+        <BottomBar />
       </View>
     </View>
   );

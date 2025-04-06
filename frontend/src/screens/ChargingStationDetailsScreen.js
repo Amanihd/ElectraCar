@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import StationHeader from "../../components/StationHeader";
-import { useBookmarks } from "../../context/BookmarksContext";
-import SectionDetail from "../../components/SectionDetail";
-import GetDirectionsButton from "../../components/GetDirectionsButton";  // Import the new button component
+import StationHeader from "../components/StationHeader";
+import { useBookmarks } from "../context/BookmarksContext";
+import SectionDetail from "../components/SectionDetail";
+import GetDirectionsButton from "../components/GetDirectionsButton"; // Import the new button component
 
 const ChargingStationDetails = ({ route, navigation }) => {
   const { addBookmark } = useBookmarks();
@@ -28,7 +28,6 @@ const ChargingStationDetails = ({ route, navigation }) => {
     if (!station) return;
     navigation.navigate("DirectionsScreen", { station });
   };
-  
 
   return (
     <View style={{ flex: 1 }}>
@@ -41,7 +40,7 @@ const ChargingStationDetails = ({ route, navigation }) => {
           style={styles.backButton}
         />
         <Image
-          source={require("../../../assets/images/charging_station.jpg")}
+          source={require("../../assets/images/charging_station.jpg")}
           style={styles.stationImage}
         />
       </View>
@@ -58,22 +57,16 @@ const ChargingStationDetails = ({ route, navigation }) => {
 
       {/* Wrap SectionDetails with a View and add margin */}
       <View style={styles.detailsWrapper}>
-        <SectionDetail 
-          title="Plug Type" 
-          content={station.Connections[0]?.ConnectionType?.Title} 
+        <SectionDetail
+          title="Plug Type"
+          content={station.Connections[0]?.ConnectionType?.Title}
         />
-        <SectionDetail 
-          title="Cost" 
-          content={station.UsageCost} 
+        <SectionDetail title="Cost" content={station.UsageCost} />
+        <SectionDetail
+          title="Parking"
+          content={station.AddressInfo.AccessComments}
         />
-        <SectionDetail 
-          title="Parking" 
-          content={station.AddressInfo.AccessComments} 
-        />
-        <SectionDetail 
-          title="Amenities" 
-          content={station.Amenities} 
-        />
+        <SectionDetail title="Amenities" content={station.Amenities} />
       </View>
     </View>
   );

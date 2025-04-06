@@ -5,12 +5,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Screens
-import HomeScreen from "./screens/HomeScreen";
-import TripsScreen from "./screens/TripsScreen";
-import BookmarksScreen from "./screens/BookmarksScreen";
-import MeScreen from "./screens/MeScreen";
-import ChargingStationDetails from "./screens/ChargingStationDetails";
-import DirectionsScreen from "./screens/DirectionsScreen";
+import HomeScreen from "../screens/HomeScreen";
+import TripsScreen from "../screens/TripsScreen";
+import BookmarksScreen from "../screens/BookmarksScreen";
+import MeScreen from "../screens/MeScreen";
+import ChargingStationDetails from "../screens/ChargingStationDetailsScreen";
+import DirectionsScreen from "../screens/DirectionsScreen";
 
 // Screen Names
 const homeName = "Map";

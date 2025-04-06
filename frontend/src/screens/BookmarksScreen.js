@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Import Ionicons
-import { useBookmarks } from "../../context/BookmarksContext";
+import { useBookmarks } from "../context/BookmarksContext";
 
 const BookmarksScreen = ({ navigation }) => {
   const { bookmarks } = useBookmarks();
