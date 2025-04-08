@@ -3,21 +3,21 @@ import { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const ChargingStationMarker = ({ station }) => {
+const ChargingStationMarker = ({ station,userLocation}) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate("ChargingStationDetails", { station });
+    navigation.navigate("ChargingStationDetails", { station,userLocation});
   };
 
   return (
     <Marker
       coordinate={{
-        latitude: station.AddressInfo.Latitude,
-        longitude: station.AddressInfo.Longitude,
+        latitude: station.latitude,
+        longitude: station.longitude,
       }}
-      title={station.AddressInfo.Title}
-      description={station.AddressInfo.AddressLine1}
+      title={station.title}
+      description={station.address}
       onPress={handlePress} // Add the onPress handler here
     >
       <Ionicons name="battery-charging" size={32} color="green" />

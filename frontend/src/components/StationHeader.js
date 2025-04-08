@@ -1,17 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, StyleSheet } from "react-native";
 
-const StationHeader = ({ title, address, onSave }) => {
+
+const StationHeader = ({ title, address }) => {
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerTitle}>{title}</Text>
       <Text>{address}</Text>
-
-      {/* Save Button with Save Icon */}
-      <TouchableOpacity style={styles.saveButton} onPress={onSave}>
-        <Ionicons name="bookmark" size={24} color="red" />
-      </TouchableOpacity>
     </View>
   );
 };
@@ -37,13 +32,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "black", // Make the text color black for better visibility
-  },
-  saveButton: {
-    position: "absolute",
-    right: 15, // Align the button to the right
-    top: 20, // Position it a bit below the header title
-    flexDirection: "row",
-    alignItems: "center",
   },
 });
 

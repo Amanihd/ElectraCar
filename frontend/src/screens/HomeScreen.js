@@ -8,7 +8,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <MainMap />
 
-      {/* Scrollable Bar Positioned Above Bottom Navigation */}
+      
       <View style={styles.barContainer}>
         <BottomBar />
       </View>

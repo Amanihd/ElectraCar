@@ -1,173 +1,160 @@
-import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
-import MapView, { Marker, Polyline } from "react-native-maps";
-import * as Location from "expo-location";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import axios from "axios";
-import polyline from "@mapbox/polyline";
-
-const decodePolyline = (encoded) => {
-  const points = polyline.decode(encoded);
-  return points.map(([lat, lng]) => ({
-    latitude: lat,
-    longitude: lng,
-  }));
-};
-
-const fetchRoute = async (start, end) => {
-  const apiKey = "5b3ce3597851110001cf62482a8efc0d76304656ad6058c5dc8f9864";
-  const url = `https://api.openrouteservice.org/v2/directions/driving-car`;
-
-  try {
-    const response = await axios.post(
-      url,
-      {
-        coordinates: [
-          [start.longitude, start.latitude],
-          [end.longitude, end.latitude],
-        ],
-      },
-      {
-        headers: {
-          Authorization: apiKey,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const route = response.data.routes[0];
-    const coords = decodePolyline(route.geometry);
-    const summary = route.summary;
-
-    return {
-      coords,
-      duration: summary.duration, // seconds
-      distance: summary.distance, // meters
-    };
-  } catch (error) {
-    if (error.response && error.response.status === 429) {
-      console.error("Rate limit exceeded. Retrying after delay...");
-      await new Promise(resolve => setTimeout(resolve, 5000)); // Wait for 5 seconds
-      return await fetchRoute(start, end); // Retry the request
-    }
-
-    console.error("Failed to fetch route:", error);
-    return { coords: [], duration: 0, distance: 0 };
-  }
-};
+import MapComponent from "../components/StationDirection/MapComponent";
+import InfoComponent from "../components/StationDirection/InfoComponent";
+import LoadingComponent from "../components/StationDirection/LoadingComponent";
+import * as Location from "expo-location";
 
 const DirectionsScreen = ({ route }) => {
-  const { station } = route.params;
-  const [userLocation, setUserLocation] = useState(null);
-  const [routeCoords, setRouteCoords] = useState([]);
-  const [summary, setSummary] = useState({ duration: 0, distance: 0 });
-  const mapRef = useRef(null);
-  const lastLocationRef = useRef(null);
-  const [debounceTimeout, setDebounceTimeout] = useState(null);
-
-  const stationCoords = {
-    latitude: station.AddressInfo.Latitude,
-    longitude: station.AddressInfo.Longitude,
-  };
-
-  const loadRoute = async (from) => {
-    const { coords, duration, distance } = await fetchRoute(from, stationCoords);
-    setRouteCoords(coords);
-    setSummary({ duration, distance });
-  };
-
-  const handleLocationUpdate = async (newLocation) => {
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout);
-    }
-
-    const timeout = setTimeout(async () => {
-      const { latitude, longitude } = newLocation.coords;
-      const current = { latitude, longitude };
-      setUserLocation(current);
-      await loadRoute(current);
-    }, 1000); // Delay of 1 second
-
-    setDebounceTimeout(timeout);
-  };
+  const { station, userLocation } = route.params;
+  const [routeCoordinates, setRouteCoordinates] = useState([]);
+  const [routeInfo, setRouteInfo] = useState({ distance: 0, duration: 0 });
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [isTracking, setIsTracking] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState(userLocation);
+  const [locationSubscription, setLocationSubscription] = useState(null);
 
   useEffect(() => {
-    let subscription;
-
-    const startTracking = async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
+    const requestLocationPermission = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        console.log("Permission denied");
+        setErrorMsg("Permission to access location was denied");
         return;
       }
-
-      const initialLocation = await Location.getCurrentPositionAsync({});
-      const coords = initialLocation.coords;
-      setUserLocation(coords);
-      lastLocationRef.current = coords;
-      await loadRoute(coords);
-
-      subscription = await Location.watchPositionAsync(
-        {
-          accuracy: Location.Accuracy.High,
-          timeInterval: 5000,
-          distanceInterval: 10,
-        },
-        handleLocationUpdate
-      );
     };
 
-    startTracking();
+    requestLocationPermission();
+
+    let subscription = null;
+
+    if (isTracking) {
+      // Start tracking the user's location
+      Location.watchPositionAsync(
+        { accuracy: Location.Accuracy.High, distanceInterval: 10 },
+        (location) => {
+          setCurrentLocation(location.coords);
+        }
+      )
+        .then((sub) => {
+          setLocationSubscription(sub); // Store the subscription
+        })
+        .catch((error) => {
+          console.error("Error starting location watch:", error);
+        });
+    } else {
+      // Stop tracking if already tracking
+      if (locationSubscription && locationSubscription.remove) {
+        locationSubscription.remove(); // Remove the subscription when tracking stops
+      }
+    }
 
     return () => {
-      if (subscription) subscription.remove();
+      if (locationSubscription && locationSubscription.remove) {
+        locationSubscription.remove(); // Cleanup subscription on component unmount
+      }
     };
-  }, []);
+  }, [isTracking]);
 
-  const minutes = Math.round(summary.duration / 60);
-  const km = (summary.distance / 1000).toFixed(1);
+  useEffect(() => {
+    if (currentLocation) {
+      const getDirections = async () => {
+        try {
+          const response = await axios.get(
+            `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf62482a8efc0d76304656ad6058c5dc8f9864`,
+            {
+              params: {
+                start: `${currentLocation.longitude},${currentLocation.latitude}`,
+                end: `${station.longitude},${station.latitude}`,
+              },
+            }
+          );
+
+          if (response.data.features && response.data.features.length > 0) {
+            const directions = response.data.features[0].geometry.coordinates;
+            if (directions) {
+              const coordinates = directions.map((coord) => ({
+                latitude: coord[1],
+                longitude: coord[0],
+              }));
+
+              // Include the end location (charging station) in the coordinates
+              coordinates.push({
+                latitude: station.latitude,
+                longitude: station.longitude,
+              });
+
+              setRouteCoordinates(coordinates);
+
+              // Extract distance and duration from the response
+              const distance =
+                response.data.features[0].properties.segments[0].distance /
+                1000; // Convert meters to kilometers
+              const duration =
+                response.data.features[0].properties.segments[0].duration / 60; // Convert seconds to minutes
+              setRouteInfo({
+                distance: distance.toFixed(2), // Keep 2 decimal points
+                duration: duration.toFixed(0), // Round to nearest minute
+              });
+            } else {
+              console.error("No coordinates found in the directions.");
+            }
+          } else {
+            console.error("Invalid API response or no route found.");
+          }
+        } catch (error) {
+          console.error("Error fetching directions:", error);
+        }
+      };
+
+      getDirections();
+    }
+  }, [currentLocation, station]);
+
+  const toggleTracking = () => {
+    setIsTracking((prev) => !prev); // Toggle tracking state
+  };
+
+  if (!currentLocation) {
+    return <LoadingComponent errorMsg={errorMsg} />;
+  }
 
   return (
-    <View style={styles.container}>
-      <MapView
-        ref={mapRef}
-        style={styles.map}
-        initialRegion={{
-          latitude: stationCoords.latitude,
-          longitude: stationCoords.longitude,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
-        }}
+    <View style={[styles.container, isTracking && styles.stopButton]}>
+      <TouchableOpacity
+        // Change button style based on isTracking
+        onPress={toggleTracking}
       >
-        {userLocation && (
-          <Marker coordinate={userLocation} title="You are here" pinColor="blue" />
-        )}
-        <Marker coordinate={stationCoords} title={station.AddressInfo.Title} />
-        {routeCoords.length > 0 && (
-          <Polyline coordinates={routeCoords} strokeColor="blue" strokeWidth={4} />
-        )}
-      </MapView>
-
-      {/* 🚗 Trip Summary */}
-      <View style={styles.summaryBox}>
-        <Text style={styles.summaryText}>🕒 {minutes} mins | 📍 {km} km</Text>
-      </View>
+        <Text style={styles.buttonText}>
+          {isTracking ? "Stop Tracking..." : "Start Tracking"}
+        </Text>
+      </TouchableOpacity>
+      <MapComponent
+        userLocation={currentLocation}
+        station={station}
+        routeCoordinates={routeCoordinates}
+      />
+      <InfoComponent routeInfo={routeInfo} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  map: { width: "100%", height: "70%" },
-  summaryBox: {
-    backgroundColor: "#fff",
-    padding: 10,
+  container: {
+    flex: 1,
+    paddingTop: 20,
+
+    justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 1,
-    borderColor: "#ddd",
+    backgroundColor: "#007bff",
   },
-  summaryText: {
+  stopButton: {
+    backgroundColor: "#ff6347", // Change color when tracking
+  },
+  buttonText: {
+    color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
+    paddingBottom: 10,
   },
 });
 

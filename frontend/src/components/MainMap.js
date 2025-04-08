@@ -3,16 +3,16 @@ import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import ResetLocationButton from "./MapControls/ResetLocationButton";
-import ZoomOutButton from "./MapControls/ZoomOutButton";
 import ChargingStationMarker from "./ChargingStationMarker";
-import { useNavigation } from "@react-navigation/native";
+
+// Import the local JSON file
+import chargingStationsData from '../data/stations.json';
 
 const MainMap = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [mapRef, setMapRef] = useState(null);
   const [chargingStations, setChargingStations] = useState([]);
-  const [zoomLevel, setZoomLevel] = useState(0.01);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -31,10 +31,8 @@ const MainMap = () => {
         longitude: location.coords.longitude,
       });
 
-      fetchChargingStations(
-        location.coords.latitude,
-        location.coords.longitude
-      );
+      // Use local charging station data
+      setChargingStations(chargingStationsData);
     };
 
     getLocation();
@@ -48,32 +46,6 @@ const MainMap = () => {
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
       });
-    }
-  };
-
-  const zoomOut = () => {
-    if (mapRef) {
-      const newZoomLevel = zoomLevel + 0.05;
-      setZoomLevel(newZoomLevel);
-
-      mapRef.animateToRegion({
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-        latitudeDelta: newZoomLevel,
-        longitudeDelta: newZoomLevel,
-      });
-    }
-  };
-
-  const fetchChargingStations = async (latitude, longitude) => {
-    try {
-      const response = await fetch(
-        `https://api.openchargemap.io/v3/poi/?output=json&latitude=${latitude}&longitude=${longitude}&maxresults=10&key=a164f27a-d27a-456a-a7fe-0fd483025c3f`
-      );
-      const data = await response.json();
-      setChargingStations(data);
-    } catch (error) {
-      console.error("Error fetching charging stations:", error);
     }
   };
 
@@ -101,12 +73,11 @@ const MainMap = () => {
         {userLocation && <Marker coordinate={userLocation} pinColor="blue" />}
 
         {chargingStations.map((station, index) => (
-          <ChargingStationMarker key={index} station={station} />
+          <ChargingStationMarker key={index} station={station}   userLocation={userLocation}/>
         ))}
       </MapView>
 
       <ResetLocationButton onPress={resetMapToUserLocation} />
-      <ZoomOutButton onPress={zoomOut} />
     </View>
   );
 };

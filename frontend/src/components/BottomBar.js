@@ -1,15 +1,17 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import CustomButton from "./CustomButton"; // Import CustomButton component
+import { useNavigation } from "@react-navigation/native";
+import CustomButton from "./CustomButton";
 
-const ScrollableBar = () => {
+const BottomBar = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.viewContent}>
         <CustomButton
           iconName="search"
           label="Search"
-          onPress={() => console.log("Navigate to Search")}
+          onPress={() => navigation.navigate("SearchStation")}
         />
         <CustomButton
           iconName="options"
@@ -38,20 +40,19 @@ const ScrollableBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white', // Set background to white
-    padding: 10,              // Optional: Add padding around the container
-    width: '100%',
-    paddingTop:20,
-    paddingBottom:20,
-    borderTopLeftRadius:30,
-    borderTopRightRadius:30,
-    
+    backgroundColor: "white", // Set background to white
+    padding: 10, // Optional: Add padding around the container
+    width: "100%",
+    paddingTop: 20,
+    paddingBottom: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   viewContent: {
-    flexDirection: "row",      // Align buttons horizontally
-    flexWrap: "wrap",          // Wrap buttons to the next line if necessary
-    justifyContent: "center",  // Center buttons horizontally
+    flexDirection: "row", // Align buttons horizontally
+    flexWrap: "wrap", // Wrap buttons to the next line if necessary
+    justifyContent: "center", // Center buttons horizontally
   },
 });
 
-export default ScrollableBar;
+export default BottomBar;

@@ -1,0 +1,1263 @@
+[
+  {
+    "id": 1,
+    "title": "شارع حامد",
+    "address": "شارع حامد",
+    "latitude": 31.945688947047472,
+    "longitude": 35.83857841304484,
+    "cost": "0.25",
+    "amenities": [],
+    "plugType": [
+      "GB-T DC - GB/T 20234.3"
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 2,
+    "title": "JoPetrol AbuAlanda",
+    "address": "AlHizam St.",
+    "latitude": 31.9115305,
+    "longitude": 35.9831179,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "CCS (Type 1)",
+      "GB-T DC - GB/T 20234.3"
+    ],
+    "plugScore": null,
+    "parking": 10,
+    "isFast": false,
+    "numConnections": 4,
+    "isAvailable": true
+  },
+  {
+    "id": 3,
+    "title": "Desert Highway",
+    "address": "Desert Highway",
+    "latitude": 30.22010699357827,
+    "longitude": 35.73037028047872,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "CCS (Type 2)",
+      "CHAdeMO"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 4,
+    "title": "Ahl Hussein youth city club",
+    "address": "Al Shaheed Street",
+    "latitude": 31.986788284867387,
+    "longitude": 35.90020299002276,
+    "cost": "1",
+    "amenities": [],
+    "plugType": [
+      "Type 1 (J1772)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 5,
+    "title": "محطة الحق جوبترول",
+    "address": "Desert Highway",
+    "latitude": 30.06252178325643,
+    "longitude": 35.48904090635892,
+    "cost": "2",
+    "amenities": [],
+    "plugType": [
+      "GB-T DC - GB/T 20234.3"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 6,
+    "title": "استراحة أعمدة القدس",
+    "address": "Desert Highway",
+    "latitude": 30.79618911824919,
+    "longitude": 35.96023132969003,
+    "cost": "2",
+    "amenities": [],
+    "plugType": [
+      "GB-T DC - GB/T 20234.3"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 7,
+    "title": "City mall Tesla destination charger",
+    "address": "city mall",
+    "latitude": 31.979626241223485,
+    "longitude": 35.83664729441898,
+    "cost": "2 JDs",
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) ",
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 8,
+    "title": "JoPetrol Misdar Station",
+    "address": "Prince Al Hasan Street",
+    "latitude": 31.93298317563577,
+    "longitude": 35.93317895368489,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 9,
+    "title": "JoPetrol Salah Hunaity",
+    "address": "65;40",
+    "latitude": 31.816154864684876,
+    "longitude": 35.637221374726664,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 10,
+    "title": "JoPetrol Armouti EV charging station ",
+    "address": "Prince Hashem Bin Al-Hussein Street",
+    "latitude": 31.91770680242223,
+    "longitude": 35.90255686324508,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 11,
+    "title": "ION Amman Station",
+    "address": "Za'Al Abu Tayeh Street",
+    "latitude": 31.977235619659552,
+    "longitude": 35.85405901299464,
+    "cost": "1",
+    "amenities": [],
+    "plugType": [
+      "Type 1 (J1772)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 12,
+    "title": "ION Zarqa station",
+    "address": "Sukhneh Road",
+    "latitude": 32.08822013671316,
+    "longitude": 36.066144974207305,
+    "cost": "1",
+    "amenities": [],
+    "plugType": [
+      "Type 1 (J1772)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 13,
+    "title": "ION Mafraq station",
+    "address": "15",
+    "latitude": 32.28844808986682,
+    "longitude": 36.23202912889337,
+    "cost": "1",
+    "amenities": [],
+    "plugType": [
+      "Type 1 (J1772)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 14,
+    "title": "ION Gravity coffee house station",
+    "address": "King Abdullah Bin Al-Hussein II",
+    "latitude": 32.17905694247136,
+    "longitude": 35.85296950097984,
+    "cost": "1",
+    "amenities": [],
+    "plugType": [
+      "Type 1 (J1772)"
+    ],
+    "plugScore": null,
+    "parking": 4,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 15,
+    "title": "JoPetrol 911 ",
+    "address": "Petra Steert",
+    "latitude": 32.500787505663666,
+    "longitude": 35.975959572005536,
+    "cost": "Payment",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 16,
+    "title": "Total Niveen station",
+    "address": "Petra st.",
+    "latitude": 32.5260861036535,
+    "longitude": 35.89691376406756,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 17,
+    "title": "Manaseer Jurd Daraweesh Station",
+    "address": "Desert Highway",
+    "latitude": 30.70642924752171,
+    "longitude": 35.88761272934687,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 18,
+    "title": "Manaseer Karak - Mutah Station",
+    "address": "",
+    "latitude": 31.12686303990587,
+    "longitude": 35.71743642610602,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 19,
+    "title": "Manseer Zarqa / Khaw station",
+    "address": "Mekkah 36th Street",
+    "latitude": 32.088416251568574,
+    "longitude": 36.11132098623273,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 20,
+    "title": "Al Hurriyah Street",
+    "address": "Al Hurriyah Street",
+    "latitude": 31.925029508737907,
+    "longitude": 35.8691731201269,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 4,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 21,
+    "title": "Manaseer Bayader Wadi-Seer station",
+    "address": "Al-Sina'a Street",
+    "latitude": 31.945967094735835,
+    "longitude": 35.844438914064085,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 22,
+    "title": "Manaseer Qatranah 2 station",
+    "address": "Queen Alia Airport Road",
+    "latitude": 31.279878150999266,
+    "longitude": 36.054573633350515,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 23,
+    "title": "Manaseer Dead Sea station",
+    "address": "40",
+    "latitude": 31.81975513020761,
+    "longitude": 35.67319191186709,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 24,
+    "title": "Manaseer Yaduda 2",
+    "address": "Madaba St.",
+    "latitude": 31.86251889829903,
+    "longitude": 35.92702793288004,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 25,
+    "title": "Manaseer Al Hezam 3 station",
+    "address": "Al Hezam Al Daeri Road",
+    "latitude": 31.967689984346322,
+    "longitude": 35.99726047509273,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 26,
+    "title": "Manaseer Al-Quds Arabiya Station",
+    "address": "Al-Quds Street",
+    "latitude": 31.911212584552956,
+    "longitude": 35.89668989142626,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 27,
+    "title": "Manaseer Marka Balad Station",
+    "address": "King Abdullah I Street",
+    "latitude": 31.98777933878415,
+    "longitude": 35.999555684830284,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 28,
+    "title": "Manaseer Wadi Saqra Station",
+    "address": "Arar Street",
+    "latitude": 31.96407963963651,
+    "longitude": 35.888614932086284,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 29,
+    "title": "Manaseer Markaz Thaqafi Station",
+    "address": "Queen Alia Street",
+    "latitude": 31.9777418696887,
+    "longitude": 35.90321658324751,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 30,
+    "title": "Manaseer Saru 1 Station",
+    "address": "Al-Salt Street",
+    "latitude": 32.038929947793335,
+    "longitude": 35.78931460932745,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 31,
+    "title": "Manaseer Saru 2 Station",
+    "address": "Al-Salt Street",
+    "latitude": 32.04223252531422,
+    "longitude": 35.78107040340558,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 32,
+    "title": "Manaseer Baqa'a Station",
+    "address": "King Abdullah Bin Al-Hussein II Street",
+    "latitude": 32.09234197652485,
+    "longitude": 35.843966206399045,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 33,
+    "title": "Manaseer Ramtha station",
+    "address": "Jordan Street",
+    "latitude": 32.52993899362039,
+    "longitude": 36.000555911904144,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 34,
+    "title": "Manaseer Irbid Station",
+    "address": "Rateb Albatanyah",
+    "latitude": 32.54395647980475,
+    "longitude": 35.858839406006155,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 35,
+    "title": "Manaseer Husun 2 Station",
+    "address": "King Abdullah II Eben Al Hussein",
+    "latitude": 32.50229320659926,
+    "longitude": 35.876958533548304,
+    "cost": "1,5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 3,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 36,
+    "title": "JoPetrol Aqaba Station",
+    "address": "Jordan Valley Highway",
+    "latitude": 29.56431481465316,
+    "longitude": 35.01985641130955,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 37,
+    "title": "JoPetrol Zarqa Station",
+    "address": "15",
+    "latitude": 32.04421007637677,
+    "longitude": 36.11439716793825,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)"
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 38,
+    "title": "JoPetrol Salt station",
+    "address": "Al-Salt Street",
+    "latitude": 32.04425644898555,
+    "longitude": 35.77626996836352,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 39,
+    "title": "JoPetrol Addustour station",
+    "address": "Queen Rania Al-Abdullah Street",
+    "latitude": 31.999000756675855,
+    "longitude": 35.87956439972254,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 40,
+    "title": "JoPetrol - Gulf Khalda EV Charger",
+    "address": "Wasfi At-Tall Street",
+    "latitude": 31.996846744248444,
+    "longitude": 35.83782931905273,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 2,
+    "isAvailable": true
+  },
+  {
+    "id": 41,
+    "title": "JoPetrol Dakhelieh EV Charging",
+    "address": "Queen Alia",
+    "latitude": 31.974699742143912,
+    "longitude": 35.90803663912766,
+    "cost": "1.5",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 42,
+    "title": "Yajouz Street",
+    "address": "Yajouz Street",
+    "latitude": 32.02732348358761,
+    "longitude": 35.896163305115806,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Unknown"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 43,
+    "title": "Nima Arabia Co. Ltd. – Show Room",
+    "address": "Abu Alabbas Elkettani",
+    "latitude": 31.986574,
+    "longitude": 35.960562,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 1 (J1772)"
+    ],
+    "plugScore": null,
+    "parking": null,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 44,
+    "title": "Smart Buy",
+    "address": "6 Fahmi Hashem Street",
+    "latitude": 31.951912,
+    "longitude": 35.855571,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 45,
+    "title": "Dunes Club",
+    "address": "Airport Road",
+    "latitude": 31.852459,
+    "longitude": 35.896699,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 46,
+    "title": "Day By Day Cafe",
+    "address": "PR. Bandar Street",
+    "latitude": 31.173937,
+    "longitude": 35.711063,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 47,
+    "title": "La Storia Tourism Complex",
+    "address": "Nebo Street",
+    "latitude": 31.767311,
+    "longitude": 35.742147,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 48,
+    "title": "Romero Restaurant",
+    "address": "3 Mohammad Hussein Haykal Street",
+    "latitude": 31.952704,
+    "longitude": 35.912359,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 49,
+    "title": "Sun City Camp",
+    "address": "Ad Disah Road",
+    "latitude": 29.656966,
+    "longitude": 35.4796,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 50,
+    "title": "Grand Hyatt Amman",
+    "address": "Hussein Bin Ali Street",
+    "latitude": 31.955856,
+    "longitude": 35.909974,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 51,
+    "title": "Fakhreldin Restaurant",
+    "address": "Taha Hussein Stree",
+    "latitude": 31.951953,
+    "longitude": 35.920235,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 52,
+    "title": "American Products Center",
+    "address": "Airport Road",
+    "latitude": 31.751603,
+    "longitude": 35.939779,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 53,
+    "title": "Intercontinental Amman",
+    "address": "Islamic College Street",
+    "latitude": 31.953363,
+    "longitude": 35.913405,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 54,
+    "title": "Zahr W Raihan",
+    "address": "Yathreb",
+    "latitude": 32.013398,
+    "longitude": 35.833279,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 55,
+    "title": "Petra Marriott Hotel",
+    "address": "Queen Rania Al Abdallah Street",
+    "latitude": 30.304492,
+    "longitude": 35.463703,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 56,
+    "title": "Spago Restaurant",
+    "address": "Nouh Ar-Roumi St.",
+    "latitude": 31.956728,
+    "longitude": 35.858984,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 57,
+    "title": "Tala Bay Resort",
+    "address": "South Beach Coastal Road",
+    "latitude": 29.409229,
+    "longitude": 34.979191,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 58,
+    "title": "Kempinski Hotel Aqaba Red Sea",
+    "address": "K. Hussein St.",
+    "latitude": 29.532021,
+    "longitude": 34.997382,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Tesla (Model S/X)"
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 59,
+    "title": "Mecca Mall",
+    "address": "Abdullah Ad Dawud",
+    "latitude": 31.977694,
+    "longitude": 35.843194,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 60,
+    "title": "IKEA Amman",
+    "address": "Queen Alia Airport St 561",
+    "latitude": 31.825703,
+    "longitude": 35.901175,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 61,
+    "title": "The Petra Marriott Hotel",
+    "address": "Queen Rania Al Abdallah Street",
+    "latitude": 30.304395,
+    "longitude": 35.463784,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 62,
+    "title": "Taj Mall",
+    "address": "PR. Hashim St",
+    "latitude": 31.941387,
+    "longitude": 35.88807,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 63,
+    "title": "JoPetrol Jarash station",
+    "address": "جرش / الأردن",
+    "latitude": 32.2886875,
+    "longitude": 35.9138125,
+    "cost": "Payment",
+    "amenities": [],
+    "plugType": [
+      "CHAdeMO",
+      "CCS (Type 2)",
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 2,
+    "isFast": false,
+    "numConnections": 3,
+    "isAvailable": true
+  },
+  {
+    "id": 64,
+    "title": "Movenpick Resort & Spa Dead Sea",
+    "address": "Dead Sea Road",
+    "latitude": 31.717687,
+    "longitude": 35.588363,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 65,
+    "title": "Kempinski Hotel Ishtar Dead Sea",
+    "address": "Swaimeh Dead Sea Highway",
+    "latitude": 31.715335,
+    "longitude": 35.58619,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 66,
+    "title": "Grand East Hotel",
+    "address": "Dead Sea Road",
+    "latitude": 31.745711,
+    "longitude": 35.593189,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 67,
+    "title": "Dead Sea Spa Hotel",
+    "address": "Dead Sea Road",
+    "latitude": 31.713519,
+    "longitude": 35.585908,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 68,
+    "title": "Holiday Inn Resort Dead Sea",
+    "address": "Dead Sea Road",
+    "latitude": 31.751259,
+    "longitude": 35.589965,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 69,
+    "title": "Hilton Dead Sea Resort",
+    "address": "Dead Sea Road",
+    "latitude": 31.721888,
+    "longitude": 35.587162,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 70,
+    "title": "Crowne Plaza Jordan Dead Sea Resort & Spa",
+    "address": "Dead Sea Road",
+    "latitude": 31.707678,
+    "longitude": 35.584298,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  },
+  {
+    "id": 71,
+    "title": "Dead Sea Marriott Resort",
+    "address": "Dead Sea Road",
+    "latitude": 31.718667,
+    "longitude": 35.586902,
+    "cost": null,
+    "amenities": [],
+    "plugType": [
+      "Type 2 (Tethered Connector) "
+    ],
+    "plugScore": null,
+    "parking": 1,
+    "isFast": false,
+    "numConnections": 1,
+    "isAvailable": true
+  }
+]

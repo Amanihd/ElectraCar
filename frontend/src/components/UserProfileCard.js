@@ -8,7 +8,7 @@ const UserProfileCard = ({ name, email }) => {
 
   return (
     <View style={styles.profileBox}>
-      {/* Top row: Icon + Info + Edit */}
+
       <View style={styles.headerRow}>
         <Ionicons name="person-circle-outline" size={50} color="#666" />
 
@@ -22,7 +22,7 @@ const UserProfileCard = ({ name, email }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Bottom Button */}
+    
       <View style={styles.buttonWrapper}>
         <Button
           title="Add Vehicle"
@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     borderRadius: 12,
     marginBottom: 20,
+    borderColor:'gray',
+    borderWidth: 1,
   },
   headerRow: {
     flexDirection: 'row',
