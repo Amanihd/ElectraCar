@@ -3,20 +3,21 @@ import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "./CustomButton";
 
-const BottomBar = () => {
+const BottomBar = ({ userLocation }) => {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.viewContent}>
         <CustomButton
           iconName="search"
           label="Search"
-          onPress={() => navigation.navigate("SearchStation")}
+          onPress={() => navigation.navigate("SearchStation", { userLocation })}
         />
         <CustomButton
           iconName="options"
           label="All Filters"
-          onPress={() => console.log("Apply Filter")}
+          onPress={() => navigation.navigate("AllFilters")}
         />
         <CustomButton
           iconName="checkmark-circle"
@@ -40,8 +41,8 @@ const BottomBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white", // Set background to white
-    padding: 10, // Optional: Add padding around the container
+    backgroundColor: "white",
+    padding: 10, 
     width: "100%",
     paddingTop: 20,
     paddingBottom: 20,
@@ -49,9 +50,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
   },
   viewContent: {
-    flexDirection: "row", // Align buttons horizontally
-    flexWrap: "wrap", // Wrap buttons to the next line if necessary
-    justifyContent: "center", // Center buttons horizontally
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    justifyContent: "center", 
   },
 });
 

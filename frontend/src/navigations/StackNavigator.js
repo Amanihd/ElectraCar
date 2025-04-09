@@ -9,6 +9,7 @@ import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import SupportScreen from "../screens/SupportScreen";
 import SearchStationScreen from "../screens/SearchStationScreen";
+import AllFiltersScreen from "../screens/AllFiltersScreen";
 
 const Stack = createStackNavigator();
 
@@ -83,6 +84,15 @@ const StackNavigator = () => (
       component={SearchStationScreen}
       options={{
         headerTitle: "Search Station",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="AllFilters"
+      component={AllFiltersScreen}
+      options={{
+        headerTitle: "All Filters",
         headerStyle: { backgroundColor: "#000C66" },
         headerTintColor: "white",
       }}

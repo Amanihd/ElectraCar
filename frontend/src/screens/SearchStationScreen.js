@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,11 +6,12 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-} from 'react-native';
-import stations from '../data/stations.json';
+} from "react-native";
+import stations from "../data/stations.json";
 
-const SearchStationScreen = ({ navigation }) => {
-  const [query, setQuery] = useState('');
+const SearchStationScreen = ({ route, navigation }) => {
+  const { userLocation } = route.params;
+  const [query, setQuery] = useState("");
   const [filteredStations, setFilteredStations] = useState([]);
 
   const handleSearch = (text) => {
@@ -22,7 +23,7 @@ const SearchStationScreen = ({ navigation }) => {
   };
 
   const handleStationPress = (station) => {
-    navigation.navigate('ChargingStationDetails', { station }); // send station data to detail screen
+    navigation.navigate("ChargingStationDetails", { station, userLocation }); // send station data to detail screen
   };
 
   return (
@@ -46,9 +47,11 @@ const SearchStationScreen = ({ navigation }) => {
             <Text style={styles.resultSub}>{item.address}</Text>
           </TouchableOpacity>
         )}
-        ListEmptyComponent={() => (
-          query.length > 0 && <Text style={styles.noResults}>No stations found</Text>
-        )}
+        ListEmptyComponent={() =>
+          query.length > 0 && (
+            <Text style={styles.noResults}>No stations found</Text>
+          )
+        }
       />
     </View>
   );
@@ -58,11 +61,11 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   input: {
     borderWidth: 1,
-    borderColor: '#aaa',
+    borderColor: "#aaa",
     borderRadius: 8,
     padding: 12,
     marginBottom: 12,
@@ -70,20 +73,20 @@ const styles = StyleSheet.create({
   result: {
     padding: 12,
     borderBottomWidth: 1,
-    borderColor: '#eee',
+    borderColor: "#eee",
   },
   resultText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   resultSub: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
   noResults: {
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 20,
-    color: 'gray',
+    color: "gray",
   },
 });
 

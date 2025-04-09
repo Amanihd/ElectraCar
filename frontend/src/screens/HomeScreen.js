@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import BottomBar from "../components/BottomBar";
 import MainMap from "../components/MainMap";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
+  const [userLocation, setUserLocation] = useState(null);
+
   return (
     <View style={styles.container}>
-      <MainMap />
-
-      
+      <MainMap getlocation={setUserLocation} />
       <View style={styles.barContainer}>
-        <BottomBar />
+        <BottomBar userLocation={userLocation} navigation={navigation} />
       </View>
     </View>
   );
@@ -19,11 +19,11 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative", // Ensures proper positioning of absolute elements
+    position: "relative",
   },
   barContainer: {
     position: "absolute",
-    bottom: -5, // Adjust this value based on your Bottom Navigation height
+    bottom: -5,
     left: 0,
     right: 0,
   },

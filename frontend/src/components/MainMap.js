@@ -5,10 +5,9 @@ import * as Location from "expo-location";
 import ResetLocationButton from "./MapControls/ResetLocationButton";
 import ChargingStationMarker from "./ChargingStationMarker";
 
-// Import the local JSON file
-import chargingStationsData from '../data/stations.json';
+import chargingStationsData from "../data/stations.json";
 
-const MainMap = () => {
+const MainMap = ({ getlocation }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [mapRef, setMapRef] = useState(null);
@@ -30,6 +29,11 @@ const MainMap = () => {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       });
+
+      getlocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      })
 
       // Use local charging station data
       setChargingStations(chargingStationsData);
@@ -73,7 +77,11 @@ const MainMap = () => {
         {userLocation && <Marker coordinate={userLocation} pinColor="blue" />}
 
         {chargingStations.map((station, index) => (
-          <ChargingStationMarker key={index} station={station}   userLocation={userLocation}/>
+          <ChargingStationMarker
+            key={index}
+            station={station}
+            userLocation={userLocation}
+          />
         ))}
       </MapView>
 
