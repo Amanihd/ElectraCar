@@ -1,10 +1,22 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import CustomButton from "./CustomButton";
 
-const BottomBar = ({ userLocation }) => {
-  const navigation = useNavigation();
+const BottomBar = ({
+  userLocation,
+  navigation,
+  setFilterTypes,
+  filterTypes,
+}) => {
+  const toggleFilter = (filter) => {
+    setFilterTypes((prevFilters) => {
+      if (prevFilters.includes(filter)) {
+        return prevFilters.filter((item) => item !== filter); // remove filter
+      } else {
+        return [...prevFilters, filter]; // add filter
+      }
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -22,17 +34,20 @@ const BottomBar = ({ userLocation }) => {
         <CustomButton
           iconName="checkmark-circle"
           label="Available"
-          onPress={() => console.log("Navigate to available")}
+          selected={filterTypes.includes("available")} // Check if the filter is selected
+          onPress={() => toggleFilter("available")}
         />
         <CustomButton
           iconName="battery-charging"
           label="2+ Chargers"
-          onPress={() => console.log("Navigate to chargers")}
+          selected={filterTypes.includes("2plus")} // Check if the filter is selected
+          onPress={() => toggleFilter("2plus")}
         />
         <CustomButton
           iconName="speedometer"
           label="Fast"
-          onPress={() => console.log("Navigate to fast")}
+          selected={filterTypes.includes("fast")} // Check if the filter is selected
+          onPress={() => toggleFilter("fast")}
         />
       </View>
     </View>
@@ -42,7 +57,7 @@ const BottomBar = ({ userLocation }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    padding: 10, 
+    padding: 10,
     width: "100%",
     paddingTop: 20,
     paddingBottom: 20,
@@ -50,9 +65,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
   },
   viewContent: {
-    flexDirection: "row", 
-    flexWrap: "wrap", 
-    justifyContent: "center", 
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
 });
 

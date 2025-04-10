@@ -5,12 +5,18 @@ import MainMap from "../components/MainMap";
 
 const HomeScreen = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null);
+  const [filterTypes, setFilterTypes] = useState([]); // NEW
 
   return (
     <View style={styles.container}>
-      <MainMap getlocation={setUserLocation} />
+      <MainMap getlocation={setUserLocation} filterTypes={filterTypes} />
       <View style={styles.barContainer}>
-        <BottomBar userLocation={userLocation} navigation={navigation} />
+        <BottomBar
+          userLocation={userLocation}
+          navigation={navigation}
+          setFilterTypes={setFilterTypes}
+          filterTypes={filterTypes}
+        />
       </View>
     </View>
   );

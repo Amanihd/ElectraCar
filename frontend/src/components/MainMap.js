@@ -7,11 +7,15 @@ import ChargingStationMarker from "./ChargingStationMarker";
 
 import chargingStationsData from "../data/stations.json";
 
-const MainMap = ({ getlocation }) => {
+const MainMap = ({ getlocation, filterTypes }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [mapRef, setMapRef] = useState(null);
   const [chargingStations, setChargingStations] = useState([]);
+
+  useEffect(() => {
+    console.log("Filter type changed:", filterTypes);
+  }, [filterTypes]);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -33,7 +37,7 @@ const MainMap = ({ getlocation }) => {
       getlocation({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-      })
+      });
 
       // Use local charging station data
       setChargingStations(chargingStationsData);
@@ -41,6 +45,21 @@ const MainMap = ({ getlocation }) => {
 
     getLocation();
   }, []);
+
+  // NEW: Apply filter logic
+  const filteredStations = chargingStations.filter((station) => {
+  if (filterTypes.length === 0) {
+    return true; // No filter is applied, show all stations
+  }
+
+  // Otherwise, apply the filters
+  return filterTypes.some((filter) => {
+    if (filter === "available" && station.isAvailable) return true;
+    if (filter === "2plus" && station.numConnections >= 2) return true;
+    if (filter === "fast" && station.isFast) return true;
+    return false;
+  });
+});
 
   const resetMapToUserLocation = async () => {
     if (userLocation && mapRef) {
@@ -76,7 +95,7 @@ const MainMap = ({ getlocation }) => {
       >
         {userLocation && <Marker coordinate={userLocation} pinColor="blue" />}
 
-        {chargingStations.map((station, index) => (
+        {filteredStations.map((station, index) => (
           <ChargingStationMarker
             key={index}
             station={station}

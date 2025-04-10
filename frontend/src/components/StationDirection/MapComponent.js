@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -7,12 +6,14 @@ const MapComponent = ({ userLocation, station, routeCoordinates }) => {
   return (
     <MapView
       style={{ width: "100%", height: "100%" }}
-      initialRegion={{
+      region={{
         latitude: userLocation.latitude,
         longitude: userLocation.longitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
-      }}
+      }} // Dynamically update region based on user's location
+      showsUserLocation={true} // Show user's location on the map
+      followsUserLocation={true} // Follow user's location
     >
       {/* User's current location */}
       <Marker coordinate={userLocation} title="Your Location">

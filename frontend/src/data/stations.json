@@ -84,7 +84,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -101,7 +101,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -138,7 +138,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -156,7 +156,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -175,7 +175,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -261,7 +261,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -279,7 +279,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -297,7 +297,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -315,7 +315,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -333,7 +333,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -351,7 +351,7 @@
     ],
     "plugScore": null,
     "parking": 4,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -369,7 +369,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -388,7 +388,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -407,7 +407,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -426,7 +426,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -445,7 +445,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -464,7 +464,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -483,7 +483,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -502,7 +502,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -521,7 +521,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -540,7 +540,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -558,7 +558,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -577,7 +577,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -595,7 +595,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -613,7 +613,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -632,7 +632,7 @@
     ],
     "plugScore": null,
     "parking": 3,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -651,7 +651,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -669,7 +669,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -688,7 +688,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -707,7 +707,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -725,7 +725,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 2,
     "isAvailable": true
   },
@@ -744,7 +744,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -795,7 +795,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -812,7 +812,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -829,7 +829,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -880,7 +880,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -931,7 +931,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -948,7 +948,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -965,7 +965,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -982,7 +982,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -999,7 +999,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1016,7 +1016,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1033,7 +1033,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1067,7 +1067,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1101,7 +1101,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1120,7 +1120,7 @@
     ],
     "plugScore": null,
     "parking": 2,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 3,
     "isAvailable": true
   },
@@ -1137,7 +1137,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1171,7 +1171,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1188,7 +1188,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1205,7 +1205,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1222,7 +1222,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1239,7 +1239,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   },
@@ -1256,7 +1256,7 @@
     ],
     "plugScore": null,
     "parking": 1,
-    "isFast": false,
+    "isFast": true,
     "numConnections": 1,
     "isAvailable": true
   }

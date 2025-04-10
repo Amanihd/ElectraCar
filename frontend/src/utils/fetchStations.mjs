@@ -17,7 +17,7 @@ const fetchStations = async () => {
     plugType: station.Connections?.map((conn) => conn.ConnectionType?.Title),
     plugScore: station.UserComments?.[0]?.Rating || null,
     parking: station.NumberOfPoints || null,
-    isFast: station.Connections?.some(conn => conn.Level?.Title?.includes('Fast')),
+    isFast: station.Connections?.some(conn => conn.PowerKW >= 22),
     numConnections: station.Connections?.length || 0,
     isAvailable: station.StatusType?.IsOperational ?? null,
   }));

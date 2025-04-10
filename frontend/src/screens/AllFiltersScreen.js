@@ -80,7 +80,6 @@ const AllFiltersScreen = () => {
         </View>
       </View>
 
-    
       <View style={styles.filterSection}>
         <Text style={styles.label}>Vehicle</Text>
         <View style={styles.buttonWrapper}>
@@ -92,7 +91,6 @@ const AllFiltersScreen = () => {
         </View>
       </View>
 
-     
       <View style={styles.filterSection}>
         <Text style={styles.label}>Plug Type</Text>
         <View style={styles.optionContainer}>
@@ -118,7 +116,6 @@ const AllFiltersScreen = () => {
         </View>
       </View>
 
-     
       <View style={styles.filterSection}>
         <Text style={styles.label}>Station Count</Text>
         <View style={styles.optionContainer}>
@@ -144,7 +141,6 @@ const AllFiltersScreen = () => {
         </View>
       </View>
 
-     
       <View style={styles.filterSection}>
         <Text style={styles.label}>Amenities</Text>
         <View style={styles.optionContainer}>
@@ -164,7 +160,6 @@ const AllFiltersScreen = () => {
         </View>
       </View>
 
-    
       <View style={styles.filterSection}>
         <Text style={[styles.label, styles.parkingLabel]}>
           Parking Available
@@ -179,7 +174,6 @@ const AllFiltersScreen = () => {
         </Pressable>
       </View>
 
-     
       <View style={styles.buttonWrapper}>
         <Button
           title="APPLY FILTER"
@@ -211,9 +205,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   sliderContainer: {
-    alignItems: "center", 
-    justifyContent: "center", 
-    width: "100%", 
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
     marginTop: 10,
   },
   sliderSelected: {
