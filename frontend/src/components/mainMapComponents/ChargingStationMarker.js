@@ -1,13 +1,13 @@
 import React from "react";
 import { Marker } from "react-native-maps";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "react-native-vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const ChargingStationMarker = ({ station,userLocation}) => {
+const ChargingStationMarker = ({ station, userLocation }) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate("ChargingStationDetails", { station,userLocation});
+    navigation.navigate("ChargingStationDetails", { station, userLocation });
   };
 
   return (
@@ -20,7 +20,7 @@ const ChargingStationMarker = ({ station,userLocation}) => {
       description={station.address}
       onPress={handlePress} // Add the onPress handler here
     >
-      <Ionicons name="battery-charging" size={32} color="green" />
+      <FontAwesome5 name="charging-station" size={20} color="#00A86B" />
     </Marker>
   );
 };

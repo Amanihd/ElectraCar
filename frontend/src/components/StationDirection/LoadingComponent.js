@@ -1,13 +1,20 @@
+// components/LoadingScreen.js
 import React from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
 
-const LoadingComponent = ({ errorMsg }) => {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" color="#000C66" />
-      <Text>{errorMsg ? errorMsg : "Getting your location..."}</Text>
-    </View>
-  );
-};
+const LoadingScreen = ({ errorMsg }) => (
+  <View style={styles.loadingContainer}>
+    <ActivityIndicator size="large" color="#000C66" />
+    <Text>{errorMsg ? errorMsg : "Getting location..."}</Text>
+  </View>
+);
 
-export default LoadingComponent;
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+export default LoadingScreen;

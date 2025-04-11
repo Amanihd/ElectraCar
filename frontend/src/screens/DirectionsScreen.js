@@ -122,10 +122,9 @@ const DirectionsScreen = ({ route }) => {
   return (
     <View style={[styles.container, isTracking && styles.stopButton]}>
       <TouchableOpacity
-        // Change button style based on isTracking
         onPress={toggleTracking}
       >
-        <Text style={styles.buttonText}>
+        <Text style={isTracking ? styles.buttonTextTracking : styles.buttonText}>
           {isTracking ? "Stop Tracking..." : "Start Tracking"}
         </Text>
       </TouchableOpacity>
@@ -146,13 +145,18 @@ const styles = StyleSheet.create({
 
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#007bff",
+    backgroundColor: "#ddd",
   },
   stopButton: {
-    backgroundColor: "#ff6347", // Change color when tracking
+    backgroundColor: "#00A86B", // Change color when tracking
   },
   buttonText: {
-    color: "#fff",
+    color: "black",
+    fontSize: 16,
+    paddingBottom: 10,
+  },
+  buttonTextTracking: {
+    color: "white",
     fontSize: 16,
     paddingBottom: 10,
   },

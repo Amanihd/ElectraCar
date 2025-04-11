@@ -1,6 +1,7 @@
 import React from "react";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "react-native-vector-icons";
 
 const MapComponent = ({ userLocation, station, routeCoordinates }) => {
   return (
@@ -28,7 +29,7 @@ const MapComponent = ({ userLocation, station, routeCoordinates }) => {
         }}
         title={station.title}
       >
-        <Ionicons name="battery-charging" size={30} color="green" />
+         <FontAwesome5 name="charging-station" size={20} color="#00A86B" />
       </Marker>
 
       {/* Directions (Polyline) */}

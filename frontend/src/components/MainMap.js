@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
-import ResetLocationButton from "./MapControls/ResetLocationButton";
-import ChargingStationMarker from "./ChargingStationMarker";
+import ResetLocationButton from "./mainMapComponents/ResetLocationButton";
+import ChargingStationMarker from "./mainMapComponents/ChargingStationMarker";
 
 import chargingStationsData from "../data/stations.json";
+import StationCount from "./mainMapComponents/StationCount";
+import LoadingScreen from "./StationDirection/LoadingComponent";
+import useFilteredStations from "../hooks/useFilteredStations";
 
 const MainMap = ({ getlocation, filterTypes }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [mapRef, setMapRef] = useState(null);
   const [chargingStations, setChargingStations] = useState([]);
+  const filteredStations = useFilteredStations(chargingStations, filterTypes);
 
-  useEffect(() => {
-    console.log("Filter type changed:", filterTypes);
-  }, [filterTypes]);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -46,21 +47,6 @@ const MainMap = ({ getlocation, filterTypes }) => {
     getLocation();
   }, []);
 
-  // NEW: Apply filter logic
-  const filteredStations = chargingStations.filter((station) => {
-  if (filterTypes.length === 0) {
-    return true; // No filter is applied, show all stations
-  }
-
-  // Otherwise, apply the filters
-  return filterTypes.some((filter) => {
-    if (filter === "available" && station.isAvailable) return true;
-    if (filter === "2plus" && station.numConnections >= 2) return true;
-    if (filter === "fast" && station.isFast) return true;
-    return false;
-  });
-});
-
   const resetMapToUserLocation = async () => {
     if (userLocation && mapRef) {
       mapRef.animateToRegion({
@@ -73,12 +59,7 @@ const MainMap = ({ getlocation, filterTypes }) => {
   };
 
   if (!userLocation) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#000C66" />
-        <Text>{errorMsg ? errorMsg : "Getting location..."}</Text>
-      </View>
-    );
+    return <LoadingScreen errorMsg={errorMsg} />;
   }
 
   return (
@@ -103,6 +84,7 @@ const MainMap = ({ getlocation, filterTypes }) => {
           />
         ))}
       </MapView>
+      <StationCount count={filteredStations.length} />
 
       <ResetLocationButton onPress={resetMapToUserLocation} />
     </View>
@@ -117,11 +99,6 @@ const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "100%",
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
 

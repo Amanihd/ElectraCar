@@ -1,6 +1,17 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
 import CustomButton from "./CustomButton";
+import MultiSelectModal from "./MultiSelectModal";
+
+const plugTypesOptions = [
+  "CHAdeMO",
+  "GB-T DC - GB/T 20234.3",
+  "CCS (Type 2)",
+  "CCS (Type 1)",
+  "Type 1 (J1772)",
+  "Type 2 (Tethered Connector)",
+  "Tesla (Model S/X)",
+];
 
 const BottomBar = ({
   userLocation,
@@ -8,48 +19,97 @@ const BottomBar = ({
   setFilterTypes,
   filterTypes,
 }) => {
+  const [plugTypeModalVisible, setPlugTypeModalVisible] = useState(false);
+  const [selectedPlugTypes, setSelectedPlugTypes] = useState([]);
+
   const toggleFilter = (filter) => {
-    setFilterTypes((prevFilters) => {
-      if (prevFilters.includes(filter)) {
-        return prevFilters.filter((item) => item !== filter); // remove filter
+    setFilterTypes((prevFilters) =>
+      prevFilters.includes(filter)
+        ? prevFilters.filter((item) => item !== filter)
+        : [...prevFilters, filter]
+    );
+  };
+
+  const togglePlugTypeSelection = (type) => {
+    setSelectedPlugTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
+
+  const handlePlugTypeDone = () => {
+    setPlugTypeModalVisible(false);
+
+    setFilterTypes((prev) => {
+      // Remove any existing plugType filter
+      const newFilters = prev.filter((type) => type.filter !== "plugType");
+
+      if (selectedPlugTypes.length > 0) {
+        // Add updated plugType filter object
+        return [...newFilters, { filter: "plugType", selectedPlugTypes }];
       } else {
-        return [...prevFilters, filter]; // add filter
+        // No plug types selected → return only the other filters
+        return newFilters;
       }
     });
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.viewContent}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.viewContent}
+      >
         <CustomButton
           iconName="search"
           label="Search"
           onPress={() => navigation.navigate("SearchStation", { userLocation })}
         />
         <CustomButton
-          iconName="options"
-          label="All Filters"
-          onPress={() => navigation.navigate("AllFilters")}
-        />
-        <CustomButton
           iconName="checkmark-circle"
           label="Available"
-          selected={filterTypes.includes("available")} // Check if the filter is selected
+          selected={filterTypes.includes("available")}
           onPress={() => toggleFilter("available")}
         />
         <CustomButton
-          iconName="battery-charging"
+          iconName="charging-station"
           label="2+ Chargers"
-          selected={filterTypes.includes("2plus")} // Check if the filter is selected
+          selected={filterTypes.includes("2plus")}
           onPress={() => toggleFilter("2plus")}
+          useFontAwesome
         />
         <CustomButton
-          iconName="speedometer"
+          iconName="bolt"
           label="Fast"
-          selected={filterTypes.includes("fast")} // Check if the filter is selected
+          selected={filterTypes.includes("fast")}
           onPress={() => toggleFilter("fast")}
+          useFontAwesome
         />
-      </View>
+        <CustomButton
+          iconName="car"
+          label="Parking"
+          selected={filterTypes.includes("parking")}
+          onPress={() => toggleFilter("parking")}
+        />
+        <CustomButton
+          iconName="plug"
+          label="Plug Type"
+          selected={selectedPlugTypes.length > 0}
+          onPress={() => setPlugTypeModalVisible(true)}
+          useFontAwesome
+        />
+      </ScrollView>
+
+      {/* Reusable MultiSelect Modal for Plug Types */}
+      <MultiSelectModal
+        visible={plugTypeModalVisible}
+        onClose={() => setPlugTypeModalVisible(false)}
+        options={plugTypesOptions}
+        selectedItems={selectedPlugTypes}
+        toggleItemSelection={togglePlugTypeSelection}
+        onDone={handlePlugTypeDone}
+        title="Select Plug Types"
+      />
     </View>
   );
 };
@@ -57,12 +117,12 @@ const BottomBar = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    padding: 10,
+    padding: 15,
     width: "100%",
     paddingTop: 20,
     paddingBottom: 20,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   viewContent: {
     flexDirection: "row",
