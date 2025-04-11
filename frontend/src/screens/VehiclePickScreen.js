@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc'
   },
-  vehicleText: { fontSize: 16, color: '#000C66' },
+  vehicleText: { fontSize: 16, color: 'black' },
   radio: { fontSize: 20 },
   link: {
     color: '#0033A0',
