@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     justifyContent: 'center',
-    fontSize: 32,
+    fontSize: 28,
     textAlign: 'center',
     fontWeight: '600',
     marginBottom: 16
