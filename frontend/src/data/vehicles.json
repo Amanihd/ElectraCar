@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "make": "Changan",
+    "model": "E-Star BEV",
+    "trim": "Standard",
+    "battery_capacity_kWh": 32,
+    "range_km": 300,
+    "charging_time_h": 8
+  },
+  {
+    "id": 2,
+    "make": "Changan",
+    "model": "EADO EV",
+    "trim": "Standard",
+    "battery_capacity_kWh": 52.56,
+    "range_km": 405,
+    "charging_time_h": 9
+  },
+  {
+    "id": 3,
+    "make": "Tesla",
+    "model": "Model 3",
+    "trim": "Standard Range Plus",
+    "battery_capacity_kWh": 54,
+    "range_km": 448,
+    "charging_time_h": 6
+  },
+  {
+    "id": 4,
+    "make": "Tesla",
+    "model": "Model S",
+    "trim": "Long Range",
+    "battery_capacity_kWh": 100,
+    "range_km": 652,
+    "charging_time_h": 10
+  },
+  {
+    "id": 5,
+    "make": "Tesla",
+    "model": "Model X",
+    "trim": "Long Range",
+    "battery_capacity_kWh": 100,
+    "range_km": 561,
+    "charging_time_h": 10
+  },
+  {
+    "id": 6,
+    "make": "Tesla",
+    "model": "Model Y",
+    "trim": "Long Range",
+    "battery_capacity_kWh": 75,
+    "range_km": 531,
+    "charging_time_h": 8
+  },
+  {
+    "id": 7,
+    "make": "BYD",
+    "model": "Dolphin",
+    "trim": "Standard",
+    "battery_capacity_kWh": 44.9,
+    "range_km": 405,
+    "charging_time_h": 8
+  },
+  {
+    "id": 8,
+    "make": "BYD",
+    "model": "Han",
+    "trim": "Extended Range",
+    "battery_capacity_kWh": 76.9,
+    "range_km": 550,
+    "charging_time_h": 10
+  },
+  {
+    "id": 9,
+    "make": "BYD",
+    "model": "Atto 3",
+    "trim": "Extended Range",
+    "battery_capacity_kWh": 60.5,
+    "range_km": 420,
+    "charging_time_h": 8
+  },
+  {
+    "id": 10,
+    "make": "BYD",
+    "model": "Tang",
+    "trim": "Standard",
+    "battery_capacity_kWh": 82.8,
+    "range_km": 505,
+    "charging_time_h": 9
+  },
+  {
+    "id": 11,
+    "make": "BMW",
+    "model": "i4",
+    "trim": "eDrive40",
+    "battery_capacity_kWh": 81,
+    "range_km": 590,
+    "charging_time_h": 8.5
+  },
+  {
+    "id": 12,
+    "make": "BMW",
+    "model": "iX",
+    "trim": "xDrive50",
+    "battery_capacity_kWh": 105.2,
+    "range_km": 630,
+    "charging_time_h": 11
+  },
+  {
+    "id": 13,
+    "make": "Hyundai",
+    "model": "Kona Electric",
+    "trim": "Ultimate",
+    "battery_capacity_kWh": 64,
+    "range_km": 484,
+    "charging_time_h": 9.5
+  },
+  {
+    "id": 14,
+    "make": "Hyundai",
+    "model": "Ioniq 5",
+    "trim": "Long Range AWD",
+    "battery_capacity_kWh": 77.4,
+    "range_km": 507,
+    "charging_time_h": 8.3
+  },
+  {
+    "id": 15,
+    "make": "Kia",
+    "model": "EV6",
+    "trim": "Wind AWD",
+    "battery_capacity_kWh": 77.4,
+    "range_km": 484,
+    "charging_time_h": 8
+  },
+  {
+    "id": 16,
+    "make": "Kia",
+    "model": "Niro EV",
+    "trim": "EX",
+    "battery_capacity_kWh": 64,
+    "range_km": 385,
+    "charging_time_h": 9.5
+  },
+  {
+    "id": 17,
+    "make": "Volkswagen",
+    "model": "ID.4",
+    "trim": "Pro S",
+    "battery_capacity_kWh": 82,
+    "range_km": 410,
+    "charging_time_h": 7.5
+  },
+  {
+    "id": 18,
+    "make": "Audi",
+    "model": "Q4 e-tron",
+    "trim": "50 quattro",
+    "battery_capacity_kWh": 82,
+    "range_km": 520,
+    "charging_time_h": 8
+  },
+  {
+    "id": 19,
+    "make": "Mercedes-Benz",
+    "model": "EQB",
+    "trim": "EQB 300 4MATIC",
+    "battery_capacity_kWh": 66.5,
+    "range_km": 410,
+    "charging_time_h": 7.75
+  },
+  {
+    "id": 20,
+    "make": "MG",
+    "model": "ZS EV",
+    "trim": "Long Range",
+    "battery_capacity_kWh": 72.6,
+    "range_km": 440,
+    "charging_time_h": 8.5
+  },
+  {
+    "id": 21,
+    "make": "Renault",
+    "model": "ZOE",
+    "trim": "R135 ZE50",
+    "battery_capacity_kWh": 52,
+    "range_km": 385,
+    "charging_time_h": 9
+  },
+  {
+    "id": 22,
+    "make": "Nissan",
+    "model": "Leaf",
+    "trim": "S Plus",
+    "battery_capacity_kWh": 62,
+    "range_km": 364,
+    "charging_time_h": 11
+  },
+  {
+    "id": 23,
+    "make": "Ford",
+    "model": "Mustang Mach-E",
+    "trim": "Premium AWD",
+    "battery_capacity_kWh": 91,
+    "range_km": 483,
+    "charging_time_h": 9
+  },
+  {
+    "id": 24,
+    "make": "Opel",
+    "model": "Corsa-e",
+    "trim": "Standard",
+    "battery_capacity_kWh": 50,
+    "range_km": 337,
+    "charging_time_h": 7.5
+  },
+  {
+    "id": 25,
+    "make": "Peugeot",
+    "model": "e-208",
+    "trim": "GT",
+    "battery_capacity_kWh": 50,
+    "range_km": 340,
+    "charging_time_h": 7.5
+  },
+  {
+    "id": 26,
+    "make": "Volvo",
+    "model": "XC40 Recharge",
+    "trim": "Twin",
+    "battery_capacity_kWh": 78,
+    "range_km": 418,
+    "charging_time_h": 8
+  },
+  {
+    "id": 27,
+    "make": "Chevrolet",
+    "model": "Bolt EV",
+    "trim": "1LT",
+    "battery_capacity_kWh": 66,
+    "range_km": 417,
+    "charging_time_h": 10
+  },
+  {
+    "id": 28,
+    "make": "Skoda",
+    "model": "Enyaq iV",
+    "trim": "80",
+    "battery_capacity_kWh": 77,
+    "range_km": 535,
+    "charging_time_h": 9
+  },
+  {
+    "id": 29,
+    "make": "Fiat",
+    "model": "500e",
+    "trim": "Icon",
+    "battery_capacity_kWh": 42,
+    "range_km": 320,
+    "charging_time_h": 6.5
+  },
+  {
+    "id": 30,
+    "make": "Honda",
+    "model": "e",
+    "trim": "Advance",
+    "battery_capacity_kWh": 35.5,
+    "range_km": 220,
+    "charging_time_h": 5
+  }
+]
