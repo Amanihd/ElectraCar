@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 import TermsLinks from '../components/TermsLinks';
 import CustomInput from '../components/CustomInput';
 import JoinButton from '../components/JoinButton';
-import useUserStore from '../store/userStore';
+import useUserStore from '../store/userStore.js';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
