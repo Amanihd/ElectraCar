@@ -11,7 +11,7 @@ import SupportScreen from "../screens/SupportScreen";
 import SearchStationScreen from "../screens/SearchStationScreen";
 import AllFiltersScreen from "../screens/AllFiltersScreen";
 
-//Add vehicle which is inside Me Screen
+// Add vehicle which is inside Me Screen
 import AddVehicleScreen from "../screens/AddVehicleScreen";
 import MakeScreen from "../screens/MakeScreen";
 import ModelScreen from "../screens/ModelScreen";
@@ -21,6 +21,13 @@ import VehiclePickScreen from "../screens/VehiclePickScreen";
 import ManageVehiclesScreen from "../screens/ManageVehiclesScreen";
 import SearchLocationScreen from "../screens/SearchLocationScreen";
 import TripsScreen from "../screens/TripsScreen";
+
+// All about Sign a user 
+import SignUpScreen from "../screens/SignUpScreen";
+import SignInScreen from "../screens/SignInScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
+import ResetPasswordScreen from "../screens/ResetPasswordScreen";
+import MyProfileScreen from "../screens/MyProfileScreen";
 
 const Stack = createStackNavigator();
 
@@ -117,9 +124,7 @@ const StackNavigator = () => (
         headerTintColor: "white",
       }}
     />
-
-    {/*all about vehicles*/}
-
+    {/* All about vehicles */}
     <Stack.Screen
       name="AddVehicle"
       component={AddVehicleScreen}
@@ -183,8 +188,7 @@ const StackNavigator = () => (
         headerTintColor: "white",
       }}
     />
-
-    {/* for trips screen */}
+    {/* For trips screen */}
     <Stack.Screen
       name="SearchLocation"
       component={SearchLocationScreen}
@@ -199,6 +203,52 @@ const StackNavigator = () => (
       component={TripsScreen}
       options={{
         headerTitle: "Trips",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    {/* All about sign up, auth, sign in, join */}
+    <Stack.Screen
+      name="SignUp"
+      component={SignUpScreen}
+      options={{
+        headerTitle: "Sign Up",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="SignIn"
+      component={SignInScreen}
+      options={{
+        headerTitle: "Sign In",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="ForgotPassword"
+      component={ForgotPasswordScreen}
+      options={{
+        headerTitle: "Forgot Password",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="ResetPassword"
+      component={ResetPasswordScreen}
+      options={{
+        headerTitle: "Reset Password",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="MyProfile"
+      component={MyProfileScreen}
+      options={{
+        headerTitle: "My Profile",
         headerStyle: { backgroundColor: "#000C66" },
         headerTintColor: "white",
       }}

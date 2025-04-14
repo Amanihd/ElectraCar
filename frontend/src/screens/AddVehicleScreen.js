@@ -9,11 +9,11 @@ const AddVehicleScreen = () => {
     const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      {/* Back button could be added here */}
+      
 
       <Text style={styles.title}>Personalize your experience by adding a vehicle</Text>
       <Image
-        source={require('../../assets/images/car-animation.png')} // Replace with real animation or photo
+        source={require('../../assets/images/car-animation.png')} //vehicle car animation
         style={styles.image}
         resizeMode='cover'
       />
