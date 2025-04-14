@@ -1,12 +1,95 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+import Logo from '../components/Logo';
+import Footer from '../components/Footer';
+import TermsLinks from '../components/TermsLinks';
 
 const JoinScreen = () => {
-  return (
-    <View>
-      <Text>JoinScreen</Text>
-    </View>
-  )
-}
+  const navigation = useNavigation();
 
-export default JoinScreen
+  return (
+    <View style={styles.outerContainer}>
+      <View style={styles.content}>
+        <Logo />
+
+        <Text style={styles.title}>Join ElectraCar</Text>
+
+        <TouchableOpacity
+          style={styles.emailButton}
+          onPress={() => navigation.navigate('SignUp')}
+        >
+          <Text style={styles.buttonText}>Sign up with Email</Text>
+        </TouchableOpacity>
+
+        <View style={styles.linksContainer}>
+                  <Text style={styles.text}>Not a member? </Text>
+                  <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+                    <Text style={styles.linkText}>Sign In</Text>
+                  </TouchableOpacity>
+                </View>
+
+        <TermsLinks />
+      </View>
+
+      <Footer />
+    </View>
+  );
+};
+
+export default JoinScreen;
+
+const styles = StyleSheet.create({
+  
+  outerContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: '#f2f2f2',
+  },
+  content: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginVertical: 30,
+    color: 'black',
+  },
+  emailButton: {
+    backgroundColor: '#000C66',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginBottom: 16,
+    width: '100%',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  link: {
+    color: 'black',
+    fontSize: 14,
+    marginTop: 10,
+    textAlign: 'center',
+  },
+  linksContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  text: {
+    color: '#666',
+  },
+  linkText: {
+    textAlign:'center',
+    color: '#000C66',
+    fontWeight: 'bold',
+  },
+});

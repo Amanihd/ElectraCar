@@ -17,8 +17,8 @@ const UserProfileCard = ({ name, email }) => {
           <Text style={styles.email}>{email}</Text>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-          <Ionicons name="create-outline" size={24} color="#007bff" />
+        <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
+          <Ionicons name="create-outline" size={24} color="#000C66" />
         </TouchableOpacity>
       </View>
 
@@ -26,7 +26,7 @@ const UserProfileCard = ({ name, email }) => {
       <View style={styles.buttonWrapper}>
         <Button
           title="Add Vehicle"
-          color="#007bff"
+          color="#000C66"
           onPress={() => navigation.navigate('AddVehicle')}
         />
       </View>

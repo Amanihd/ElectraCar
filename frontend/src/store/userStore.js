@@ -3,7 +3,8 @@ const useUserStore = () => {
     return {
       user: {
         name: "John Doe",
-        email: "johndoe@example.com"
+        email: "johndoe@example.com",
+        
       },
       loadUser: () => {},
       setUser: () => {},

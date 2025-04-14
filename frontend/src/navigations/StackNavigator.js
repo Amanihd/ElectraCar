@@ -20,6 +20,14 @@ import VehicleSummaryScreen from "../screens/VehicleSummaryScreen";
 import VehiclePickScreen from "../screens/VehiclePickScreen";
 import ManageVehiclesScreen from "../screens/ManageVehiclesScreen";
 
+//All about Sign a user 
+import SignUpScreen from "../screens/SignUpScreen";
+import SignInScreen from "../screens/SignInScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
+import ResetPasswordScreen from "../screens/ResetPasswordScreen";
+import MyProfileScreen from "../screens/MyProfileScreen";
+
+
 const Stack = createStackNavigator();
 
 const StackNavigator = () => (
@@ -172,6 +180,55 @@ const StackNavigator = () => (
     headerTintColor: "white",
   }}
   />
+  {/* All about sign up,auth,signin,join*/}
+  <Stack.Screen
+  name="SignUp"
+  component={SignUpScreen}
+  options={{
+    headerTitle: "Sign Up",
+    headerStyle: { backgroundColor: "#000C66" },
+    headerTintColor: "white",
+  }}
+  />
+  <Stack.Screen
+  name="SignIn"
+  component={SignInScreen}
+  options={{
+    headerTitle: "Sign In",
+    headerStyle: { backgroundColor: "#000C66" },
+    headerTintColor: "white",
+  }}
+  />
+  
+  <Stack.Screen
+  name="ForgotPassword"
+  component={ForgotPasswordScreen}
+  options={{
+    headerTitle: " Forgot Password",
+    headerStyle: { backgroundColor: "#000C66" },
+    headerTintColor: "white",
+  }}
+  />
+  <Stack.Screen
+  name="ResetPassword"
+  component={ResetPasswordScreen}
+  options={{
+    headerTitle: "Reset Password ",
+    headerStyle: { backgroundColor: "#000C66" },
+    headerTintColor: "white",
+  }}
+  />
+  <Stack.Screen
+  name="MyProfile"
+  component={MyProfileScreen}
+  options={{
+    headerTitle: "My Profile ",
+    headerStyle: { backgroundColor: "#000C66" },
+    headerTintColor: "white",
+  }}
+  />
+
+
   </Stack.Navigator>
 );
 
