@@ -1,5 +1,5 @@
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import React from 'react';
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import React from "react";
 
 const MeLink = ({ title, onPress }) => {
   return (
@@ -15,10 +15,11 @@ const styles = StyleSheet.create({
   link: {
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderColor: '#ddd',
+    borderColor: "#ddd",
   },
   text: {
     fontSize: 16,
-    color: '#007bff',
+    fontWeight: "semibold",
+    color: "black",
   },
 });

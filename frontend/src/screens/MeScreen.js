@@ -1,42 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import UserProfileCard from "../components/UserProfileCard";
 import MeLinksContainer from "../components/MeLinksContainer";
 import { useNavigation } from "@react-navigation/native";
-import Logo from "../components/Logo"; // Import the Logo component
-import SignOutButton from "../components/SignOutButton"; // Import the SignOutButton component
+import Logo from "../components/Logo";
+import SignOutButton from "../components/SignOutButton";
 import Footer from "../components/Footer";
+import { AuthContext } from "../context/AuthContext";
 
 const MeScreen = () => {
   const [user, setUser] = useState(null);
   const navigation = useNavigation();
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
-  // Mocking loading user (in a real scenario, you'd use useUserStore)
+  // Mock user (replace with real fetch logic)
   useEffect(() => {
-    const mockUser = { name: "John Doe", email: "johndoe@example.com" };
-    setUser(mockUser);
-  }, []);
+    if (isLoggedIn) {
+      const mockUser = { name: "John Doe", email: "johndoe@example.com" };
+      setUser(mockUser);
+    }
+  }, [isLoggedIn]);
 
-  if (!user) {
+  if (!isLoggedIn) {
+    // If not logged in, show join/sign-up UI
     return (
       <View style={styles.container}>
         <Logo />
         <Text style={styles.subtitle}>Join the ElectraCar community</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Join")}>
+        <TouchableOpacity onPress={() => navigation.navigate("JoinScreen")}>
           <Text style={styles.linkText}>Sign up or sign in today!</Text>
         </TouchableOpacity>
-        <MeLinksContainer navigation={navigation} />
+        <View style={{ marginTop: 60 }}>
+          <MeLinksContainer navigation={navigation} />
+        </View>
+
         <Footer />
       </View>
     );
   }
 
+  // If logged in, show profile and other content
   return (
     <View style={styles.container}>
       <UserProfileCard name={user.name} email={user.email} />
       <MeLinksContainer navigation={navigation} />
       <View style={styles.signOutButtonContainer}>
-        <SignOutButton onPress={() => setUser(null)} />
+        <SignOutButton
+          onPress={() => {
+            logout(); // from AuthContext
+            setUser(null); // local state
+          }}
+        />
       </View>
       <Footer />
     </View>
@@ -53,7 +67,8 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 22,
+    fontWeight:'bold',
     marginBottom: 10,
   },
   linkText: {

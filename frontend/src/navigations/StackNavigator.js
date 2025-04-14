@@ -19,6 +19,8 @@ import TrimScreen from "../screens/TrimScreen";
 import VehicleSummaryScreen from "../screens/VehicleSummaryScreen";
 import VehiclePickScreen from "../screens/VehiclePickScreen";
 import ManageVehiclesScreen from "../screens/ManageVehiclesScreen";
+import SearchLocationScreen from "../screens/SearchLocationScreen";
+import TripsScreen from "../screens/TripsScreen";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +30,15 @@ const StackNavigator = () => (
       name="MainTabs"
       component={BottomTabNavigator}
       options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="HomeScreen"
+      component={AllFiltersScreen}
+      options={{
+        headerTitle: "Map",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
     />
     <Stack.Screen
       name="ChargingStationDetails"
@@ -104,74 +115,94 @@ const StackNavigator = () => (
         headerTitle: "All Filters",
         headerStyle: { backgroundColor: "#000C66" },
         headerTintColor: "white",
-      }}/>
+      }}
+    />
 
-      
-{/*all about vehicles*/}
+    {/*all about vehicles*/}
 
-      <Stack.Screen
-  name="AddVehicle"
-  component={AddVehicleScreen}
-  options={{
-    headerTitle: "Add Vehicle",
-    headerStyle: { backgroundColor: "#000C66" },
-    headerTintColor: "white",
-  }}
-  />
-  <Stack.Screen
-  name="Make"
-  component={MakeScreen}
-  options={{
-    headerTitle: "Make",
-    headerStyle: { backgroundColor: "#000C66" },
-    headerTintColor: "white",
-  }}
-  />
-  <Stack.Screen
-  name="Model"
-  component={ModelScreen}
-  options={{
-    headerTitle: "Model",
-    headerStyle: { backgroundColor: "#000C66" },
-    headerTintColor: "white",
-  }}
+    <Stack.Screen
+      name="AddVehicle"
+      component={AddVehicleScreen}
+      options={{
+        headerTitle: "Add Vehicle",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
     />
     <Stack.Screen
-  name="Trim"
-  component={TrimScreen}
-  options={{
-    headerTitle: "Trim",
-    headerStyle: { backgroundColor: "#000C66" },
-    headerTintColor: "white",
-  }}
-  />
-   <Stack.Screen
-  name="Vehicle Summary"
-  component={VehicleSummaryScreen}
-  options={{
-    headerTitle: "Vehicle Summary",
-    headerStyle: { backgroundColor: "#000C66" },
-    headerTintColor: "white",
-  }}
-  />
-  <Stack.Screen
-  name="VehiclePickScreen"
-  component={VehiclePickScreen}
-  options={{
-    headerTitle: "Vehicles",
-    headerStyle: { backgroundColor: "#000C66" },
-    headerTintColor: "white",
-  }}
-  />
-  <Stack.Screen
-  name="ManageVehiclesScreen"
-  component={ManageVehiclesScreen}
-  options={{
-    headerTitle: "Manage Vehicles",
-    headerStyle: { backgroundColor: "#000C66" },
-    headerTintColor: "white",
-  }}
-  />
+      name="Make"
+      component={MakeScreen}
+      options={{
+        headerTitle: "Make",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="Model"
+      component={ModelScreen}
+      options={{
+        headerTitle: "Model",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="Trim"
+      component={TrimScreen}
+      options={{
+        headerTitle: "Trim",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="Vehicle Summary"
+      component={VehicleSummaryScreen}
+      options={{
+        headerTitle: "Vehicle Summary",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="VehiclePickScreen"
+      component={VehiclePickScreen}
+      options={{
+        headerTitle: "Vehicles",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="ManageVehiclesScreen"
+      component={ManageVehiclesScreen}
+      options={{
+        headerTitle: "Manage Vehicles",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+
+    {/* for trips screen */}
+    <Stack.Screen
+      name="SearchLocation"
+      component={SearchLocationScreen}
+      options={{
+        headerTitle: "Search",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="Trips"
+      component={TripsScreen}
+      options={{
+        headerTitle: "Trips",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
   </Stack.Navigator>
 );
 
