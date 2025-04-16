@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import LottieView from "lottie-react-native";
 import { UserLocationContext } from "../context/UserLocationContext";
 import { VehicleContext } from "../context/VehicleContext";
@@ -15,7 +15,7 @@ import BatteryLevelModal from "../components/Trip/BatteryLevelModal";
 import BookmarkModal from "../components/Trip/BookmarkModal";
 
 const TripsScreen = ({ route, navigation }) => {
-  const { isLoggedIn, login, logout } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   const { userLocation } = useContext(UserLocationContext);
   const { selectedVehicle } = useContext(VehicleContext);
   const { batteryLevel, setBatteryLevel } = useContext(BatteryContext);
@@ -26,10 +26,11 @@ const TripsScreen = ({ route, navigation }) => {
   const [modalStage, setModalStage] = useState(null);
   const [showBookmarkModal, setShowBookmarkModal] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
+  const [tripName, setTripName] = useState("");
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigation.navigate("JoinScreen");
+      navigation.navigate("Join"); // No redirect param
     }
   }, [isLoggedIn]);
 
@@ -79,6 +80,7 @@ const TripsScreen = ({ route, navigation }) => {
     const driveableDistance = (maxRange * batteryLevel) / 100;
 
     const tripData = {
+      title: tripName.trim() || "Unnamed Trip",
       start: {
         lat: parseFloat(start.latitude || start.lat),
         lon: parseFloat(start.longitude || start.lon),
@@ -114,6 +116,12 @@ const TripsScreen = ({ route, navigation }) => {
 
         <Text style={styles.title}>Plan your trip easily</Text>
         <Text style={styles.subtitle}>with ElectraCar</Text>
+        <TextInput
+          placeholder="Name your trip (e.g. Office Route)"
+          style={styles.input}
+          value={tripName}
+          onChangeText={setTripName}
+        />
 
         <TripInput
           label="📍"
@@ -163,7 +171,6 @@ const styles = StyleSheet.create({
     width: 220,
     height: 220,
     alignSelf: "center",
-    marginBottom: 10,
   },
   title: {
     fontSize: 24,
@@ -176,6 +183,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 30,
     color: "#555",
+  },
+  input: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 15,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 1,
   },
 });
 

@@ -27,7 +27,7 @@ const MeScreen = () => {
       <View style={styles.container}>
         <Logo />
         <Text style={styles.subtitle}>Join the ElectraCar community</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("JoinScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Join")}>
           <Text style={styles.linkText}>Sign up or sign in today!</Text>
         </TouchableOpacity>
         <View style={{ marginTop: 60 }}>
@@ -39,11 +39,22 @@ const MeScreen = () => {
     );
   }
 
+  if (isLoggedIn && !user) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading your profile...</Text>
+      </View>
+    );
+  }
+  
   // If logged in, show profile and other content
   return (
     <View style={styles.container}>
       <UserProfileCard name={user.name} email={user.email} />
-      <MeLinksContainer navigation={navigation} />
+       <View style={{ marginTop: 60 }}>
+          <MeLinksContainer navigation={navigation} />
+        </View>
+
       <View style={styles.signOutButtonContainer}>
         <SignOutButton
           onPress={() => {

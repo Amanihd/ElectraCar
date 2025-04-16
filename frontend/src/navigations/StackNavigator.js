@@ -9,7 +9,6 @@ import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import SupportScreen from "../screens/SupportScreen";
 import SearchStationScreen from "../screens/SearchStationScreen";
-import AllFiltersScreen from "../screens/AllFiltersScreen";
 
 // Add vehicle which is inside Me Screen
 import AddVehicleScreen from "../screens/AddVehicleScreen";
@@ -28,6 +27,8 @@ import SignInScreen from "../screens/SignInScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import ResetPasswordScreen from "../screens/ResetPasswordScreen";
 import MyProfileScreen from "../screens/MyProfileScreen";
+import HomeScreen from "../screens/HomeScreen";
+import TripMapScreen from "../screens/TripMapScreen";
 
 const Stack = createStackNavigator();
 
@@ -40,7 +41,7 @@ const StackNavigator = () => (
     />
     <Stack.Screen
       name="HomeScreen"
-      component={AllFiltersScreen}
+      component={HomeScreen}
       options={{
         headerTitle: "Map",
         headerStyle: { backgroundColor: "#000C66" },
@@ -68,6 +69,7 @@ const StackNavigator = () => (
         headerTitle: "Join",
         headerStyle: { backgroundColor: "#000C66" },
         headerTintColor: "white",
+        headerLeft: () => null, 
       }}
     />
     <Stack.Screen
@@ -115,15 +117,7 @@ const StackNavigator = () => (
         headerTintColor: "white",
       }}
     />
-    <Stack.Screen
-      name="AllFilters"
-      component={AllFiltersScreen}
-      options={{
-        headerTitle: "All Filters",
-        headerStyle: { backgroundColor: "#000C66" },
-        headerTintColor: "white",
-      }}
-    />
+
     {/* All about vehicles */}
     <Stack.Screen
       name="AddVehicle"
@@ -203,6 +197,15 @@ const StackNavigator = () => (
       component={TripsScreen}
       options={{
         headerTitle: "Trips",
+        headerStyle: { backgroundColor: "#000C66" },
+        headerTintColor: "white",
+      }}
+    />
+    <Stack.Screen
+      name="TripMap"
+      component={TripMapScreen}
+      options={{
+        headerTitle: "My Trip",
         headerStyle: { backgroundColor: "#000C66" },
         headerTintColor: "white",
       }}

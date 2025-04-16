@@ -6,35 +6,41 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
+  Keyboard,
 } from "react-native";
 import axios from "axios";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const SearchLocationScreen = ({ route, navigation }) => {
   const { type, start, destination } = route.params;
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = async (text) => {
-    setQuery(text);
-    if (text.length < 3) {
+  const handleSubmitSearch = async () => {
+    if (query.length < 3) {
       setResults([]);
       return;
     }
+
+    setLoading(true);
+    Keyboard.dismiss();
 
     try {
       const res = await axios.get(
         "https://nominatim.openstreetmap.org/search",
         {
           params: {
-            q: text,
+            q: query,
             format: "json",
             addressdetails: 1,
             limit: 5,
-            countrycodes: "JO", // Restrict to Jordan
+            countrycodes: "JO",
           },
           headers: {
-            "Accept-Language": "en,ar", // English first, then Arabic
-            "User-Agent": "ElectraCar/1.0 (contact@electracar.com)", // Replace with your details
+            "Accept-Language": "en,ar",
+            "User-Agent": "ElectraCar/1.0 (contact@electracar.com)",
           },
         }
       );
@@ -42,11 +48,12 @@ const SearchLocationScreen = ({ route, navigation }) => {
       setResults(res.data);
     } catch (error) {
       console.error("Error fetching location:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSelectLocation = (item) => {
-    console.log("Selected location:", item);
     if (type === "start") {
       navigation.navigate("Trips", { start: item, destination });
     } else {
@@ -56,14 +63,23 @@ const SearchLocationScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder={`Search ${
-          type === "start" ? "Start" : "Destination"
-        } Point`}
-        value={query}
-        onChangeText={handleSearch}
-        style={styles.input}
-      />
+      <View style={styles.searchRow}>
+        <TextInput
+          placeholder={`Search ${type === "start" ? "Start" : "Destination"} Point`}
+          value={query}
+          onChangeText={setQuery}
+          onSubmitEditing={handleSubmitSearch}
+          returnKeyType="search"
+          style={styles.input}
+        />
+        <TouchableOpacity onPress={handleSubmitSearch} style={styles.iconContainer}>
+          <Ionicons name="search" size={24} color="#000C66" />
+        </TouchableOpacity>
+      </View>
+
+      {loading && (
+        <ActivityIndicator size="large" color="#000C66" style={{ marginBottom: 15 }} />
+      )}
 
       <FlatList
         data={results}
@@ -87,12 +103,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
   },
+  searchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
+  },
   input: {
+    flex: 1,
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 8,
     padding: 12,
-    marginBottom: 15,
+    paddingRight: 40,
+    marginRight: 10,
+  },
+  iconContainer: {
+    backgroundColor: "#E1E6F2",
+    padding: 10,
+    borderRadius: 8,
   },
   resultItem: {
     paddingVertical: 10,

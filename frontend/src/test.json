@@ -1,0 +1,9 @@
+{
+  "destination": { "lat": 31.882219900000003, "lon": 35.927824412072425 },
+  "driveableDistance": 202.5,
+  "isBookmark": true,
+  "maxRange": 405,
+  "selectedCar": { "id": 2, "make": "Kia", "model": "EV6", "trim": "GT-Line" },
+  "start": { "lat": 31.9816892, "lon": 35.9436084 },
+  "title": "My home"
+}
