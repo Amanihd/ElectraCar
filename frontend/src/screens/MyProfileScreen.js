@@ -1,175 +1,168 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useContext } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Animated } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-const MyProfileScreen = ({ route }) => {
-  const navigation = useNavigation();
+const MyProfileScreen = () => {
+  const { user, updateUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
-  
-  // Initial data from navigation params or default values
-  const [profile, setProfile] = useState(route.params?.profile || {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-  });
-  
-  const [tempProfile, setTempProfile] = useState({...profile});
+  const [tempProfile, setTempProfile] = useState({ ...user });
 
   const handleSave = () => {
-    setProfile(tempProfile);
+    updateUser(tempProfile);
     setIsEditing(false);
-    // Here you would typically call an API to update the profile
   };
+
+  if (!user) return <Text>Loading...</Text>;
 
   return (
     <View style={styles.container}>
-      
+      {/* Static Profile  */}
+      <TouchableOpacity style={styles.avatarContainer}>
+        <Ionicons name="person-circle" size={120} color="#000C66" />
+      </TouchableOpacity>
 
-      {/* Profile Image */}
-      <View style={styles.profileImageContainer}>
-        <Ionicons name="person-circle-outline" size={120} color="#666" />
-       
-      </View>
+      {/* Card */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>My Info</Text>
 
-      {/* Profile Info */}
-      <View style={styles.profileBox}>
-        <View style={styles.formGroup}>
-          <Text style={styles.label}>Name</Text>
+        {/* Name Field */}
+        <View style={styles.row}>
+          <MaterialIcons name="person" size={24} color="#000C66" />
           {isEditing ? (
             <TextInput
-              style={styles.input}
               value={tempProfile.name}
-              onChangeText={(text) => setTempProfile({...tempProfile, name: text})}
-              autoCapitalize="words"
+              onChangeText={(text) => setTempProfile({ ...tempProfile, name: text })}
+              style={styles.input}
+              placeholder="Name"
             />
           ) : (
-            <Text style={styles.value}>{profile.name}</Text>
+            <Text style={styles.infoText}>{user.name}</Text>
           )}
         </View>
 
-        <View style={styles.formGroup}>
-          <Text style={styles.label}>Email</Text>
+        {/* Email Field */}
+        <View style={styles.row}>
+          <MaterialIcons name="email" size={24} color="#000C66" />
           {isEditing ? (
             <TextInput
-              style={styles.input}
               value={tempProfile.email}
-              onChangeText={(text) => setTempProfile({...tempProfile, email: text})}
+              onChangeText={(text) => setTempProfile({ ...tempProfile, email: text })}
+              style={styles.input}
+              placeholder="Email"
               keyboardType="email-address"
               autoCapitalize="none"
             />
           ) : (
-            <Text style={styles.value}>{profile.email}</Text>
+            <Text style={styles.infoText}>{user.email}</Text>
           )}
         </View>
 
+        {/* Divider */}
+        <View style={styles.divider} />
+
+        {/* Action Buttons */}
         {isEditing ? (
           <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-            <Text style={styles.saveButtonText}>Save Changes</Text>
+            <Text style={styles.saveButtonText}>💾 Save Changes</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity 
-            style={styles.editButton} 
-            onPress={() => setIsEditing(true)}
-          >
-            <Text style={styles.editButtonText}>Edit Profile</Text>
+          <TouchableOpacity style={styles.editButton} onPress={() => setIsEditing(true)}>
+            <Text style={styles.editButtonText}>✏️ Edit Profile</Text>
           </TouchableOpacity>
         )}
       </View>
-
     </View>
   );
 };
 
+export default MyProfileScreen;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  container: { flex: 1, backgroundColor: '#f2f2f2', padding: 20 },
+  
+  avatarContainer: {
     alignItems: 'center',
     marginBottom: 20,
   },
-  headerTitle: {
+  changePhotoText: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
+  },
+
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+
+  cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#000C66',
+    marginBottom: 16,
   },
-  profileImageContainer: {
+
+  row: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 18,
   },
-  editPhotoButton: {
-    marginTop: 10,
-  },
-  editPhotoText: {
-    color: '#000C66',
+
+  input: {
+    flex: 1,
+    marginLeft: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
     fontSize: 16,
+    paddingVertical: 5,
   },
-  profileBox: {
-    padding: 20,
-    backgroundColor: '#f2f2f2',
-    borderRadius: 12,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  formGroup: {
-    marginBottom: 20,
-  },
-  label: {
+
+  infoText: {
     fontSize: 16,
-    color: '#666',
-    marginBottom: 5,
-  },
-  value: {
-    fontSize: 18,
-    paddingVertical: 10,
+    color: '#333',
+    marginLeft: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
+    paddingVertical: 5,
+    flex: 1,
   },
-  input: {
-    fontSize: 18,
-    padding: 10,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 5,
+
+  divider: {
+    height: 1,
+    backgroundColor: '#ccc',
+    marginVertical: 10,
   },
+
   editButton: {
     backgroundColor: '#000C66',
-    padding: 15,
-    borderRadius: 5,
+    padding: 12,
+    borderRadius: 8,
     alignItems: 'center',
   },
+
   editButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
   },
+
   saveButton: {
-    backgroundColor: '#4CAF50',
-    padding: 15,
-    borderRadius: 5,
+    backgroundColor: '#28a745',
+    padding: 12,
+    borderRadius: 8,
     alignItems: 'center',
   },
+
   saveButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
   },
-  addVehicleButton: {
-    backgroundColor: '#000C66',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  addVehicleButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
 });
-
-export default MyProfileScreen;

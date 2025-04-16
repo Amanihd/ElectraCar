@@ -54,7 +54,7 @@ const JoinScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.linksContainer}>
-          <Text style={styles.text}>Not a member? </Text>
+          <Text style={styles.text}>Already a member? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
             <Text style={styles.linkText}>Sign In</Text>
           </TouchableOpacity>
