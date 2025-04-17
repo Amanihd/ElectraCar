@@ -1,11 +1,12 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React from "react";
+import Footer from "../components/Footer";
 
 const TermsOfUseScreen = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ paddingBottom: 100 }}
+      contentContainerStyle={{ paddingBottom: 60 }}
     >
       <Text style={styles.header}>Terms of Use</Text>
       <Text style={styles.modifiedDate}>Last updated: April 7, 2025</Text>
@@ -51,6 +52,7 @@ const TermsOfUseScreen = () => {
       </Text>
 
       <Text style={styles.paragraph}>Thanks for using ElectraCar!</Text>
+      <Footer/>
     </ScrollView>
   );
 };

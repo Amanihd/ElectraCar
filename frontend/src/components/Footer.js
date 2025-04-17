@@ -13,7 +13,6 @@ const Footer = () => {
 const styles = StyleSheet.create({
   footer: {
     padding: 10,
-    backgroundColor: '#f2f2f2',
     alignItems: 'center',
     marginTop: 'auto', // This ensures the footer stays at the bottom of the screen
   },

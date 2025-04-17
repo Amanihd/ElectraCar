@@ -1,11 +1,12 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React from "react";
+import Footer from "../components/Footer";
 
 const PrivacyPolicyScreen = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ paddingBottom: 80 }}
+      contentContainerStyle={{ paddingBottom: 60 }}
     >
       <Text style={styles.header}>Privacy Policy</Text>
       <Text style={styles.modifiedDate}>Last updated: April 7, 2025</Text>
@@ -66,6 +67,7 @@ const PrivacyPolicyScreen = () => {
       <Text style={styles.paragraph}>
         Thank you for trusting ElectraCar with your information!
       </Text>
+      <Footer/>
     </ScrollView>
   );
 };

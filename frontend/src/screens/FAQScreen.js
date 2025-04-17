@@ -1,11 +1,12 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React from "react";
+import Footer from "../components/Footer";
 
 const FAQScreen = ({ navigation }) => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ paddingBottom: 80 }}
+      contentContainerStyle={{ paddingBottom: 60 }}
     >
       <Text style={styles.header}>Frequently Asked Questions (FAQ)</Text>
 
@@ -112,6 +113,8 @@ const FAQScreen = ({ navigation }) => {
         </Text>
         in the "Me" section.
       </Text>
+
+      <Footer/>
     </ScrollView>
   );
 };
@@ -141,6 +144,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     color: "#333",
   },
+ 
 });
 
 export default FAQScreen;

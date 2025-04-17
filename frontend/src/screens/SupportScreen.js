@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import React from 'react';
+import Footer from '../components/Footer';
 
 const SupportScreen = () => {
   const handleEmailPress = () => {
@@ -25,6 +26,7 @@ const SupportScreen = () => {
       <Text style={styles.paragraph}>
         We aim to respond within 24-48 hours. Thank you for using ElectraCar!
       </Text>
+      <Footer/>
     </View>
   );
 };

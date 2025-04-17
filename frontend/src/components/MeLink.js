@@ -1,25 +1,50 @@
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import React from "react";
+import { FontAwesome5 } from "react-native-vector-icons";
 
-const MeLink = ({ title, onPress }) => {
+const MeLink = ({ title, icon, onPress }) => {
   return (
-    <TouchableOpacity style={styles.link} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
-    </TouchableOpacity>
+    <View style={styles.section}>
+      <TouchableOpacity style={styles.item} onPress={onPress}>
+        <FontAwesome5
+          name={icon}
+          size={20}
+          color="#000C66"
+          style={styles.itemIcon}
+        />
+        <Text style={styles.itemText}>{title}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 export default MeLink;
 
 const styles = StyleSheet.create({
-  link: {
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderColor: "#ddd",
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 18,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 8,
+    elevation: 1.5,
   },
-  text: {
+  itemIcon: {
+    marginRight: 16,
+    color: "#000C66",
+  },
+  itemText: {
     fontSize: 16,
-    fontWeight: "semibold",
-    color: "black",
+    fontWeight: "500",
+    color: "#333",
+  },
+  section: {
+    width: "90%",
   },
 });
