@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import axios from "axios";
 import MapComponent from "../components/StationDirection/MapComponent";
 import InfoComponent from "../components/StationDirection/InfoComponent";
 import LoadingComponent from "../components/StationDirection/LoadingComponent";
+import TrackingButton from "../components/StationDirection/TrackingButton"; 
 import * as Location from "expo-location";
 
 const DirectionsScreen = ({ route }) => {
@@ -26,10 +27,7 @@ const DirectionsScreen = ({ route }) => {
 
     requestLocationPermission();
 
-    let subscription = null;
-
     if (isTracking) {
-      // Start tracking the user's location
       Location.watchPositionAsync(
         { accuracy: Location.Accuracy.High, distanceInterval: 10 },
         (location) => {
@@ -37,21 +35,20 @@ const DirectionsScreen = ({ route }) => {
         }
       )
         .then((sub) => {
-          setLocationSubscription(sub); // Store the subscription
+          setLocationSubscription(sub);
         })
         .catch((error) => {
           console.error("Error starting location watch:", error);
         });
     } else {
-      // Stop tracking if already tracking
       if (locationSubscription && locationSubscription.remove) {
-        locationSubscription.remove(); // Remove the subscription when tracking stops
+        locationSubscription.remove();
       }
     }
 
     return () => {
       if (locationSubscription && locationSubscription.remove) {
-        locationSubscription.remove(); // Cleanup subscription on component unmount
+        locationSubscription.remove();
       }
     };
   }, [isTracking]);
@@ -72,13 +69,13 @@ const DirectionsScreen = ({ route }) => {
 
           if (response.data.features && response.data.features.length > 0) {
             const directions = response.data.features[0].geometry.coordinates;
+
             if (directions) {
               const coordinates = directions.map((coord) => ({
                 latitude: coord[1],
                 longitude: coord[0],
               }));
 
-              // Include the end location (charging station) in the coordinates
               coordinates.push({
                 latitude: station.latitude,
                 longitude: station.longitude,
@@ -86,15 +83,15 @@ const DirectionsScreen = ({ route }) => {
 
               setRouteCoordinates(coordinates);
 
-              // Extract distance and duration from the response
               const distance =
                 response.data.features[0].properties.segments[0].distance /
-                1000; // Convert meters to kilometers
+                1000;
               const duration =
-                response.data.features[0].properties.segments[0].duration / 60; // Convert seconds to minutes
+                response.data.features[0].properties.segments[0].duration / 60;
+
               setRouteInfo({
-                distance: distance.toFixed(2), // Keep 2 decimal points
-                duration: duration.toFixed(0), // Round to nearest minute
+                distance: distance.toFixed(2),
+                duration: duration.toFixed(0),
               });
             } else {
               console.error("No coordinates found in the directions.");
@@ -112,7 +109,7 @@ const DirectionsScreen = ({ route }) => {
   }, [currentLocation, station]);
 
   const toggleTracking = () => {
-    setIsTracking((prev) => !prev); // Toggle tracking state
+    setIsTracking((prev) => !prev);
   };
 
   if (!currentLocation) {
@@ -120,46 +117,17 @@ const DirectionsScreen = ({ route }) => {
   }
 
   return (
-    <View style={[styles.container, isTracking && styles.stopButton]}>
-      <TouchableOpacity
-        onPress={toggleTracking}
-      >
-        <Text style={isTracking ? styles.buttonTextTracking : styles.buttonText}>
-          {isTracking ? "Stop Tracking..." : "Start Tracking"}
-        </Text>
-      </TouchableOpacity>
+    <View>
+      <TrackingButton isTracking={isTracking} onPress={toggleTracking} />
       <MapComponent
         userLocation={currentLocation}
         station={station}
         routeCoordinates={routeCoordinates}
+        isStation={true}
       />
       <InfoComponent routeInfo={routeInfo} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ddd",
-  },
-  stopButton: {
-    backgroundColor: "#00A86B", // Change color when tracking
-  },
-  buttonText: {
-    color: "black",
-    fontSize: 16,
-    paddingBottom: 10,
-  },
-  buttonTextTracking: {
-    color: "white",
-    fontSize: 16,
-    paddingBottom: 10,
-  },
-});
 
 export default DirectionsScreen;

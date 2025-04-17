@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Text, StyleSheet, Button, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 import LottieView from "lottie-react-native";
 import { UserLocationContext } from "../context/UserLocationContext";
 import { VehicleContext } from "../context/VehicleContext";
@@ -101,7 +101,20 @@ const TripsScreen = ({ route, navigation }) => {
     };
 
     console.log("Trip data to send:", tripData);
-    // Submit tripData to backend here if needed
+    // Submit this tripData to backend
+
+    try {
+      navigation.navigate("TripMap", {
+        start: { lat: 31.9815471, lng: 35.9434113 },
+        streets: [
+          //  { lat: 31.9634, lng: 35.9304 }, // Example start point in Amman
+          { lat: 31.9824522, lng: 35.9412327 }, // Example middle point
+        ],
+        destination: { lat: 31.97, lng: 35.94 }, // Example destination in Amman
+      });
+    } catch (error) {
+      console.error("Error fetching trip route:", error);
+    }
   };
 
   return (
