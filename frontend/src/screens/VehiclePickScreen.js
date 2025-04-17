@@ -29,7 +29,8 @@ const VehiclePickScreen = () => {
       navigation.goBack();
     }
     // Save selected vehicle logic here (local or backend)
-    navigation.navigate("MainTabs", { screen: "Me" });
+    //navigation.navigate("MainTabs", { screen: "Me" });
+    navigation.navigate('AddVehicle')
   };
 
   const renderItem = ({ item }) => (

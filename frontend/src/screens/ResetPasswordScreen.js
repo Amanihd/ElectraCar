@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
 import CustomInput from '../components/CustomInput';
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
 
 const PasswordReset = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const email = route.params?.email || '';
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -25,14 +36,16 @@ const PasswordReset = () => {
       setError('Passwords do not match');
       return false;
     }
-  
     setError('');
     return true;
   };
 
   const handleReset = () => {
     if (validate()) {
-      // Simulate success
+      //  Send password and email to backend
+
+      // for now 
+      alert('Password successfully updated!');
       navigation.navigate('SignIn');
     }
   };
@@ -45,7 +58,7 @@ const PasswordReset = () => {
       <View style={styles.inner}>
         <Logo />
         <Text style={styles.title}>Reset Password</Text>
-        <Text style={styles.subtitle}>Enter your new password below</Text>
+        <Text style={styles.subtitle}>Resetting password for: {email}</Text>
 
         <CustomInput
           placeholder="New Password"
@@ -95,10 +108,10 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
     color: '#444',
-    marginBottom: 24,
+    marginBottom: 20,
   },
   errorText: {
     color: 'red',
@@ -118,3 +131,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+

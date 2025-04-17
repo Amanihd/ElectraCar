@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity,  } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import VehicleButton from '../components/VehicleButton';
+import LottieView from "lottie-react-native";
 
 
 const VehicleSummaryScreen = () => {
@@ -19,11 +20,13 @@ const VehicleSummaryScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../assets/images/car-animation.png')} // Replace with real animation or photo
-        style={styles.image}
-        resizeMode='cover'
-      />
+      <LottieView
+              source={require("../../assets/images/vehicle.json")}
+              style={styles.animation}
+              autoPlay
+              loop
+             
+            />
       {/*<Text style={styles.title}>Vehicle Summary</Text>*/}
       <Text style={styles.text}>Make: {make}</Text>
       <Text style={styles.text}>Model: {model}</Text>
@@ -53,10 +56,10 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 4,
   },
-  image: {
-    width: '100%',
-    height: 200,
-    marginVertical: 20,
+  animation: {
+    width: 400,
+    height: 300,
+    alignSelf: 'center',
   },
   
 });

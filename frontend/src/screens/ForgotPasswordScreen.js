@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import CustomInput from '../components/CustomInput';
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
@@ -24,8 +33,22 @@ const ForgotPasswordScreen = () => {
 
   const handleSubmit = () => {
     if (validate()) {
-      // Navigate to ResetPassword (as if the email is verified)
-      navigation.navigate('ResetPassword');
+      // Send email to backend for verification
+      
+
+      // success for now
+      Alert.alert(
+        'Reset Link Sent',
+        'A password reset link has been sent to your email.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('ResetPassword', { email }); // pass email to reset
+            },
+          },
+        ]
+      );
     }
   };
 
@@ -37,7 +60,9 @@ const ForgotPasswordScreen = () => {
       <View style={styles.inner}>
         <Logo />
         <Text style={styles.title}>Forgot Password?</Text>
-        <Text style={styles.subtitle}>Enter your email to receive reset instructions</Text>
+        <Text style={styles.subtitle}>
+          Enter your email to receive reset instructions
+        </Text>
 
         <CustomInput
           placeholder="Enter your Email"
@@ -57,6 +82,8 @@ const ForgotPasswordScreen = () => {
     </KeyboardAvoidingView>
   );
 };
+
+export default ForgotPasswordScreen;
 
 const styles = StyleSheet.create({
   outerContainer: {
@@ -96,4 +123,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgotPasswordScreen;

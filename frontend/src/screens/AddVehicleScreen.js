@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import LottieView from "lottie-react-native";
 
 
 
@@ -12,10 +13,13 @@ const AddVehicleScreen = () => {
       
 
       <Text style={styles.title}>Personalize your experience by adding a vehicle</Text>
-      <Image
-        source={require('../../assets/images/car-animation.png')} //vehicle car animation
-        style={styles.image}
-        resizeMode='cover'
+    
+      <LottieView
+        source={require("../../assets/images/vehicle.json")}
+        style={styles.animation}
+        autoPlay
+        loop
+       
       />
       
       <Text style={styles.subtitle}>
@@ -81,7 +85,12 @@ export const styles = StyleSheet.create({
     color: '#0033A0',
     marginTop: 12,
     fontSize: 14
-  }
+  },
+  animation: {
+    width: 400,
+    height: 300,
+    alignSelf: 'center',
+  },
 });
 
 export default AddVehicleScreen;
