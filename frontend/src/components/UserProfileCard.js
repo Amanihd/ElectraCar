@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   noneSelected: {
-    color: "#bbb", // light color for 'None selected'
+    color: "#bbb", 
     fontSize: 15,
   },
 });
