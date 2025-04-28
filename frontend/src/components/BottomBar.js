@@ -3,6 +3,11 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import CustomButton from "./CustomButton";
 import MultiSelectModal from "./MultiSelectModal";
 
+import i18next from "../services/i18next.js";
+import { useTranslation } from "react-i18next";
+
+
+
 const plugTypesOptions = [
   "CHAdeMO",
   "GB-T DC - GB/T 20234.3",
@@ -21,6 +26,8 @@ const BottomBar = ({
 }) => {
   const [plugTypeModalVisible, setPlugTypeModalVisible] = useState(false);
   const [selectedPlugTypes, setSelectedPlugTypes] = useState([]);
+  const { t } = useTranslation();
+
 
   const toggleFilter = (filter) => {
     setFilterTypes((prevFilters) =>
@@ -62,7 +69,7 @@ const BottomBar = ({
       >
         <CustomButton
           iconName="search"
-          label="Search"
+          label={t('search')}
           onPress={() => navigation.navigate("SearchStation", { userLocation })}
         />
         <CustomButton
