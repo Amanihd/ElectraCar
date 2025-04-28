@@ -27,12 +27,19 @@ const TripsScreen = ({ route, navigation }) => {
   const [showBookmarkModal, setShowBookmarkModal] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
   const [tripName, setTripName] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigation.navigate("Join"); // No redirect param
+      navigation.navigate("Join");
+    } else {
+      setLoading(false); 
     }
   }, [isLoggedIn]);
+
+  if (loading) {
+    return null; // Don't render anything while loading
+  }
 
   const vehicle = selectedVehicle || {
     id: 1,

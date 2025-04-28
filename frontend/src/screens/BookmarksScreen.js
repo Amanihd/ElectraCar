@@ -30,6 +30,7 @@ const cardImages = [
 const BookmarksScreen = ({ navigation }) => {
   const { isLoggedIn } = useContext(AuthContext);
   const [bookmarks, setBookmarks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -46,12 +47,24 @@ const BookmarksScreen = ({ navigation }) => {
         image: cardImages[index % cardImages.length],
       }));
       setBookmarks(mockData);
+      setLoading(false);
     }
   }, [isLoggedIn]);
 
   const handleBookmarkPress = (tripId) => {
-    navigation.navigate("TripMap", { tripId });
+    navigation.navigate("TripMap", {
+      start: { lat: 31.9815471, lng: 35.9434113 },
+      streets: [
+        //  { lat: 31.9634, lng: 35.9304 }, // Example start point in Amman
+        { lat: 31.9824522, lng: 35.9412327 }, // Example middle point
+      ],
+      destination: { lat: 31.97, lng: 35.94 }, // Example destination in Amman
+    });
   };
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
