@@ -1,29 +1,46 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Slider from "@react-native-community/slider";
+import React, { useState } from "react";
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
-const BatteryLevelModal = ({ visible, batteryLevel, onValueChange, onContinue }) => {
+const BatteryLevelModal = ({
+  visible,
+  batteryLevel,
+  onValueChange,
+  onContinue,
+}) => {
+  const { t } = useTranslation();
+  const [inputValue, setInputValue] = useState(batteryLevel.toString());
+
   if (!visible) return null;
+
+  // Handle input change and ensure the value is between 0 and 100
+  const handleInputChange = (value) => {
+    if (value === "" || /^[0-9\b]+$/.test(value)) {
+      const newValue = Math.min(Math.max(parseInt(value) || 0, 0), 100);
+      setInputValue(newValue.toString());
+      onValueChange(newValue); // Update the value directly when input changes
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.title}>Battery Level</Text>
-        <Text style={styles.text}>{batteryLevel}% charged</Text>
+        <Text style={styles.title}>{t("battery_level")}</Text>
+        <Text style={styles.text}>
+          {batteryLevel}% {t("charged")}
+        </Text>
 
-        <Slider
-          style={{ width: 250, height: 40 }}
-          minimumValue={0}
-          maximumValue={100}
-          step={1}
-          value={batteryLevel}
-          minimumTrackTintColor="#000C66"
-          maximumTrackTintColor="#ccc"
-          onValueChange={onValueChange}
+        {/* Input for manual entry */}
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          value={inputValue}
+          onChangeText={handleInputChange}
         />
+
         <View style={{ marginTop: 20, width: "100%" }}>
           <Text style={styles.continue} onPress={onContinue}>
-            Continue
+            {t("continue")}
           </Text>
         </View>
       </View>
@@ -49,6 +66,17 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 18, fontWeight: "bold", color: "#000C66" },
   text: { fontSize: 16, marginVertical: 20, color: "#333" },
+  input: {
+    height: 40,
+    width: "80%",
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    fontSize: 16,
+    marginTop: 10,
+    textAlign: "center",
+  },
   continue: {
     backgroundColor: "#000C66",
     color: "#fff",

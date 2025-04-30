@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  I18nManager,
+} from "react-native";
 import MeLink from "./MeLink"; // Import your MeLink component
 import { useTranslation } from "react-i18next"; // For translation
 import LanguageModal from "./LanguageModal"; // Your modal component
@@ -7,6 +13,7 @@ import LanguageModal from "./LanguageModal"; // Your modal component
 const MeLinksContainer = ({ navigation }) => {
   const { t, i18n } = useTranslation(); // Hook to get translation function and i18n instance
   const [visible, setVisible] = useState(false); // For controlling the modal visibility
+  const isRTL = i18n.language === "ar";
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang); // Change the language
@@ -14,29 +21,30 @@ const MeLinksContainer = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { direction: isRTL ? "rtl" : "ltr" }]}>
       <MeLink
-        title="My Profile"
+        title={t("my_profile")}
         icon="user"
         onPress={() => navigation.navigate("MyProfile")}
+        isRTL={isRTL}
       />
       <MeLink
-        title="FAQ"
+        title={t("faq")}
         icon="question-circle"
         onPress={() => navigation.navigate("FAQ")}
       />
       <MeLink
-        title="Support"
+        title={t("support")}
         icon="envelope"
         onPress={() => navigation.navigate("Support")}
       />
       <MeLink
-        title="Terms of Use"
+        title={t("terms_of_use")}
         icon="file-alt"
         onPress={() => navigation.navigate("TermsOfUse")}
       />
       <MeLink
-        title="Privacy Policy"
+        title={t("privacy_policy")}
         icon="shield-alt"
         onPress={() => navigation.navigate("PrivacyPolicy")}
       />
@@ -55,10 +63,21 @@ const MeLinksContainer = ({ navigation }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: "#EAF0FF",
+    borderRadius: 6,
+    marginTop: 15,
+  },
+  buttonText: {
+    color: "#007BFF",
+    textAlign: "center",
+    fontSize: 16,
   },
 });
 

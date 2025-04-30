@@ -3,17 +3,19 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { VehicleContext } from "../context/VehicleContext";
+import { useTranslation } from "react-i18next";
 
 const UserProfileCard = ({ name, email, onSignOut }) => {
   const navigation = useNavigation();
   const { selectedVehicle } = useContext(VehicleContext);
+  const { t, i18n } = useTranslation();
 
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
         <View style={{ flex: 1 }} />
         <TouchableOpacity onPress={onSignOut}>
-          <Text style={styles.signOutText}>Sign out</Text>
+          <Text style={styles.signOutText}>{t("sign_out")}</Text>
         </TouchableOpacity>
       </View>
 
@@ -27,16 +29,29 @@ const UserProfileCard = ({ name, email, onSignOut }) => {
       <Text style={styles.email}>{email}</Text>
 
       <View style={styles.card}>
-        <View style={styles.cardLeft}>
-          <Ionicons name="car-sport-outline" size={24} color="#000C66" />
-          <Text style={styles.cardTitle}>Selected Car</Text>
+        <View
+          style={[
+            styles.cardLeft,
+            { flexDirection: i18n.language === "ar" ? "row-reverse" : "row" },
+          ]}
+        >
+          <Ionicons
+            name="car-sport-outline"
+            size={24}
+            color="#000C66"
+            style={{
+              marginRight: i18n.language === "ar" ? 0 : 8,
+              marginLeft: i18n.language === "ar" ? 8 : 0,
+            }}
+          />
+          <Text style={styles.cardTitle}>{t("selected_car")}</Text>
         </View>
         <Text style={styles.cardDetail}>
           <Text style={styles.cardTitle}>
             {selectedVehicle ? (
               `${selectedVehicle.make} - ${selectedVehicle.model}`
             ) : (
-              <Text style={styles.noneSelected}>None selected</Text>
+              <Text style={styles.noneSelected}>{t("none_selected")}</Text>
             )}
           </Text>
         </Text>
@@ -44,7 +59,7 @@ const UserProfileCard = ({ name, email, onSignOut }) => {
           style={styles.upgradeButton}
           onPress={() => navigation.navigate("VehiclePickScreen")}
         >
-          <Text style={styles.upgradeText}>Choose Another</Text>
+          <Text style={styles.upgradeText}>{t("choose_another")}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -126,7 +141,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   noneSelected: {
-    color: "#bbb", 
+    color: "#bbb",
     fontSize: 15,
   },
 });

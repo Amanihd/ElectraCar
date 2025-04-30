@@ -1,10 +1,12 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 const GetDirectionsButton = ({ onPress }) => {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity style={[styles.button, styles.buttonMargin]} onPress={onPress}>
-      <Text style={styles.buttonText}>Get Directions</Text>
+      <Text style={styles.buttonText}>{t('get_directions')}</Text>
     </TouchableOpacity>
   );
 };

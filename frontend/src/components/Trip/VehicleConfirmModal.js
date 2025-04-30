@@ -1,25 +1,29 @@
 import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
 const VehicleConfirmModal = ({ visible, vehicle, onYes, onNo }) => {
+  const { t } = useTranslation();
   if (!visible) return null;
 
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.title}>Is this your vehicle?</Text>
+        <Text style={styles.title}>{t("is_this_your_vehicle")}</Text>
         <Text style={styles.text}>
           {vehicle.make} - {vehicle.model} ({vehicle.trim})
         </Text>
         <View style={styles.buttons}>
           <Pressable style={styles.button} onPress={onYes}>
-            <Text style={styles.buttonText}>Yes</Text>
+            <Text style={styles.buttonText}>{t("yes")}</Text>
           </Pressable>
           <Pressable
             style={[styles.button, { backgroundColor: "#ccc" }]}
             onPress={onNo}
           >
-            <Text style={[styles.buttonText, { color: "#000" }]}>No</Text>
+            <Text style={[styles.buttonText, { color: "#000" }]}>
+              {t("no")}
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -44,7 +48,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: { fontSize: 18, fontWeight: "bold", color: "#000C66" },
-  text: { fontSize: 16, marginVertical: 20, textAlign: "center", color: "#333" },
+  text: {
+    fontSize: 16,
+    marginVertical: 20,
+    textAlign: "center",
+    color: "#333",
+  },
   buttons: {
     flexDirection: "row",
     width: "100%",

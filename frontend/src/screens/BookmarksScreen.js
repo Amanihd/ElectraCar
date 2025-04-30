@@ -5,29 +5,29 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
-  Image,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import LottieView from "lottie-react-native";
-
+import { useTranslation } from "react-i18next";
 const { width } = Dimensions.get("window");
 const CARD_MARGIN = 8;
-const CARD_WIDTH = (width - 60) / 2; // Account for padding and margin
-const cardImages = [
-  require("../../assets/images/bookmarksImage/card1.jpg"),
-  require("../../assets/images/bookmarksImage/card2.jpeg"),
-  require("../../assets/images/bookmarksImage/card3.jpg"),
-  require("../../assets/images/bookmarksImage/card4.jpg"),
-  require("../../assets/images/bookmarksImage/card5.jpg"),
-  require("../../assets/images/bookmarksImage/card6.jpg"),
-  require("../../assets/images/bookmarksImage/card7.jpg"),
-  require("../../assets/images/bookmarksImage/card8.jpg"),
-  require("../../assets/images/bookmarksImage/card9.jpg"),
-  require("../../assets/images/bookmarksImage/card10.jpg"),
-];
+const CARD_WIDTH = (width - 60) / 2;
+
+const getRandomBlueShade = () => {
+  const shades = [
+    "#93C5FD", // light blue
+    "#60A5FA",
+    "#3B82F6",
+    "#2563EB",
+    "#1D4ED8",
+    "#1E40AF", // dark blue
+  ];
+  return shades[Math.floor(Math.random() * shades.length)];
+};
 
 const BookmarksScreen = ({ navigation }) => {
+  const { t } = useTranslation();
   const { isLoggedIn } = useContext(AuthContext);
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,16 +37,17 @@ const BookmarksScreen = ({ navigation }) => {
       navigation.navigate("Join");
     } else {
       const mockData = [
-        { id: "1", title: "Trip to Downtown" },
-        { id: "2", title: "Morning Office Route" },
-        { id: "3", title: "Weekend Adventure" },
-        { id: "4", title: "Evening Chill" },
-        { id: "5", title: "Sunset Drive" },
-      ].map((item, index) => ({
+        { id: "1", title: "Trip to home" },
+        { id: "2", title: "Office Route" },
+        { id: "3", title: "Weekend" },
+        { id: "4", title: "Park" },
+        { id: "5", title: "Uni" },
+      ].map((item) => ({
         ...item,
-        image: cardImages[index % cardImages.length],
+        color: getRandomBlueShade(),
       }));
-      setBookmarks(mockData);
+
+    //  setBookmarks(mockData);
       setLoading(false);
     }
   }, [isLoggedIn]);
@@ -54,17 +55,17 @@ const BookmarksScreen = ({ navigation }) => {
   const handleBookmarkPress = (tripId) => {
     navigation.navigate("TripMap", {
       start: { lat: 31.9815471, lng: 35.9434113 },
-      streets: [
-        //  { lat: 31.9634, lng: 35.9304 }, // Example start point in Amman
-        { lat: 31.9824522, lng: 35.9412327 }, // Example middle point
-      ],
-      destination: { lat: 31.97, lng: 35.94 }, // Example destination in Amman
+      streets: [{ lat: 31.9824522, lng: 35.9412327 }],
+      destination: { lat: 31.97, lng: 35.94 },
     });
   };
 
-  if (loading) {
-    return null;
-  }
+  const handleRemoveBookmark = (tripId) => {
+    setBookmarks((prev) => prev.filter((item) => item.id !== tripId));
+    // Later: also send request to backend to delete
+  };
+
+  if (loading) return null;
 
   return (
     <View style={styles.container}>
@@ -76,15 +77,13 @@ const BookmarksScreen = ({ navigation }) => {
             autoPlay
             loop
           />
-          <Text style={styles.title}>
-            Find Your Bookmarked trips here easily
-          </Text>
-          <Text style={styles.subtitle}>No bookmarks yet.</Text>
-          <Text style={styles.subtitle}>Start adding!</Text>
+          <Text style={styles.title}>{t("bookmark_title")}</Text>
+          <Text style={styles.subtitle}>{t("no_bookmarks")}</Text>
+          <Text style={styles.subtitle}> {t("start_adding_bookmark")}</Text>
         </View>
       ) : (
         <FlatList
-          key={"2-column"} // 💡 force remount when numColumns changes
+          key={"2-column"}
           data={bookmarks}
           keyExtractor={(item) => item.id}
           numColumns={2}
@@ -95,8 +94,13 @@ const BookmarksScreen = ({ navigation }) => {
               onPress={() => handleBookmarkPress(item.id)}
               style={styles.card}
             >
-              <Image source={item.image} style={styles.cardImage} />
+              <View
+                style={[styles.colorBox, { backgroundColor: item.color }]}
+              />
               <Text style={styles.cardTitle}>{item.title}</Text>
+              <TouchableOpacity onPress={() => handleRemoveBookmark(item.id)}>
+                <Text style={styles.removeText}>{t("remove")}</Text>
+              </TouchableOpacity>
             </TouchableOpacity>
           )}
         />
@@ -138,7 +142,6 @@ const styles = StyleSheet.create({
     width: CARD_WIDTH,
     aspectRatio: 1,
     borderRadius: 10,
-    justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -146,15 +149,14 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     elevation: 1.5,
     marginHorizontal: CARD_MARGIN / 2,
-    justifyContent: "flex-start",
     overflow: "hidden",
+    paddingBottom: 8,
   },
-  cardImage: {
+  colorBox: {
     width: "100%",
-    height: "70%",
+    height: "55%", // shortened height
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    resizeMode: "cover",
   },
   cardTitle: {
     fontSize: 16,
@@ -162,6 +164,13 @@ const styles = StyleSheet.create({
     color: "#111827",
     textAlign: "center",
     marginTop: 8,
+    paddingHorizontal: 8,
+  },
+  removeText: {
+    fontSize: 13,
+    color: "#6B7280", // Tailwind's gray-500
+    marginTop: 4,
+    textDecorationLine: "underline",
   },
   emptyContainer: {
     flex: 1,

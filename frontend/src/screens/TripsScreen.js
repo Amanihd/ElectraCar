@@ -14,7 +14,10 @@ import VehicleConfirmModal from "../components/Trip/VehicleConfirmModal";
 import BatteryLevelModal from "../components/Trip/BatteryLevelModal";
 import BookmarkModal from "../components/Trip/BookmarkModal";
 
+import { useTranslation } from "react-i18next";
+
 const TripsScreen = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const { isLoggedIn } = useContext(AuthContext);
   const { userLocation } = useContext(UserLocationContext);
   const { selectedVehicle } = useContext(VehicleContext);
@@ -33,7 +36,7 @@ const TripsScreen = ({ route, navigation }) => {
     if (!isLoggedIn) {
       navigation.navigate("Join");
     } else {
-      setLoading(false); 
+      setLoading(false);
     }
   }, [isLoggedIn]);
 
@@ -134,10 +137,10 @@ const TripsScreen = ({ route, navigation }) => {
           loop
         />
 
-        <Text style={styles.title}>Plan your trip easily</Text>
-        <Text style={styles.subtitle}>with ElectraCar</Text>
+        <Text style={styles.title}>{t("plan_your_trip")}</Text>
+        <Text style={styles.subtitle}>{t("with_electracar")}</Text>
         <TextInput
-          placeholder="Name your trip (e.g. Office Route)"
+          placeholder={t("trip_name_placeholder")}
           style={styles.input}
           value={tripName}
           onChangeText={setTripName}

@@ -1,7 +1,9 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
 const TrackingButton = ({ isTracking, onPress }) => {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -11,7 +13,7 @@ const TrackingButton = ({ isTracking, onPress }) => {
       ]}
     >
       <Text style={{ color: isTracking ? "#fff" : "#000", fontWeight: "bold" }}>
-        {isTracking ? "Stop Tracking" : "Start Tracking"}
+        {isTracking ? t("stop_tracking") : t("start_tracking")}
       </Text>
     </TouchableOpacity>
   );
