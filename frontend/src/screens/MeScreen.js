@@ -14,19 +14,21 @@ import Footer from "../components/Footer";
 import MeLinksContainer from "../components/MeLinksContainer";
 import UserProfileCard from "../components/UserProfileCard";
 
+import { useTranslation } from "react-i18next";
 
 const MeScreen = () => {
   const navigation = useNavigation();
   const { user, isLoggedIn, logout } = useContext(AuthContext);
+  const { t } = useTranslation();
 
   if (!isLoggedIn) {
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Logo />
-          <Text style={styles.subtitle}>Join the ElectraCar community</Text>
+          <Text style={styles.subtitle}>{t("join_electracar")}</Text>
           <TouchableOpacity onPress={() => navigation.navigate("Join")}>
-            <Text style={styles.linkText}>Sign up or sign in today!</Text>
+            <Text style={styles.linkText}>{t("sign_up_sign_in")}</Text>
           </TouchableOpacity>
           <View style={{ marginTop: 60 }}>
             <MeLinksContainer navigation={navigation} />
@@ -40,7 +42,7 @@ const MeScreen = () => {
   if (!user) {
     return (
       <View style={styles.container}>
-        <Text style={styles.subtitle}>Loading your profile...</Text>
+        <Text style={styles.subtitle}>{t("loading_profile")}</Text>
       </View>
     );
   }
@@ -48,11 +50,14 @@ const MeScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <UserProfileCard name={user.name} email={user.email} onSignOut={logout} />
+        <UserProfileCard
+          name={user.name}
+          email={user.email}
+          onSignOut={logout}
+        />
         <MeLinksContainer navigation={navigation} />
-        <Footer/>
+        <Footer />
       </ScrollView>
-    
     </View>
   );
 };

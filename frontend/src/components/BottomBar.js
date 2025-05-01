@@ -74,33 +74,33 @@ const BottomBar = ({
         />
         <CustomButton
           iconName="checkmark-circle"
-          label="Available"
+          label={t("available")}
           selected={filterTypes.includes("available")}
           onPress={() => toggleFilter("available")}
         />
         <CustomButton
           iconName="charging-station"
-          label="2+ Chargers"
+          label={t("two_plus_chargers")}
           selected={filterTypes.includes("2plus")}
           onPress={() => toggleFilter("2plus")}
           useFontAwesome
         />
         <CustomButton
           iconName="bolt"
-          label="Fast"
+          label={t("fast")}
           selected={filterTypes.includes("fast")}
           onPress={() => toggleFilter("fast")}
           useFontAwesome
         />
         <CustomButton
           iconName="car"
-          label="Parking"
+          label={t("parking")}
           selected={filterTypes.includes("parking")}
           onPress={() => toggleFilter("parking")}
         />
         <CustomButton
           iconName="plug"
-          label="Plug Type"
+          label={t("plug_type")}
           selected={selectedPlugTypes.length > 0}
           onPress={() => setPlugTypeModalVisible(true)}
           useFontAwesome

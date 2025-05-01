@@ -2,7 +2,7 @@ import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import React from "react";
 import { FontAwesome5 } from "react-native-vector-icons";
 
-const MeLink = ({ title, icon, onPress }) => {
+const MeLink = ({ title, icon, onPress, isRTL }) => {
   return (
     <View style={styles.section}>
       <TouchableOpacity style={styles.item} onPress={onPress}>
@@ -10,7 +10,7 @@ const MeLink = ({ title, icon, onPress }) => {
           name={icon}
           size={20}
           color="#000C66"
-          style={styles.itemIcon}
+          style={[styles.itemIcon, { marginLeft: isRTL ? 8 : 16 }]} // Adjust icon margin here
         />
         <Text style={styles.itemText}>{title}</Text>
       </TouchableOpacity>
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     elevation: 1.5,
   },
   itemIcon: {
-    marginRight: 16,
     color: "#000C66",
+    marginRight: 16,
   },
   itemText: {
     fontSize: 16,

@@ -8,8 +8,10 @@ import {
   StyleSheet,
 } from "react-native";
 import stations from "../data/stations.json";
+import { useTranslation } from "react-i18next";
 
 const SearchStationScreen = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const { userLocation } = route.params;
   const [query, setQuery] = useState("");
   const [filteredStations, setFilteredStations] = useState([]);
@@ -29,7 +31,7 @@ const SearchStationScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Search for a station..."
+        placeholder={t("search_for_station")}
         value={query}
         onChangeText={handleSearch}
         style={styles.input}
@@ -49,7 +51,7 @@ const SearchStationScreen = ({ route, navigation }) => {
         )}
         ListEmptyComponent={() =>
           query.length > 0 && (
-            <Text style={styles.noResults}>No stations found</Text>
+            <Text style={styles.noResults}>{t("no_stations_found")}</Text>
           )
         }
       />

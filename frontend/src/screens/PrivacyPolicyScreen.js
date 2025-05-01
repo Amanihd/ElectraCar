@@ -1,73 +1,62 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React from "react";
 import Footer from "../components/Footer";
+import { useTranslation } from "react-i18next";
+import i18next from "../services/i18next";
 
 const PrivacyPolicyScreen = () => {
+  const { t } = useTranslation();
+  const isRTL = i18next.language === "ar";
+
+  const rtlTextAlign = { textAlign: isRTL ? "right" : "left" };
+
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={{ paddingBottom: 60 }}
     >
-      <Text style={styles.header}>Privacy Policy</Text>
-      <Text style={styles.modifiedDate}>Last updated: April 7, 2025</Text>
+      <Text style={[styles.header, rtlTextAlign]}>{t("header")}</Text>
+      <Text style={[styles.modifiedDate, rtlTextAlign]}>{t("modifiedDate")}</Text>
 
-      <Text style={styles.paragraph}>
-        At ElectraCar, your privacy is important to us. This privacy policy
-        explains how we collect, use, and protect your information when you use
-        our app. By using ElectraCar, you agree to the collection and use of
-        information in accordance with this policy.
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("intro")}
       </Text>
 
-      <Text style={styles.subHeader}>1. Information We Collect</Text>
-      <Text style={styles.paragraph}>
-        We collect the information you provide when you use the app, such as
-        your location and battery status. We also gather some technical
-        information automatically, like your device type and operating system
-        version, to help improve our service.
+      <Text style={[styles.subHeader, rtlTextAlign]}>{t("infoCollectHeader")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("infoCollect")}
       </Text>
 
-      <Text style={styles.subHeader}>2. How We Use Your Information</Text>
-      <Text style={styles.paragraph}>
-        The information we collect is used to provide you with accurate route
-        suggestions, show nearby charging stations, and improve your overall
-        experience. We may also use your data to troubleshoot issues, send
-        updates, and improve our services.
+      <Text style={[styles.subHeader, rtlTextAlign]}>{t("useInfoHeader")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("useInfo")}
       </Text>
 
-      <Text style={styles.subHeader}>3. How We Protect Your Information</Text>
-      <Text style={styles.paragraph}>
-        We take security seriously and use a variety of security measures to
-        protect your personal information. However, no method of electronic
-        storage or transmission is 100% secure, and we can’t guarantee absolute
-        security.
+      <Text style={[styles.subHeader, rtlTextAlign]}>{t("protectInfoHeader")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("protectInfo")}
       </Text>
 
-      <Text style={styles.subHeader}>4. Sharing Your Information</Text>
-      <Text style={styles.paragraph}>
-        We do not sell, rent, or trade your personal information. However, we
-        may share your information with trusted partners who help us operate the
-        app or provide services to you, under strict confidentiality agreements.
+      <Text style={[styles.subHeader, rtlTextAlign]}>{t("shareInfoHeader")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("shareInfo")}
       </Text>
 
-      <Text style={styles.subHeader}>5. Your Choices</Text>
-      <Text style={styles.paragraph}>
-        You have control over your information. You can choose to turn off
-        location services or stop using the app at any time. However, most
-        features of the app may not work as intended without location data.
+      <Text style={[styles.subHeader, rtlTextAlign]}>{t("yourChoicesHeader")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("yourChoices")}
       </Text>
 
-      <Text style={styles.subHeader}>6. Changes to This Policy</Text>
-      <Text style={styles.paragraph}>
-        We may update this privacy policy from time to time as the app evolves.
-        If we make any significant changes, we’ll notify you through the app or
-        via other means. The date of the last update will always be displayed at
-        the top of this page.
+      <Text style={[styles.subHeader, rtlTextAlign]}>{t("changesPolicyHeader")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("changesPolicy")}
       </Text>
 
-      <Text style={styles.paragraph}>
-        Thank you for trusting ElectraCar with your information!
+      <Text style={[styles.paragraph, rtlTextAlign]}>
+        {t("thankYou")}
       </Text>
-      <Footer/>
+
+      <Footer />
     </ScrollView>
   );
 };

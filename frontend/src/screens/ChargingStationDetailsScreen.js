@@ -3,23 +3,25 @@ import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import StationHeader from "../components/StationHeader";
 import SectionDetail from "../components/SectionDetail";
-import GetDirectionsButton from "../components/GetDirectionsButton"; // Import the new button component
+import GetDirectionsButton from "../components/GetDirectionsButton";
+import { useTranslation } from "react-i18next";
 
 const ChargingStationDetails = ({ route, navigation }) => {
+  const { t, i18n } = useTranslation();
   const station = route?.params?.station;
-  const userLocation=route?.params?.userLocation;
+  const userLocation = route?.params?.userLocation;
+
   if (!station) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>No station data available.</Text>
+        <Text style={styles.errorText}>{t("no_station_data")}</Text>
       </View>
     );
   }
 
-  // Get Directions function
   const handleGetDirections = () => {
     if (!station) return;
-    navigation.navigate("DirectionsScreen", { station,userLocation });
+    navigation.navigate("DirectionsScreen", { station, userLocation });
   };
 
   return (
@@ -40,56 +42,63 @@ const ChargingStationDetails = ({ route, navigation }) => {
       </View>
 
       {/* Station Header */}
-      <StationHeader
-        title={station.title}
-        address={station.address}
-      />
+      <StationHeader title={station.title} address={station.address} />
 
       {/* Directions Button */}
       <GetDirectionsButton onPress={handleGetDirections} />
 
       {/* Details Section */}
       <View style={styles.detailsWrapper}>
-        {/* Plug Type - Display the first plug type */}
+        {/* Plug Type */}
         <SectionDetail
-          title="Plug Type"
-          content={station.plugType[0] || "N/A"}
+          title={t("plug_type")}
+          content={station.plugType[0] || t("not_applicable")}
         />
-        
+
         {/* Cost */}
         <SectionDetail
-          title="Cost"
-          content={station.cost ? `$${station.cost}` : "N/A"}
+          title={t("cost")}
+          content={station.cost ? `$${station.cost}` : t("not_applicable")}
         />
 
         {/* Parking */}
         <SectionDetail
-          title="Parking"
-          content={station.parking ? `${station.parking} spots` : "No parking info"}
+          title={t("parking")}
+          content={
+            station.parking
+              ? `${station.parking} ${
+                  station.parking === 1 ? t("spot") : t("spots")
+                }`
+              : t("no_parking_info")
+          }
         />
 
-        {/* Amenities - Display as a list or 'N/A' if empty */}
+        {/* Amenities */}
         <SectionDetail
-          title="Amenities"
-          content={station.amenities.length > 0 ? station.amenities.join(", ") : "No amenities listed"}
+          title={t("amenities")}
+          content={
+            station.amenities.length > 0
+              ? station.amenities.join(", ")
+              : t("no_amenities_listed")
+          }
         />
 
-        {/* Plug Score (if available) */}
+        {/* Plug Score */}
         <SectionDetail
-          title="Plug Score"
-          content={station.plugScore ? station.plugScore : "N/A"}
+          title={t("plug_score")}
+          content={station.plugScore ? station.plugScore : t("not_applicable")}
         />
 
-        {/* Is Fast Charging */}
+        {/* Fast Charging */}
         <SectionDetail
-          title="Fast Charging"
-          content={station.isFast ? "Yes" : "No"}
+          title={t("fast_charging")}
+          content={station.isFast ? t("yes") : t("no")}
         />
 
         {/* Availability */}
         <SectionDetail
-          title="Availability"
-          content={station.isAvailable ? "Available" : "Not available"}
+          title={t("availability")}
+          content={station.isAvailable ? t("available") : t("not_available")}
         />
       </View>
     </ScrollView>
@@ -116,7 +125,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   detailsWrapper: {
-    marginTop: 50, // Adjust this value to move the details down as needed
+    marginTop: 50,
     paddingHorizontal: 15,
   },
   errorContainer: {

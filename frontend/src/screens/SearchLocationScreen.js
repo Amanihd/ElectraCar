@@ -11,13 +11,16 @@ import {
 } from "react-native";
 import axios from "axios";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useTranslation } from "react-i18next";
+
 
 const SearchLocationScreen = ({ route, navigation }) => {
   const { type, start, destination } = route.params;
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const { t } = useTranslation();
+  
   const handleSubmitSearch = async () => {
     if (query.length < 3) {
       setResults([]);
@@ -65,7 +68,11 @@ const SearchLocationScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.searchRow}>
         <TextInput
-          placeholder={`Search ${type === "start" ? "Start" : "Destination"} Point`}
+         placeholder={
+          type === "start"
+            ? t("search_start_point")
+            : t("search_destination_point")
+        }
           value={query}
           onChangeText={setQuery}
           onSubmitEditing={handleSubmitSearch}

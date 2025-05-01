@@ -1,24 +1,35 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useTranslation } from "react-i18next";
 
 const BookmarkModal = ({ visible, onSave }) => {
+  const { t } = useTranslation();
+
   if (!visible) return null;
 
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Ionicons name="bookmark" size={20} color="red" style={{ marginBottom: 15 }} />
-        <Text style={styles.title}>Add to Bookmarks?</Text>
-        <Text style={styles.text}>Do you want to bookmark this trip for later?</Text>
+        <Ionicons
+          name="bookmark"
+          size={20}
+          color="red"
+          style={{ marginBottom: 15 }}
+        />
+       <Text style={styles.title}>{t("add_to_bookmarks")}</Text>
+       <Text style={styles.text}>{t("bookmark_trip_message")}</Text>
 
         <View style={styles.buttons}>
           <TouchableOpacity style={styles.button} onPress={() => onSave(true)}>
-            <Text style={styles.buttonText}>Yes</Text>
+            <Text style={styles.buttonText}>{t("yes")}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.button, { backgroundColor: "#ccc" }]} onPress={() => onSave(false)}>
-            <Text style={[styles.buttonText, { color: "#000" }]}>No</Text>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: "#ccc" }]}
+            onPress={() => onSave(false)}
+          >
+            <Text style={[styles.buttonText, { color: "#000" }]}>{t("no")}</Text>
           </TouchableOpacity>
         </View>
       </View>

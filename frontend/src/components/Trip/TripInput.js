@@ -1,12 +1,23 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
-const TripInput = ({ label, value, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={styles.input}>
-    <Text style={styles.emoji}>{label}</Text>
-    <Text style={styles.text}>{value || "Select location"}</Text>
-  </TouchableOpacity>
-);
+const TripInput = ({ label, value, onPress }) => {
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.input, isArabic && styles.inputRTL]}
+    >
+      <Text style={[styles.emoji, isArabic && styles.emojiRTL]}>{label}</Text>
+      <Text style={[styles.text, isArabic && styles.textRTL]}>
+        {value || t("select_location")}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   input: {
@@ -18,9 +29,16 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     elevation: 2,
   },
+  inputRTL: {
+    flexDirection: "row-reverse",
+  },
   emoji: {
     fontSize: 18,
     marginRight: 10,
+  },
+  emojiRTL: {
+    marginRight: 0,
+    marginLeft: 10,
   },
   text: {
     fontSize: 16,
@@ -28,6 +46,9 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flex: 1,
     flexWrap: "wrap",
+  },
+  textRTL: {
+    textAlign: "right",
   },
 });
 
