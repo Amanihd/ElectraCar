@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
+import i18next from "../../services/i18next";
 
 const BatteryLevelModal = ({
   visible,
@@ -10,6 +11,12 @@ const BatteryLevelModal = ({
 }) => {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState(batteryLevel.toString());
+
+  const isRTL = i18next.language === "ar";
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
   if (!visible) return null;
 
@@ -25,8 +32,8 @@ const BatteryLevelModal = ({
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.title}>{t("battery_level")}</Text>
-        <Text style={styles.text}>
+        <Text style={[styles.title,arFontFamilySmiBold]}>{t("battery_level")}</Text>
+        <Text style={[styles.text,arFontFamilyRegular]}>
           {batteryLevel}% {t("charged")}
         </Text>
 
@@ -39,7 +46,7 @@ const BatteryLevelModal = ({
         />
 
         <View style={{ marginTop: 20, width: "100%" }}>
-          <Text style={styles.continue} onPress={onContinue}>
+          <Text style={[styles.continue,arFontFamilySmiBold]} onPress={onContinue}>
             {t("continue")}
           </Text>
         </View>
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     maxWidth: 320,
     alignItems: "center",
   },
-  title: { fontSize: 18, fontWeight: "bold", color: "#000C66" },
+  title: { fontSize: 18, color: "#000C66" },
   text: { fontSize: 16, marginVertical: 20, color: "#333" },
   input: {
     height: 40,
@@ -83,7 +90,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 12,
     borderRadius: 10,
-    fontWeight: "bold",
   },
 });
 

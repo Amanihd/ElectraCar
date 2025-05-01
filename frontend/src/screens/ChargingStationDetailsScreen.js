@@ -7,7 +7,7 @@ import GetDirectionsButton from "../components/GetDirectionsButton";
 import { useTranslation } from "react-i18next";
 
 const ChargingStationDetails = ({ route, navigation }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const station = route?.params?.station;
   const userLocation = route?.params?.userLocation;
 

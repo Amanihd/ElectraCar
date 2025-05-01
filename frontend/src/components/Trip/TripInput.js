@@ -6,13 +6,15 @@ const TripInput = ({ label, value, onPress }) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
+const arFontFamilyRegular = isArabic ? { fontFamily: "IBM-Regular" } : {};
+
   return (
     <TouchableOpacity
       onPress={onPress}
       style={[styles.input, isArabic && styles.inputRTL]}
     >
       <Text style={[styles.emoji, isArabic && styles.emojiRTL]}>{label}</Text>
-      <Text style={[styles.text, isArabic && styles.textRTL]}>
+      <Text style={[styles.text, isArabic && styles.textRTL,arFontFamilyRegular]}>
         {value || t("select_location")}
       </Text>
     </TouchableOpacity>

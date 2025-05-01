@@ -9,20 +9,29 @@ import {
   StyleSheet,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // or 'react-native-vector-icons'
+import { useTranslation } from "react-i18next";
+import i18next from "../services/i18next";
 
 const MultiSelectModal = ({
   visible,
   onClose,
-  options, // Generic options to display
-  selectedItems, // Generic selected items
-  toggleItemSelection, // Toggle selection for items
+  options,
+  selectedItems,
+  toggleItemSelection,
   onDone,
-  title, // Title for the modal, to specify context like "Select Plug Types" or "Select Amenities"
+  title,
 }) => {
+  const { t } = useTranslation();
+  const isRTL = i18next.language === "ar";
+const rtlTextAlign = { textAlign: isRTL ? "right" : "left" };
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+
   return (
     <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
       <View style={styles.modalContainer}>
-        <Text style={styles.modalTitle}>{title}</Text>
+        <Text style={[styles.modalTitle, arFontFamilySmiBold,rtlTextAlign]}>{title}</Text>
 
         <FlatList
           data={options}
@@ -44,7 +53,9 @@ const MultiSelectModal = ({
         />
 
         <TouchableOpacity style={styles.doneButton} onPress={onDone}>
-          <Text style={{ color: "white", fontWeight: "bold" }}>Done</Text>
+          <Text style={[{ color: "white" }, arFontFamilySmiBold]}>
+            {t("done")}
+          </Text>
         </TouchableOpacity>
       </View>
     </Modal>
@@ -60,7 +71,6 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     marginBottom: 20,
-    fontWeight: "bold",
   },
   optionItem: {
     padding: 12,

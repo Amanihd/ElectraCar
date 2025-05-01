@@ -1,15 +1,34 @@
 import React from "react";
-import { Modal, View, TouchableOpacity, Text, FlatList, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
+import {
+  Modal,
+  View,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  StyleSheet,
+} from "react-native";
+import i18next from "../services/i18next";
 
 const LanguageModal = ({ visible, onRequestClose, changeLanguage }) => {
+  const { t } = useTranslation();
   const languages = {
-    en: { nativeName: "English" },
-    ar: { nativeName: "Arabic" },
+    en: { key: "English" },
+    ar: { key: "Arabic" },
     // Add more languages as needed
   };
-
+  const isRTL = i18next.language === "ar";
+  const arFontFamilySmiBold = isRTL
+  ? { fontFamily: "IBM-SemiBold" }
+  : { fontWeight: "bold" };
+  
   return (
-    <Modal visible={visible} onRequestClose={onRequestClose} animationType="fade" transparent>
+    <Modal
+      visible={visible}
+      onRequestClose={onRequestClose}
+      animationType="fade"
+      transparent
+    >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <FlatList
@@ -19,8 +38,8 @@ const LanguageModal = ({ visible, onRequestClose, changeLanguage }) => {
                 style={styles.languageButton}
                 onPress={() => changeLanguage(item)}
               >
-                <Text style={styles.languageText}>
-                  {languages[item].nativeName}
+                <Text style={[styles.languageText,arFontFamilySmiBold]}>
+                  {t(languages[item].key)}
                 </Text>
               </TouchableOpacity>
             )}
@@ -46,7 +65,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 15,
     elevation: 10, // adds subtle shadow for depth
-    shadowColor: "#000", 
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 4 },
@@ -66,7 +85,6 @@ const styles = StyleSheet.create({
   },
   languageText: {
     fontSize: 16,
-    fontWeight: "500",
     color: "#333", // a soft dark color for text
   },
 });

@@ -7,59 +7,64 @@ import i18next from "i18next";
 const TermsOfUseScreen = () => {
   const { t } = useTranslation();
   const isRTL = i18next.language === "ar";
+  const rtlTextAlign = { textAlign: isRTL ? "right" : "left" };
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={{ paddingBottom: 60 }}
     >
-      <Text style={styles.header}>{t("terms_title")}</Text>
-      <Text
-        style={[styles.modifiedDate, { textAlign: isRTL ? "right" : "left" }]}
-      >
+      <Text style={[styles.header, arFontFamilySmiBold]}>
+        {t("terms_title")}
+      </Text>
+      <Text style={[styles.modifiedDate, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_last_updated")}
       </Text>
 
-      <Text style={[styles.paragraph, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_intro")}
       </Text>
 
-      <Text style={[styles.subHeader, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.subHeader, rtlTextAlign, arFontFamilySmiBold]}>
         {t("terms_1_title")}
       </Text>
-      <Text style={[styles.paragraph, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_1_body")}
       </Text>
 
-      <Text style={[styles.subHeader, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.subHeader, rtlTextAlign, arFontFamilySmiBold]}>
         {t("terms_2_title")}
       </Text>
-      <Text style={[styles.paragraph, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_2_body")}
       </Text>
 
-      <Text style={[styles.subHeader, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.subHeader, rtlTextAlign, arFontFamilySmiBold]}>
         {t("terms_3_title")}
       </Text>
-      <Text style={[styles.paragraph, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_3_body")}
       </Text>
 
-      <Text style={[styles.subHeader, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.subHeader, rtlTextAlign, arFontFamilySmiBold]}>
         {t("terms_4_title")}
       </Text>
-      <Text style={[styles.paragraph, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_4_body")}
       </Text>
 
-      <Text style={[styles.subHeader, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.subHeader, rtlTextAlign, arFontFamilySmiBold]}>
         {t("terms_5_title")}
       </Text>
-      <Text style={[styles.paragraph, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_5_body")}
       </Text>
 
-      <Text style={[styles.paragraph, { textAlign: isRTL ? "right" : "left" }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, arFontFamilyRegular]}>
         {t("terms_thanks")}
       </Text>
 
@@ -76,7 +81,6 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: "bold",
     marginBottom: 20,
     alignSelf: "center",
     color: "black",
@@ -85,11 +89,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#777",
     marginTop: 20,
-    fontStyle: "italic",
   },
   subHeader: {
     fontSize: 20,
-    fontWeight: "600",
     marginTop: 25,
     color: "black",
   },

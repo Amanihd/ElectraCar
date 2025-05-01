@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import CustomButton from "./CustomButton";
 import MultiSelectModal from "./MultiSelectModal";
-
-import i18next from "../services/i18next.js";
 import { useTranslation } from "react-i18next";
 
 
@@ -115,7 +113,7 @@ const BottomBar = ({
         selectedItems={selectedPlugTypes}
         toggleItemSelection={togglePlugTypeSelection}
         onDone={handlePlugTypeDone}
-        title="Select Plug Types"
+        title={t("select_plug_type")}
       />
     </View>
   );

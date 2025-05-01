@@ -1,9 +1,16 @@
 import React from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
+import i18next from "../../services/i18next"
 
 const PlanButton = ({ disabled, onPress }) => {
   const { t } = useTranslation();
+    const isRTL = i18next.language === "ar";
+    const arFontFamilySmiBold = isRTL
+      ? { fontFamily: "IBM-SemiBold" }
+      : { fontWeight: "bold" };
+    
+
   return (
     <Pressable
       style={({ pressed }) => [
@@ -14,7 +21,7 @@ const PlanButton = ({ disabled, onPress }) => {
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={[styles.text, disabled && { color: "#666" }]}>
+      <Text style={[styles.text, disabled && { color: "#666" },arFontFamilySmiBold]}>
         {t("plan_my_trip")}
       </Text>
     </Pressable>
@@ -24,14 +31,13 @@ const PlanButton = ({ disabled, onPress }) => {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#000C66",
-    padding: 16,
+    padding: 13,
     borderRadius: 12,
     alignItems: "center",
     marginTop: 30,
   },
   text: {
     color: "#fff",
-    fontWeight: "bold",
     fontSize: 16,
   },
 });

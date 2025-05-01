@@ -6,12 +6,23 @@ const SectionDetail = ({ title, content }) => {
   const { i18n, t } = useTranslation();
   const isArabic = i18n.language === "ar";
 
+  const arFontFamilySmiBold = isArabic
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isArabic ? { fontFamily: "IBM-Regular" } : {};
+
   return (
     <View style={[styles.container, isArabic && styles.arabicContainer]}>
-      <Text style={[styles.sectionHeader, isArabic && styles.arabicText]}>
+      <Text
+        style={[
+          styles.sectionHeader,
+          isArabic && styles.arabicText,
+          arFontFamilySmiBold,
+        ]}
+      >
         {title}
       </Text>
-      <Text style={isArabic && styles.arabicText}>
+      <Text style={[isArabic && styles.arabicText, arFontFamilyRegular]}>
         {content || t("not_available")}
       </Text>
     </View>
@@ -32,7 +43,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   sectionHeader: {
-    fontWeight: "bold",
     fontSize: 18,
     marginBottom: 7,
   },

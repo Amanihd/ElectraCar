@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTranslation } from "react-i18next";
-
+import i18next from "../services/i18next";
 
 const SearchLocationScreen = ({ route, navigation }) => {
   const { type, start, destination } = route.params;
@@ -21,6 +21,14 @@ const SearchLocationScreen = ({ route, navigation }) => {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   
+  const isRTL = i18next.language === "ar";
+
+  const rtlTextAlign = { textAlign: isRTL ? "right" : "left" };
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
+
   const handleSubmitSearch = async () => {
     if (query.length < 3) {
       setResults([]);
@@ -77,7 +85,7 @@ const SearchLocationScreen = ({ route, navigation }) => {
           onChangeText={setQuery}
           onSubmitEditing={handleSubmitSearch}
           returnKeyType="search"
-          style={styles.input}
+          style={[styles.input,arFontFamilyRegular]}
         />
         <TouchableOpacity onPress={handleSubmitSearch} style={styles.iconContainer}>
           <Ionicons name="search" size={24} color="#000C66" />

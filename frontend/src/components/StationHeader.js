@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 
 const StationHeader = ({ title, address }) => {
+  
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerTitle}>{title}</Text>

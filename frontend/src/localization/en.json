@@ -145,12 +145,17 @@
   "changesPolicy": "We may update this privacy policy from time to time as the app evolves. If we make any significant changes, we’ll notify you through the app or via other means. The date of the last update will always be displayed at the top of this page.",
   "thankYou": "Thank you for trusting ElectraCar with your information!",
 
-  
-    "termsOfUse": "Terms of Use",
-    "privacyPolicy": "Privacy Policy",
+  "termsOfUse": "Terms of Use",
+  "privacyPolicy": "Privacy Policy",
 
-    "bookmark_title": "Find Your Bookmarked trips here easily",
-    "no_bookmarks": "No bookmarks yet.",
-    "start_adding_bookmark": "Start adding!",
-    "remove": "Remove"
+  "bookmark_title": "Find Your Bookmarked trips here easily",
+  "no_bookmarks": "No bookmarks yet.",
+  "start_adding_bookmark": "Start adding!",
+  "remove": "Remove",
+
+  "select_plug_type": "Select Plug Types",
+  "done": "Done",
+
+  "English": "English",
+  "Arabic": "Arabic"
 }
