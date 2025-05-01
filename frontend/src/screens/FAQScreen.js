@@ -2,6 +2,8 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React from "react";
 import Footer from "../components/Footer";
 
+
+
 const FAQScreen = ({ navigation }) => {
   return (
     <ScrollView

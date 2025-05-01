@@ -81,9 +81,25 @@ const SignInScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  outerContainer: { flex: 1, justifyContent: 'space-between', backgroundColor: '#f2f2f2' },
-  inner: { flex: 1, padding: 20, justifyContent: 'center' },
-  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 24, textAlign: 'center', color: 'black' },
+  outerContainer:
+   { 
+    flex: 1, 
+    justifyContent: 'space-between', 
+    backgroundColor: '#f2f2f2' 
+  },
+  inner:
+   { flex: 1, 
+    padding: 20, 
+    justifyContent: 'center' 
+
+   },
+  title: 
+  { fontSize: 22, 
+    fontWeight: 'bold',
+     marginBottom: 24, 
+     textAlign: 'center', 
+     color: 'black' 
+  },
   button: {
     backgroundColor: '#000C66',
     paddingVertical: 14,
@@ -91,10 +107,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-  buttonText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
-  linksContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: 20, marginBottom: 10 },
+  buttonText: 
+  { 
+    color: '#fff', 
+    fontSize: 16, 
+    fontWeight: 'bold' 
+
+  },
+  linksContainer: 
+  { 
+    flexDirection: 'row', 
+    justifyContent: 'center', 
+    marginTop: 20, marginBottom: 10 
+  },
   text: { color: '#666' },
-  linkText: { color: '#000C66', fontWeight: 'bold', textAlign: 'center' },
+  linkText: 
+  { 
+    color: '#000C66', 
+    fontWeight: 'bold', 
+    textAlign: 'center' 
+  },
 });
 
 export default SignInScreen;

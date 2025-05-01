@@ -4,9 +4,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { VehicleContext } from "../context/VehicleContext";
 
+
+
 const UserProfileCard = ({ name, email, onSignOut }) => {
   const navigation = useNavigation();
   const { selectedVehicle } = useContext(VehicleContext);
+  
 
   return (
     <View style={styles.container}>

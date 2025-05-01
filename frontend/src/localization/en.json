@@ -5,6 +5,55 @@
     "fast": "Fast",
     "parking": "Parking",
     "plug_type": "Plug Type",
-    "select_plug_types": "Select Plug Types"
+    "select_plug_types": "Select Plug Types",
+
+    "my_profile_screen":{
+    "my_info": "My Info",
+    "name": "Name",
+    "email": "Email",
+    "edit_profile": "✏️ Edit Profile",
+    "save_changes": "💾 Save Changes",
+    "loading": "Loading..."
+    },
+
+    
+    "add_vehicle_screen": {
+        "title": "Personalize your experience by adding a vehicle",
+        "subtitle": "Your vehicle is used to determine compatible charging stations",
+        "add_vehicle": "ADD VEHICLE",
+        "add_later": "ADD LATER"
+      },
+    
+      
+    "vehicle_summary": {
+        "title": "Vehicle Summary",
+        "make": "Make",
+        "model": "Model",
+        "trim": "Trim",
+        "add_vehicle": "Add This Vehicle"
+        },
+
+    "vehicle_pick": {
+      "add_vehicle": "Add Vehicle",
+      "manage": "Manage Vehicles"
+      },
+      
+    "manage_vehicles": {
+      "confirm_title": "Confirm Delete",
+      "confirm_message": "Are you sure you want to delete this vehicle?",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "done": "Done"
+}
+
+      
+
+      
+    
+    
+    
+    
+    
   }
+  
   
