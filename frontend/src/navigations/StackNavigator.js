@@ -72,7 +72,7 @@ const StackNavigator = () => {
         name="Join"
         component={JoinScreen}
         options={{
-          headerTitle: "Join",
+          headerTitle: t("Join_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
           headerLeft: () => null,
@@ -129,7 +129,7 @@ const StackNavigator = () => {
         name="AddVehicle"
         component={AddVehicleScreen}
         options={{
-          headerTitle: "Add Vehicle",
+          headerTitle: t("add_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -138,7 +138,7 @@ const StackNavigator = () => {
         name="Make"
         component={MakeScreen}
         options={{
-          headerTitle: "Make",
+          headerTitle:t("make_screen") ,
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -147,7 +147,7 @@ const StackNavigator = () => {
         name="Model"
         component={ModelScreen}
         options={{
-          headerTitle: "Model",
+          headerTitle: t("model_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -156,7 +156,7 @@ const StackNavigator = () => {
         name="Trim"
         component={TrimScreen}
         options={{
-          headerTitle: "Trim",
+          headerTitle: t("trim_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -165,7 +165,7 @@ const StackNavigator = () => {
         name="Vehicle Summary"
         component={VehicleSummaryScreen}
         options={{
-          headerTitle: "Vehicle Summary",
+          headerTitle: t("vehicle_summary_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -174,7 +174,7 @@ const StackNavigator = () => {
         name="VehiclePickScreen"
         component={VehiclePickScreen}
         options={{
-          headerTitle: "Vehicles",
+          headerTitle: t("picK_vehicle_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -183,7 +183,7 @@ const StackNavigator = () => {
         name="ManageVehiclesScreen"
         component={ManageVehiclesScreen}
         options={{
-          headerTitle: "Manage Vehicles",
+          headerTitle: t("manage_vehicles_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -221,7 +221,7 @@ const StackNavigator = () => {
         name="SignUp"
         component={SignUpScreen}
         options={{
-          headerTitle: "Sign Up",
+          headerTitle: t("sign_up_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -230,7 +230,7 @@ const StackNavigator = () => {
         name="SignIn"
         component={SignInScreen}
         options={{
-          headerTitle: "Sign In",
+          headerTitle: t("sign_in"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -239,7 +239,7 @@ const StackNavigator = () => {
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{
-          headerTitle: "Forgot Password",
+          headerTitle: t("forgot_password"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -248,7 +248,7 @@ const StackNavigator = () => {
         name="ResetPassword"
         component={ResetPasswordScreen}
         options={{
-          headerTitle: "Reset Password",
+          headerTitle: t("reset_password_screen"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}
@@ -257,7 +257,7 @@ const StackNavigator = () => {
         name="MyProfile"
         component={MyProfileScreen}
         options={{
-          headerTitle: "My Profile",
+          headerTitle: t("my_profile_screens"),
           headerStyle: { backgroundColor: "#000C66" },
           headerTintColor: "white",
         }}

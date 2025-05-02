@@ -152,17 +152,14 @@
     "bookmark_title": "Find Your Bookmarked trips here easily",
     "no_bookmarks": "No bookmarks yet.",
     "start_adding_bookmark": "Start adding!",
-    "remove": "Remove"
-}
+    "remove": "Remove",
 
-    "search": "Search",
-    "available": "Available",
-    "two_plus_chargers": "2+ Chargers",
-    "fast": "Fast",
-    "parking": "Parking",
-    "plug_type": "Plug Type",
-    "select_plug_types": "Select Plug Types",
 
+    
+
+
+
+    
     "my_profile_screen":{
     "my_info": "My Info",
     "name": "Name",
@@ -200,7 +197,88 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "done": "Done"
-}
+},
+
+  "join": {
+    "title": "Join ElectraCar",
+    "signup_email": "Sign up with Email",
+    "already_member": "Already a member?",
+    "signin": "Sign In"
+    
+    
+  },
+  
+    "terms": {
+      "agree_prefix": "By continuing you agree to our",
+      "and": "and"  
+    },
+    
+  "title": "Create your account",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "password": "Password",
+  "first_name_required": "First name is required",
+  "last_name_required": "Last name is required",
+  "only_letters": "Only letters allowed",
+  "length": "Must be 2–30 characters",
+  "email_required": "Email is required",
+  "invalid_email": "Invalid email",
+  "password_required": "Password is required",
+  "password_short": "At least 8 characters",
+  "password_mixed": "Use letters & numbers",
+  "join_Button":"Join",
+  "sign_in": "Sign in",
+  "email_signin": "Email Address",
+  "not_a_member": "Not a member?",
+  "sign_up": "Sign up",
+  "forgot_password_question": "Forgot Password?",
+  "invalid_email_signin": "Please enter a valid email",
+  "forgot_password":"Forgot Password",
+  "Join_screen":"Join",
+  "sign_up_screen":"Sign up",
+  "reset_password_screen":"Reset Password",
+  "add_screen":"Add Vehicle",
+  "make_screen":"Make",
+ "model_screen":"Model",
+   "trim_screen":"Trim",
+   "vehicle_summary_screen" : "Vehicle Summary",
+   "picK_vehicle_screen":"Vehicles",
+   "manage_vehicles_screen":"Manage Vehicles",
+   "my_profile_screens":"My Profile",
+   
+  "forgot_password_title": "Forgot Password?",
+  "forgot_password_subtitle": "Enter your email to receive reset instructions",
+  "enter_email": "Enter your Email",
+  "send_reset_link": "Send Reset Link",
+  "reset_link_sent": "Reset Link Sent",
+  "reset_link_description": "A password reset link has been sent to your email.",
+
+  "reset_password": "Reset Password",
+  "resetting_password_for": "Resetting password for",
+  "new_password": "New Password",
+  "confirm_password": "Confirm Password",
+  "update_password": "Update Password",
+  "password_min_length": "At least 8 characters",
+  "password_letters_numbers": "Use letters & numbers",
+  "passwords_do_not_match": "Passwords do not match",
+  "password_updated": "Password Updated",
+  "password_updated_description": "Your password has been successfully updated.",
+  "ok_button":"OK"
+  
+   
+  
+  
+  
+  
+  
+
+ 
+    
+    
+  
+
+
 
       
 

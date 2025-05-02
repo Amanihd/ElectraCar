@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+{/*import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -122,4 +122,123 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+*/}
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
+import CustomInput from '../components/CustomInput';
+import Logo from '../components/Logo';
+import Footer from '../components/Footer';
+
+const ForgotPasswordScreen = () => {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const navigation = useNavigation();
+  const { t } = useTranslation();
+
+  const validate = () => {
+    if (!email.trim()) {
+      setError(t('email_required'));
+      return false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError(t('invalid_email'));
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
+  const handleSubmit = () => {
+    if (validate()) {
+      Alert.alert(
+        t('reset_link_sent'),
+        t('reset_link_description'),
+        [
+          {
+            text: t('ok_button'),
+            onPress: () => {
+              navigation.navigate('ResetPassword', { email });
+            },
+          },
+        ]
+      );
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView
+      style={styles.outerContainer}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <View style={styles.inner}>
+        <Logo />
+        <Text style={styles.title}>{t('forgot_password_title')}</Text>
+        <Text style={styles.subtitle}>{t('forgot_password_subtitle')}</Text>
+
+        <CustomInput
+          placeholder={t('enter_email')}
+          value={email}
+          onChangeText={setEmail}
+          error={error}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>{t('send_reset_link')}</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Footer />
+    </KeyboardAvoidingView>
+  );
+};
+
+export default ForgotPasswordScreen;
+const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    backgroundColor: '#f2f2f2',
+  },
+  inner: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    textAlign: 'center',
+    color: 'black',
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#444',
+    marginBottom: 24,
+  },
+  button: {
+    backgroundColor: '#000C66',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
