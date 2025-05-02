@@ -257,8 +257,12 @@
   "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
   "password_updated": "تم تحديث كلمة المرور",
   "password_updated_description": "تم تحديث كلمة المرور بنجاح.",
-  "ok_button":"تم"
-    
+  "ok_button":"تم",
+  "select_plug_type": "اختر أنواع القابس",
+  "done": "إنهاء",
+
+  "English": "إنجليزي",
+  "Arabic": "عربي"  
     
     
     

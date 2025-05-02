@@ -263,9 +263,15 @@
   "passwords_do_not_match": "Passwords do not match",
   "password_updated": "Password Updated",
   "password_updated_description": "Your password has been successfully updated.",
-  "ok_button":"OK"
+  "ok_button":"OK",
   
-   
+  
+
+  "select_plug_type": "Select Plug Types",
+  "done": "Done",
+
+  "English": "English",
+  "Arabic": "Arabic"
   
   
   
@@ -287,17 +293,8 @@
     
     
     
-  }
   
   
-  "bookmark_title": "Find Your Bookmarked trips here easily",
-  "no_bookmarks": "No bookmarks yet.",
-  "start_adding_bookmark": "Start adding!",
-  "remove": "Remove",
-
-  "select_plug_type": "Select Plug Types",
-  "done": "Done",
-
-  "English": "English",
-  "Arabic": "Arabic"
+  
+  
 }
