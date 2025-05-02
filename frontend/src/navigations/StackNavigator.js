@@ -38,8 +38,15 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   const { t } = useTranslation();
   const isRTL = i18next.language === "ar";
+  const fontFamily = isRTL ? "IBM-SemiBold" : "System";
+
   return (
-    <Stack.Navigator >
+    <Stack.Navigator screenOptions={{
+      
+      headerTitleStyle: {
+        fontFamily,
+      },
+    }} >
       <Stack.Screen
         name="MainTabs"
         component={BottomTabNavigator}
@@ -201,6 +208,7 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Trips"
         component={TripsScreen}
+        
         options={{
           headerTitle: t("trips"),
           headerStyle: { backgroundColor: "#000C66" },

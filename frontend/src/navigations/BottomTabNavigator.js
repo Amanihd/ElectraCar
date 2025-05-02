@@ -7,11 +7,14 @@ import TripsScreen from "../screens/TripsScreen";
 import BookmarksScreen from "../screens/BookmarksScreen";
 import MeScreen from "../screens/MeScreen";
 import { useTranslation } from "react-i18next";
+import i18next from "../services/i18next";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   const { t } = useTranslation();
+  const isRTL = i18next.language === "ar";
+  const fontSemiBold = isRTL ? "IBM-SemiBold" : "System";
 
   return (
     <Tab.Navigator
@@ -25,14 +28,20 @@ const BottomTabNavigator = () => {
             iconName = focused ? "bookmark" : "bookmark-outline";
           else if (route.name === "Me")
             iconName = focused ? "person-circle" : "person-circle-outline";
-
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: "#000C66",
         tabBarInactiveTintColor: "gray",
         headerStyle: { backgroundColor: "#000C66" },
         headerTintColor: "white",
-        tabBarLabelStyle: { paddingBottom: 10, fontSize: 12 },
+        tabBarLabelStyle: {
+          paddingBottom: 10,
+          fontSize: 12,
+          fontFamily: fontSemiBold, // <== here
+        },
+        headerTitleStyle: {
+          fontFamily: fontSemiBold, // <== and here
+        },
         tabBarStyle: { padding: 10, height: 60 },
       })}
     >

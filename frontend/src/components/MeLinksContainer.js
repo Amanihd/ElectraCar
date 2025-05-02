@@ -4,7 +4,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  I18nManager,
 } from "react-native";
 import MeLink from "./MeLink"; // Import your MeLink component
 import { useTranslation } from "react-i18next"; // For translation
@@ -32,26 +31,30 @@ const MeLinksContainer = ({ navigation }) => {
         title={t("faq")}
         icon="question-circle"
         onPress={() => navigation.navigate("FAQ")}
+        isRTL={isRTL}
       />
       <MeLink
         title={t("support")}
         icon="envelope"
         onPress={() => navigation.navigate("Support")}
+        isRTL={isRTL}
       />
       <MeLink
         title={t("terms_of_use")}
         icon="file-alt"
         onPress={() => navigation.navigate("TermsOfUse")}
+        isRTL={isRTL}
       />
       <MeLink
         title={t("privacy_policy")}
         icon="shield-alt"
         onPress={() => navigation.navigate("PrivacyPolicy")}
+        isRTL={isRTL}
       />
 
       {/* Language Selection Button */}
       <TouchableOpacity style={styles.button} onPress={() => setVisible(true)}>
-        <Text style={styles.buttonText}>{t("change-language")}</Text>
+        <Text style={[styles.buttonText,isRTL && { fontFamily: "IBM-Regular" }]}>{t("change-language")}</Text>
       </TouchableOpacity>
 
       {/* Language Modal */}
@@ -68,10 +71,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    paddingVertical: 10,
+    paddingVertical: 7,
     paddingHorizontal: 20,
     backgroundColor: "#EAF0FF",
-    borderRadius: 6,
+    borderRadius: 18,
     marginTop: 15,
   },
   buttonText: {

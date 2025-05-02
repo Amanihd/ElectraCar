@@ -10,6 +10,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import LottieView from "lottie-react-native";
 import { useTranslation } from "react-i18next";
+import i18next from "../services/i18next";
+
 const { width } = Dimensions.get("window");
 const CARD_MARGIN = 8;
 const CARD_WIDTH = (width - 60) / 2;
@@ -32,6 +34,13 @@ const BookmarksScreen = ({ navigation }) => {
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const isRTL = i18next.language === "ar";
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
+
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigation.navigate("Join");
@@ -47,7 +56,7 @@ const BookmarksScreen = ({ navigation }) => {
         color: getRandomBlueShade(),
       }));
 
-    //  setBookmarks(mockData);
+   setBookmarks(mockData);
       setLoading(false);
     }
   }, [isLoggedIn]);
@@ -77,9 +86,9 @@ const BookmarksScreen = ({ navigation }) => {
             autoPlay
             loop
           />
-          <Text style={styles.title}>{t("bookmark_title")}</Text>
-          <Text style={styles.subtitle}>{t("no_bookmarks")}</Text>
-          <Text style={styles.subtitle}> {t("start_adding_bookmark")}</Text>
+          <Text style={[styles.title,arFontFamilySmiBold]}>{t("bookmark_title")}</Text>
+          <Text style={[styles.subtitle,arFontFamilyRegular]}>{t("no_bookmarks")}</Text>
+          <Text style={[styles.subtitle,arFontFamilyRegular]}> {t("start_adding_bookmark")}</Text>
         </View>
       ) : (
         <FlatList
@@ -97,9 +106,9 @@ const BookmarksScreen = ({ navigation }) => {
               <View
                 style={[styles.colorBox, { backgroundColor: item.color }]}
               />
-              <Text style={styles.cardTitle}>{item.title}</Text>
+              <Text style={[styles.cardTitle,arFontFamilySmiBold]}>{item.title}</Text>
               <TouchableOpacity onPress={() => handleRemoveBookmark(item.id)}>
-                <Text style={styles.removeText}>{t("remove")}</Text>
+                <Text style={[styles.removeText,arFontFamilyRegular]}>{t("remove")}</Text>
               </TouchableOpacity>
             </TouchableOpacity>
           )}
@@ -124,7 +133,6 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontSize: 24,
-    fontWeight: "bold",
     color: "#000C66",
   },
   subtitle: {
@@ -160,7 +168,6 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 16,
-    fontWeight: "500",
     color: "#111827",
     textAlign: "center",
     marginTop: 8,

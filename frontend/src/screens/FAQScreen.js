@@ -11,45 +11,46 @@ const FAQScreen = ({ navigation }) => {
   const isRTL = i18next.language === "ar";
 
   const rtlTextAlign = { textAlign: isRTL ? "right" : "left" };
-
+  const arFontFamilySmiBold = isRTL ? { fontFamily: "IBM-SemiBold" } : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={{ paddingBottom: 60 }}
     >
-      <Text style={[styles.header, rtlTextAlign]}>{t("faq_title")}</Text>
+      <Text style={[styles.header, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_title")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_1")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_1")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_1")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_1")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_2")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_2")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_2")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_2")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_3")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_3")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_3")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_3")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_4")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_4")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_4")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_4")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_5")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_5")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_5")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_5")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_6")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_6")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_6")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_6")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_7")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_7")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_7")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_7")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_8")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_8")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_8")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_8")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_9")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_9")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_9")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_9")}</Text>
 
-      <Text style={[styles.subHeader, rtlTextAlign]}>{t("faq_question_10")}</Text>
-      <Text style={[styles.paragraph, rtlTextAlign]}>{t("faq_answer_10")}</Text>
+      <Text style={[styles.subHeader, rtlTextAlign,arFontFamilySmiBold]}>{t("faq_question_10")}</Text>
+      <Text style={[styles.paragraph, rtlTextAlign,arFontFamilyRegular]}>{t("faq_answer_10")}</Text>
 
-      <Text style={[styles.paragraph, rtlTextAlign, { marginTop: 20 }]}>
+      <Text style={[styles.paragraph, rtlTextAlign, { marginTop: 20 },arFontFamilyRegular]}>
         {t("faq_footer")}
         <Text
           style={{ color: "#0000EE" }}
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: "bold",
     marginBottom: 20,
     alignSelf: "center",
     color: "black",

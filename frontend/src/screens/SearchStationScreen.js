@@ -9,9 +9,16 @@ import {
 } from "react-native";
 import stations from "../data/stations.json";
 import { useTranslation } from "react-i18next";
+import i18next from "../services/i18next";
 
 const SearchStationScreen = ({ route, navigation }) => {
   const { t } = useTranslation();
+  const isRTL = i18next.language === "ar";
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
+
   const { userLocation } = route.params;
   const [query, setQuery] = useState("");
   const [filteredStations, setFilteredStations] = useState([]);
@@ -34,7 +41,7 @@ const SearchStationScreen = ({ route, navigation }) => {
         placeholder={t("search_for_station")}
         value={query}
         onChangeText={handleSearch}
-        style={styles.input}
+        style={[styles.input,arFontFamilyRegular]}
       />
 
       <FlatList

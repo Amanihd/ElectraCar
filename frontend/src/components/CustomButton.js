@@ -2,8 +2,12 @@ import React from "react";
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import { Ionicons } from "react-native-vector-icons";
 import { FontAwesome5 } from "react-native-vector-icons";
+import i18next from "../services/i18next";
 
 const CustomButton = ({ iconName, label, onPress, selected, useFontAwesome }) => {
+  const isRTL = i18next.language === "ar";
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -16,7 +20,7 @@ const CustomButton = ({ iconName, label, onPress, selected, useFontAwesome }) =>
           <Ionicons name={iconName} size={25} color="#000C66" />
         )}
       </TouchableOpacity>
-      <Text style={[styles.buttonText, selected && styles.selectedText]}>
+      <Text style={[styles.buttonText, selected && styles.selectedText,arFontFamilyRegular]}>
         {label}
       </Text>
     </View>

@@ -11,13 +11,21 @@ const UserProfileCard = ({ name, email, onSignOut }) => {
   const navigation = useNavigation();
   const { selectedVehicle } = useContext(VehicleContext);
   const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === "ar";
 
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
         <View style={{ flex: 1 }} />
         <TouchableOpacity onPress={onSignOut}>
-          <Text style={styles.signOutText}>{t("sign_out")}</Text>
+          <Text
+            style={[
+              styles.signOutText,
+              isRTL && { fontFamily: "IBM-Regular" },
+            ]}
+          >
+            {t("sign_out")}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -34,7 +42,7 @@ const UserProfileCard = ({ name, email, onSignOut }) => {
         <View
           style={[
             styles.cardLeft,
-            { flexDirection: i18n.language === "ar" ? "row-reverse" : "row" },
+            { flexDirection: isRTL ? "row-reverse" : "row" },
           ]}
         >
           <Ionicons
@@ -42,18 +50,29 @@ const UserProfileCard = ({ name, email, onSignOut }) => {
             size={24}
             color="#000C66"
             style={{
-              marginRight: i18n.language === "ar" ? 0 : 8,
-              marginLeft: i18n.language === "ar" ? 8 : 0,
+              marginRight: isRTL ? 0 : 8,
+              marginLeft: isRTL ? 8 : 0,
             }}
           />
-          <Text style={styles.cardTitle}>{t("selected_car")}</Text>
+          <Text
+            style={[styles.cardTitle, isRTL && { fontFamily: "IBM-SemiBold" }]}
+          >
+            {t("selected_car")}
+          </Text>
         </View>
         <Text style={styles.cardDetail}>
           <Text style={styles.cardTitle}>
             {selectedVehicle ? (
               `${selectedVehicle.make} - ${selectedVehicle.model}`
             ) : (
-              <Text style={styles.noneSelected}>{t("none_selected")}</Text>
+              <Text
+                style={[
+                  styles.noneSelected,
+                  isRTL && { fontFamily: "IBM-SemiBold" },
+                ]}
+              >
+                {t("none_selected")}
+              </Text>
             )}
           </Text>
         </Text>
@@ -61,7 +80,14 @@ const UserProfileCard = ({ name, email, onSignOut }) => {
           style={styles.upgradeButton}
           onPress={() => navigation.navigate("VehiclePickScreen")}
         >
-          <Text style={styles.upgradeText}>{t("choose_another")}</Text>
+          <Text
+            style={[
+              styles.upgradeText,
+              isRTL && { fontFamily: "IBM-SemiBold" },
+            ]}
+          >
+            {t("choose_another")}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

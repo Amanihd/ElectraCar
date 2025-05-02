@@ -10,9 +10,13 @@ const MeLink = ({ title, icon, onPress, isRTL }) => {
           name={icon}
           size={20}
           color="#000C66"
-          style={[styles.itemIcon, { marginLeft: isRTL ? 8 : 16 }]} // Adjust icon margin here
+          style={styles.itemIcon} 
         />
-        <Text style={styles.itemText}>{title}</Text>
+        <Text
+          style={[styles.itemText, isRTL && { fontFamily: "IBM-SemiBold" }]}
+        >
+          {title}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -38,6 +42,7 @@ const styles = StyleSheet.create({
   itemIcon: {
     color: "#000C66",
     marginRight: 16,
+    marginLeft:16,
   },
   itemText: {
     fontSize: 16,

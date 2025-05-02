@@ -7,6 +7,11 @@ const InfoComponent = ({ routeInfo }) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
+  const arFontFamilySmiBold = isArabic
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isArabic ? { fontFamily: "IBM-Regular" } : {};
+
   const getMinutesLabel = (minutes) => {
     if (minutes === 1 || minutes >= 11) {
       return t("minute"); // min
@@ -27,6 +32,7 @@ const InfoComponent = ({ routeInfo }) => {
           style={[
             styles.infoText,
             isArabic && { textAlign: "right", marginLeft: 0, marginRight: 10 },
+            arFontFamilySmiBold,
           ]}
         >
           {" "}
@@ -41,6 +47,7 @@ const InfoComponent = ({ routeInfo }) => {
           style={[
             styles.infoText,
             isArabic && { textAlign: "right", marginLeft: 0, marginRight: 10 },
+            arFontFamilySmiBold,
           ]}
         >
           {" "}

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import LottieView from "lottie-react-native";
 import { UserLocationContext } from "../context/UserLocationContext";
 import { VehicleContext } from "../context/VehicleContext";
@@ -15,6 +15,7 @@ import BatteryLevelModal from "../components/Trip/BatteryLevelModal";
 import BookmarkModal from "../components/Trip/BookmarkModal";
 
 import { useTranslation } from "react-i18next";
+import i18next from "../services/i18next";
 
 const TripsScreen = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -31,6 +32,13 @@ const TripsScreen = ({ route, navigation }) => {
   const [isBookmark, setIsBookmark] = useState(false);
   const [tripName, setTripName] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const isRTL = i18next.language === "ar";
+
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -129,7 +137,10 @@ const TripsScreen = ({ route, navigation }) => {
 
   return (
     <>
-      <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
+      >
         <LottieView
           source={require("../../assets/images/carTrip.json")}
           style={styles.animation}
@@ -137,11 +148,15 @@ const TripsScreen = ({ route, navigation }) => {
           loop
         />
 
-        <Text style={styles.title}>{t("plan_your_trip")}</Text>
-        <Text style={styles.subtitle}>{t("with_electracar")}</Text>
+        <Text style={[styles.title, arFontFamilySmiBold]}>
+          {t("plan_your_trip")}
+        </Text>
+        <Text style={[styles.subtitle, arFontFamilySmiBold]}>
+          {t("with_electracar")}
+        </Text>
         <TextInput
           placeholder={t("trip_name_placeholder")}
-          style={styles.input}
+          style={[styles.input, arFontFamilySmiBold]}
           value={tripName}
           onChangeText={setTripName}
         />
@@ -162,7 +177,7 @@ const TripsScreen = ({ route, navigation }) => {
           disabled={!start || !destination}
           onPress={handlePlanTrip}
         />
-      </View>
+      </ScrollView>
 
       <VehicleConfirmModal
         visible={modalStage === "vehicle"}
@@ -186,8 +201,9 @@ const TripsScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 25,
-    flex: 1,
+    paddingBottom: 50,
     backgroundColor: "#F5F7FA",
+    flexGrow: 1,
     justifyContent: "center",
   },
   animation: {
@@ -197,7 +213,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
     textAlign: "center",
     color: "#000C66",
   },
