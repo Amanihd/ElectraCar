@@ -10,7 +10,6 @@ const InfoComponent = ({ routeInfo }) => {
   const arFontFamilySmiBold = isArabic
     ? { fontFamily: "IBM-SemiBold" }
     : { fontWeight: "bold" };
-  const arFontFamilyRegular = isArabic ? { fontFamily: "IBM-Regular" } : {};
 
   const getMinutesLabel = (minutes) => {
     if (minutes === 1 || minutes >= 11) {
@@ -62,7 +61,7 @@ const InfoComponent = ({ routeInfo }) => {
 const styles = StyleSheet.create({
   infoContainer: {
     position: "absolute",
-    bottom: 30,
+    bottom: 60,
     left: 20,
     right: 20,
     backgroundColor: "#F8F9FA",

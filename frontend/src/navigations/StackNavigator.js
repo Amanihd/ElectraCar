@@ -32,6 +32,8 @@ import TripMapScreen from "../screens/TripMapScreen";
 
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
+import CustomButton from "../components/CustomButton";
+import CustomHeader from "../components/CustomHeader";
 
 const Stack = createStackNavigator();
 
@@ -41,12 +43,13 @@ const StackNavigator = () => {
   const fontFamily = isRTL ? "IBM-SemiBold" : "System";
 
   return (
-    <Stack.Navigator screenOptions={{
-      
-      headerTitleStyle: {
-        fontFamily,
-      },
-    }} >
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleStyle: {
+          fontFamily,
+        },
+      }}
+    >
       <Stack.Screen
         name="MainTabs"
         component={BottomTabNavigator}
@@ -64,15 +67,14 @@ const StackNavigator = () => {
       <Stack.Screen
         name="ChargingStationDetails"
         component={ChargingStationDetails}
-        options={{ headerShown: false }}
+        options={
+          { headerShown: false }}
       />
       <Stack.Screen
         name="DirectionsScreen"
         component={DirectionsScreen}
         options={{
-          headerTitle: t("directions"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="directions" />, // Use the custom header here
         }}
       />
       <Stack.Screen
@@ -88,46 +90,37 @@ const StackNavigator = () => {
       <Stack.Screen
         name="FAQ"
         component={FAQScreen}
+       
         options={{
-          headerTitle: t("faq"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="faq" />, // Use the custom header here
         }}
       />
       <Stack.Screen
         name="Support"
         component={SupportScreen}
         options={{
-          headerTitle: t("support"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="support" />, // Use the custom header here
         }}
       />
       <Stack.Screen
         name="TermsOfUse"
         component={TermsOfUseScreen}
         options={{
-          headerTitle: t("termsOfUse"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="termsOfUse" />, // Use the custom header here
         }}
       />
       <Stack.Screen
         name="PrivacyPolicy"
         component={PrivacyPolicyScreen}
         options={{
-          headerTitle: t("privacyPolicy"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="privacyPolicy" />, // Use the custom header here
         }}
       />
       <Stack.Screen
         name="SearchStation"
         component={SearchStationScreen}
         options={{
-          headerTitle: t("search_station"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="search_station" />, // Use the custom header here
         }}
       />
 
@@ -200,28 +193,21 @@ const StackNavigator = () => {
         name="SearchLocation"
         component={SearchLocationScreen}
         options={{
-          headerTitle: t("search"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="search" />, // Use the custom header here
         }}
       />
       <Stack.Screen
         name="Trips"
         component={TripsScreen}
-        
         options={{
-          headerTitle: t("trips"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="trips" />, // Use the custom header here
         }}
       />
       <Stack.Screen
         name="TripMap"
         component={TripMapScreen}
         options={{
-          headerTitle: t("my_trip"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="my_trip" />, // Use the custom header here
         }}
       />
       {/* All about sign up, auth, sign in, join */}

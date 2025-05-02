@@ -13,22 +13,31 @@ import Logo from "../components/Logo";
 import Footer from "../components/Footer";
 import MeLinksContainer from "../components/MeLinksContainer";
 import UserProfileCard from "../components/UserProfileCard";
-
+import i18next from "../services/i18next";
 import { useTranslation } from "react-i18next";
 
 const MeScreen = () => {
   const navigation = useNavigation();
   const { user, isLoggedIn, logout } = useContext(AuthContext);
   const { t } = useTranslation();
+  const isRTL = i18next.language === "ar";
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
   if (!isLoggedIn) {
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Logo />
-          <Text style={styles.subtitle}>{t("join_electracar")}</Text>
+          <Text style={[styles.subtitle, arFontFamilySmiBold]}>
+            {t("join_electracar")}
+          </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Join")}>
-            <Text style={styles.linkText}>{t("sign_up_sign_in")}</Text>
+            <Text style={[styles.linkText, arFontFamilyRegular]}>
+              {t("sign_up_sign_in")}
+            </Text>
           </TouchableOpacity>
           <View style={{ marginTop: 60 }}>
             <MeLinksContainer navigation={navigation} />
@@ -74,7 +83,6 @@ const styles = StyleSheet.create({
   subtitle: {
     textAlign: "center",
     fontSize: 22,
-    fontWeight: "bold",
     marginBottom: 10,
   },
   linkText: {

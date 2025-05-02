@@ -5,11 +5,12 @@ import StationHeader from "../components/StationHeader";
 import SectionDetail from "../components/SectionDetail";
 import GetDirectionsButton from "../components/GetDirectionsButton";
 import { useTranslation } from "react-i18next";
-
+import i18next from "../services/i18next";
 const ChargingStationDetails = ({ route, navigation }) => {
   const { t } = useTranslation();
   const station = route?.params?.station;
   const userLocation = route?.params?.userLocation;
+  const isRTL = i18next.language === "ar";
 
   if (!station) {
     return (
@@ -25,15 +26,20 @@ const ChargingStationDetails = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      {/* Header and Image Section */}
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.viewContent}
+    >
       <View style={styles.imageContainer}>
         <Ionicons
-          name="arrow-back"
-          size={25}
+          name={isRTL ? "arrow-forward" : "arrow-back"}
+          size={30}
           color="white"
           onPress={() => navigation.goBack()}
-          style={styles.backButton}
+          style={[
+            styles.backButton,
+            isRTL ? styles.rightPosition : styles.leftPosition,
+          ]}
         />
         <Image
           source={require("../../assets/images/charging_station.jpg")}
@@ -110,6 +116,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  viewContent: {
+    paddingBottom: 40,
+    flexGrow: 1,
+  },
   imageContainer: {
     position: "relative",
   },
@@ -120,9 +130,14 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 30,
-    left: 15,
+    top: 40,
     zIndex: 1,
+  },
+  leftPosition: {
+    left: 15,
+  },
+  rightPosition: {
+    right: 15,
   },
   detailsWrapper: {
     marginTop: 50,

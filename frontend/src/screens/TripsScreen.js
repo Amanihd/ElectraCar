@@ -201,7 +201,7 @@ const TripsScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 25,
-    paddingBottom: 50,
+    paddingBottom: 70,
     backgroundColor: "#F5F7FA",
     flexGrow: 1,
     justifyContent: "center",

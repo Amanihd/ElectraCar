@@ -16,7 +16,7 @@ import Logo from "../components/Logo";
 import Footer from "../components/Footer";
 import TermsLinks from "../components/TermsLinks";
 import { AuthContext } from "../context/AuthContext";
-import { CommonActions } from "@react-navigation/native";
+
 const JoinScreen = () => {
   const navigation = useNavigation();
 
@@ -26,18 +26,20 @@ const JoinScreen = () => {
     React.useCallback(() => {
       const onBackPress = () => {
         navigation.navigate("MainTabs");
-        return true; // Prevent default back behavior
+        return true;
       };
-      // Add back handler
-      BackHandler.addEventListener("hardwareBackPress", onBackPress);
-      // Clean up the event listener on component unmount
-      return () => {
-        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
-      };
+
+      // ✅ Correct way using the returned subscription
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress
+      );
+
+      // ✅ Clean up
+      return () => backHandler.remove();
     }, [navigation])
   );
   //-----------------------------------------------------
-
 
   return (
     <View style={styles.outerContainer}>

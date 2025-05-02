@@ -8,6 +8,7 @@ import BookmarksScreen from "../screens/BookmarksScreen";
 import MeScreen from "../screens/MeScreen";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
+import CustomHeader from "../components/CustomHeader";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,44 +38,45 @@ const BottomTabNavigator = () => {
         tabBarLabelStyle: {
           paddingBottom: 10,
           fontSize: 12,
-          fontFamily: fontSemiBold, // <== here
+          fontFamily: fontSemiBold, 
         },
         headerTitleStyle: {
-          fontFamily: fontSemiBold, // <== and here
+          fontFamily: fontSemiBold, 
         },
-        tabBarStyle: { padding: 10, height: 60 },
+        tabBarStyle: { padding: 10, height: 100 },//for new update
       })}
     >
       <Tab.Screen
         name="Map"
         component={HomeScreen}
+      
         options={{
+          header: () => <CustomHeader titleKey="map" isArrow={false}/>, 
           tabBarLabel: t("map"),
-          title: t("map"),
         }}
       />
       <Tab.Screen
         name="Trips"
         component={TripsScreen}
         options={{
+          header: () => <CustomHeader titleKey="trips" isArrow={false}/>, 
           tabBarLabel: t("trips"),
-          title: t("trips"),
         }}
       />
       <Tab.Screen
         name="Bookmarks"
         component={BookmarksScreen}
         options={{
+          header: () => <CustomHeader titleKey="bookmarks" isArrow={false}/>, 
           tabBarLabel: t("bookmarks"),
-          title: t("bookmarks"),
         }}
       />
       <Tab.Screen
         name="Me"
         component={MeScreen}
         options={{
+          header: () => <CustomHeader titleKey="me" isArrow={false}/>,
           tabBarLabel: t("me"),
-          title: t("me"),
         }}
       />
     </Tab.Navigator>
