@@ -1,48 +1,8 @@
-
-{/*import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-
-const CustomInput = ({ value, onChangeText, placeholder, error, ...rest }) => (
-  <View style={styles.container}>
-    <TextInput
-      placeholder={placeholder}
-      style={[styles.input, error && styles.errorInput]}
-      value={value}
-      onChangeText={onChangeText}
-      {...rest}
-    />
-    {error && <Text style={styles.errorText}>{error}</Text>}
-  </View>
-);
-
-export default CustomInput;
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 8,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    fontSize: 16,
-  },
-  errorInput: {
-    borderColor: 'red',
-  },
-  errorText: {
-    color: 'red',
-    fontSize: 12,
-    marginTop: 4,
-  },
-});*/}
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-// Optional: Check Arabic characters
+
 const isArabicText = (text) => /[\u0600-\u06FF]/.test(text);
 
 const CustomInput = ({ value, onChangeText, placeholder, error, ...rest }) => {
@@ -63,6 +23,7 @@ const CustomInput = ({ value, onChangeText, placeholder, error, ...rest }) => {
           {
             textAlign: isArabic ? 'right' : 'left',
             writingDirection: isArabic ? 'rtl' : 'ltr',
+            fontFamily: isArabic ? 'IBM-Regular' : 'System',
           },
         ]}
         {...rest}
@@ -74,6 +35,7 @@ const CustomInput = ({ value, onChangeText, placeholder, error, ...rest }) => {
             {
               textAlign: isArabicLang ? 'right' : 'left',
               alignSelf: isArabicLang ? 'flex-end' : 'flex-start',
+              fontFamily: isArabicLang ? 'IBM-Regular' : 'System',
             },
           ]}
         >
@@ -110,7 +72,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
 });
-
-
 
 

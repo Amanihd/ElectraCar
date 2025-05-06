@@ -1,70 +1,34 @@
-{/*
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-const TermsLinks = () => {
-  const navigation = useNavigation();
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>By continuing you agree to our </Text>
-      <View style={styles.linkRow}>
-        <TouchableOpacity onPress={() => navigation.navigate('TermsOfUse')}>
-          <Text style={styles.link}>Terms of Use</Text>
-        </TouchableOpacity>
-        <Text style={styles.text}> and </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
-          <Text style={styles.link}>Privacy Policy</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginVertical: 40,
-    
-  },
-  text: {
-    fontSize: 14,
-    color: '#444'
-  },
-  linkRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  link: {
-    fontSize: 14,
-    color: '#000C66',
-    textDecorationLine: 'underline'
-  }
-});
-
-export default TermsLinks;*/}
-
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, I18nManager } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
 const TermsLinks = () => {
   const navigation = useNavigation();
-  const { t } = useTranslation();
-  const isRTL = I18nManager.isRTL;
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+  
+  const arabicTextStyle = isRTL ? styles.arabicText : {};
+  const arabicLinkStyle = isRTL ? styles.arabicLink : {};
 
   return (
-    <View style={[styles.container, isRTL && { alignItems: 'flex-end' }]}>
-      <Text style={styles.text}>{t('terms.agree_prefix')}</Text>
-      <View style={[styles.linkRow, isRTL && { flexDirection: 'row-reverse' }]}>
+    <View style={styles.container}>
+      <Text style={[styles.text, arabicTextStyle, styles.centerText]}>
+        {t('terms.agree_prefix')}
+      </Text>
+      <View style={[styles.linkRow, isRTL && styles.rtlLinkRow]}>
         <TouchableOpacity onPress={() => navigation.navigate('TermsOfUse')}>
-          <Text style={styles.link}>{t('termsOfUse')}</Text>
+          <Text style={[styles.link, arabicLinkStyle, styles.centerText]}>
+            {t('termsOfUse')}
+          </Text>
         </TouchableOpacity>
-        <Text style={styles.text}> {t('terms.and')} </Text>
+        <Text style={[styles.text, arabicTextStyle, styles.centerText]}>
+          {' ' + t('terms.and') + ' '}
+        </Text>
         <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
-          <Text style={styles.link}>{t('privacyPolicy')}</Text>
+          <Text style={[styles.link, arabicLinkStyle, styles.centerText]}>
+            {t('privacyPolicy')}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -73,23 +37,42 @@ const TermsLinks = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     marginVertical: 40,
   },
   text: {
     fontSize: 14,
     color: '#444',
+    fontWeight: 'normal',
+    textAlign: 'center',
+  },
+  arabicText: {
+    fontFamily: 'IBM-Regular',
+    fontWeight: undefined,
   },
   linkRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rtlLinkRow: {
+    flexDirection: 'row-reverse',
   },
   link: {
     fontSize: 14,
     color: '#000C66',
     textDecorationLine: 'underline',
+    fontWeight: 'normal',
+    textAlign: 'center',
+  },
+  arabicLink: {
+    fontFamily: 'IBM-SemiBold',
+    fontWeight: undefined,
+  },
+  centerText: {
+    textAlign: 'center',
+    alignSelf: 'center',
   },
 });
 
 export default TermsLinks;
-

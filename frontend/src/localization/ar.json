@@ -71,7 +71,7 @@
   "sign_out": "تسجيل الخروج",
   "selected_car": "السيارة المحددة",
   "none_selected": "لم يتم اختيار سيارة",
-  "choose_another": "اختر سيارة أخرى",
+  "choose_another": "اختر مركبتك",
 
   "footer_text": "© 2025 ElectraCar جميع الحقوق محفوظة.",
 
@@ -167,6 +167,7 @@
     "subtitle": "تُستخدم مركبتك  لتحديد محطات الشحن المتوافقة",
     "add_vehicle": "أضف مركبتك ",
     "add_later": "أضف لاحقًا"
+
    },
   
     "vehicle_summary": {
@@ -179,6 +180,7 @@
     "vehicle_pick": {
       "add_vehicle": "أضف مركبتك",
       "manage": "إدارة المركبات"
+      
     },
 
     "manage_vehicles": {

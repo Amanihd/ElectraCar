@@ -81,10 +81,7 @@ const StackNavigator = () => {
         name="Join"
         component={JoinScreen}
         options={{
-          headerTitle: t("Join_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
-          headerLeft: () => null,
+          header: () => <CustomHeader titleKey="Join_screen" />, // Use the custom header here
         }}
       />
       <Stack.Screen
@@ -129,63 +126,52 @@ const StackNavigator = () => {
         name="AddVehicle"
         component={AddVehicleScreen}
         options={{
-          headerTitle: t("add_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="add_screen" isArrow={false} />, 
+          
         }}
       />
+      
       <Stack.Screen
         name="Make"
         component={MakeScreen}
         options={{
-          headerTitle:t("make_screen") ,
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="make_screen" />,
         }}
-      />
+        />
       <Stack.Screen
         name="Model"
         component={ModelScreen}
         options={{
-          headerTitle: t("model_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="model_screen" />, 
         }}
       />
       <Stack.Screen
         name="Trim"
         component={TrimScreen}
         options={{
-          headerTitle: t("trim_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="trim_screen" />, 
         }}
       />
       <Stack.Screen
         name="Vehicle Summary"
         component={VehicleSummaryScreen}
         options={{
-          headerTitle: t("vehicle_summary_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="vehicle_summary_screen" />, 
         }}
       />
       <Stack.Screen
         name="VehiclePickScreen"
         component={VehiclePickScreen}
         options={{
-          headerTitle: t("picK_vehicle_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="picK_vehicle_screen" />, 
         }}
       />
+      
       <Stack.Screen
         name="ManageVehiclesScreen"
         component={ManageVehiclesScreen}
         options={{
-          headerTitle: t("manage_vehicles_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="manage_vehicles_screen" />, 
         }}
       />
       {/* For trips screen */}
@@ -193,67 +179,59 @@ const StackNavigator = () => {
         name="SearchLocation"
         component={SearchLocationScreen}
         options={{
-          header: () => <CustomHeader titleKey="search" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="search" />, 
         }}
       />
       <Stack.Screen
         name="Trips"
         component={TripsScreen}
         options={{
-          header: () => <CustomHeader titleKey="trips" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="trips" />, 
         }}
       />
       <Stack.Screen
         name="TripMap"
         component={TripMapScreen}
         options={{
-          header: () => <CustomHeader titleKey="my_trip" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="my_trip" />, 
         }}
       />
       {/* All about sign up, auth, sign in, join */}
       <Stack.Screen
         name="SignUp"
+        
         component={SignUpScreen}
         options={{
-          headerTitle: t("sign_up_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="sign_up_screen" />, 
         }}
       />
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}
         options={{
-          headerTitle: t("sign_in"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="sign_in" />, 
         }}
       />
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{
-          headerTitle: t("forgot_password"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="forgot_password" />, 
         }}
       />
       <Stack.Screen
         name="ResetPassword"
         component={ResetPasswordScreen}
         options={{
-          headerTitle: t("reset_password_screen"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="reset_password_screen" />, 
         }}
       />
+      
       <Stack.Screen
         name="MyProfile"
         component={MyProfileScreen}
         options={{
-          headerTitle: t("my_profile_screens"),
-          headerStyle: { backgroundColor: "#000C66" },
-          headerTintColor: "white",
+          header: () => <CustomHeader titleKey="my_profile_screens" />,
         }}
       />
     </Stack.Navigator>

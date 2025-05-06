@@ -1,10 +1,16 @@
+
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const VehicleButton = ({ label, onPress, fullWidth = true }) => {
+const VehicleButton = ({ label, onPress, fullWidth = true, isRTL = false }) => {
   return (
-    <TouchableOpacity style={[styles.button, fullWidth && styles.fullWidth]} onPress={onPress}>
-      <Text style={styles.text}>{label}</Text>
+    <TouchableOpacity 
+      style={[styles.button, fullWidth && styles.fullWidth]} 
+      onPress={onPress}
+    >
+      <Text style={[styles.text, isRTL && styles.arabicText]}>
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -15,12 +21,11 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#000C66',
     borderRadius: 8,
-    paddingVertical: 14,
+    paddingVertical: 10,
     paddingHorizontal: '10%',
     alignItems: 'center',
-    marginVertical: 25,
+    marginVertical: 40,
     elevation: 3, // Android shadow
-    //IOS 
     shadowColor: '#000', // iOS shadow
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -33,5 +38,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600'
+  },
+  arabicText: {
+    fontFamily: 'IBM-SemiBold',
+    fontWeight: undefined, 
   }
 });

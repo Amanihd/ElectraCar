@@ -1,8 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, I18nManager } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import { AuthContext } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
+
+import i18next from '../services/i18next';
 
 const MyProfileScreen = () => {
   const { t, i18n } = useTranslation();
@@ -16,86 +24,86 @@ const MyProfileScreen = () => {
   };
 
   const isRTL = i18n.dir() === 'rtl';
+  const font = isRTL ? { fontFamily: 'IBM-SemiBold' } : {};
 
   if (!user) return <Text>{t('loading')}</Text>;
 
   return (
     <View style={styles.container}>
+      
+
       <View style={styles.avatarContainer}>
         <Ionicons name="person-circle-outline" size={120} color="#000C66" />
-       
       </View>
 
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('my_profile_screen.my_info')}</Text>
+        <Text style={[styles.cardTitle, font]}>{t('my_profile_screen.my_info')}</Text>
 
         {/* Name */}
         <View style={[styles.row, isRTL && { flexDirection: 'row-reverse' }]}>
           <Feather name="user" size={20} color="#000C66" />
           {isEditing ? (
             <TextInput
-              style={[styles.input, isRTL && { textAlign: 'right' }]}
+              style={[styles.input, font, isRTL && { textAlign: 'right' }]}
               value={tempProfile.name}
               onChangeText={(text) => setTempProfile({ ...tempProfile, name: text })}
               placeholder={t("my_profile_screen.name")}
               placeholderTextColor="#aaa"
             />
           ) : (
-            <Text style={[styles.infoText, isRTL && { textAlign: 'right' }]}>{user.name}</Text>
+            <Text style={[styles.infoText, font, isRTL && { textAlign: 'right' }]}>
+              {user.name}
+            </Text>
           )}
         </View>
 
- {/* Email field: text always LTR, icon right only in Arabic */}
-<View style={styles.row}>
-  {isRTL ? (
-    // Arabic: Text first, icon last
-    <>
-      {isEditing ? (
-        <TextInput
-          style={[styles.input, { textAlign: 'left', writingDirection: 'ltr' }]}
-          value={tempProfile.email}
-          onChangeText={(text) => setTempProfile({ ...tempProfile, email: text })}
-          placeholder={t("my_profile_screen.email")}
-          placeholderTextColor="#aaa"
-          keyboardType="email-address"
-        />
-      ) : (
-        <Text style={[styles.infoText, { textAlign: 'left', writingDirection: 'ltr' }]}>
-          {user.email}
-        </Text>
-      )}
-      <Feather name="mail" size={20} color="#000C66" style={{ marginLeft: 10 }} />
-    </>
-  ) : (
-    // English: Icon first, then text
-    <>
-      <Feather name="mail" size={20} color="#000C66" style={{ marginRight: 10 }} />
-      {isEditing ? (
-        <TextInput
-          style={[styles.input, { textAlign: 'left', writingDirection: 'ltr' }]}
-          value={tempProfile.email}
-          onChangeText={(text) => setTempProfile({ ...tempProfile, email: text })}
-          placeholder={t("my_profile_screen.email")}
-          placeholderTextColor="#aaa"
-          keyboardType="email-address"
-        />
-      ) : (
-        <Text style={[styles.infoText, { textAlign: 'left', writingDirection: 'ltr' }]}>
-          {user.email}
-        </Text>
-      )}
-    </>
-  )}
-</View>
-
-
+        {/* Email */}
+        <View style={styles.row}>
+          {isRTL ? (
+            <>
+              {isEditing ? (
+                <TextInput
+                  style={[styles.input, font, { textAlign: 'left', writingDirection: 'ltr' }]}
+                  value={tempProfile.email}
+                  onChangeText={(text) => setTempProfile({ ...tempProfile, email: text })}
+                  placeholder={t("my_profile_screen.email")}
+                  placeholderTextColor="#aaa"
+                  keyboardType="email-address"
+                />
+              ) : (
+                <Text style={[styles.infoText, font, { textAlign: 'left', writingDirection: 'ltr' }]}>
+                  {user.email}
+                </Text>
+              )}
+              <Feather name="mail" size={20} color="#000C66" style={{ marginLeft: 10 }} />
+            </>
+          ) : (
+            <>
+              <Feather name="mail" size={20} color="#000C66" style={{ marginRight: 10 }} />
+              {isEditing ? (
+                <TextInput
+                  style={[styles.input, font, { textAlign: 'left', writingDirection: 'ltr' }]}
+                  value={tempProfile.email}
+                  onChangeText={(text) => setTempProfile({ ...tempProfile, email: text })}
+                  placeholder={t("my_profile_screen.email")}
+                  placeholderTextColor="#aaa"
+                  keyboardType="email-address"
+                />
+              ) : (
+                <Text style={[styles.infoText, font, { textAlign: 'left', writingDirection: 'ltr' }]}>
+                  {user.email}
+                </Text>
+              )}
+            </>
+          )}
+        </View>
 
         {/* Button */}
         <TouchableOpacity
           style={isEditing ? styles.saveButton : styles.editButton}
           onPress={isEditing ? handleSave : () => setIsEditing(true)}
         >
-          <Text style={isEditing ? styles.saveButtonText : styles.editButtonText}>
+          <Text style={[isEditing ? styles.saveButtonText : styles.editButtonText, font]}>
             {isEditing ? t("my_profile_screen.save_changes") : t("my_profile_screen.edit_profile")}
           </Text>
         </TouchableOpacity>
@@ -105,17 +113,13 @@ const MyProfileScreen = () => {
 };
 
 export default MyProfileScreen;
+
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f2f2f2', padding: 20 },
 
   avatarContainer: {
     alignItems: 'center',
     marginBottom: 20,
-  },
-  changePhotoText: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 5,
   },
 
   card: {
@@ -131,7 +135,6 @@ const styles = StyleSheet.create({
 
   cardTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#000C66',
     marginBottom: 16,
     textAlign: 'center',
@@ -162,12 +165,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  divider: {
-    height: 1,
-    backgroundColor: '#ccc',
-    marginVertical: 10,
-  },
-
   editButton: {
     backgroundColor: '#000C66',
     padding: 12,
@@ -178,7 +175,6 @@ const styles = StyleSheet.create({
   editButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 
   saveButton: {
@@ -191,6 +187,5 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 });

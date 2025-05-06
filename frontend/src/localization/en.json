@@ -71,7 +71,7 @@
   "sign_out": "Sign out",
   "selected_car": "Selected Car",
   "none_selected": "None selected",
-  "choose_another": "Choose Another",
+  "choose_another": "Choose Your Vehicle",
 
   "footer_text": "© 2025 ElectraCar All rights reserved.",
 
@@ -188,6 +188,7 @@
     "vehicle_pick": {
       "add_vehicle": "Add Vehicle",
       "manage": "Manage Vehicles"
+      
       },
       
     "manage_vehicles": {
