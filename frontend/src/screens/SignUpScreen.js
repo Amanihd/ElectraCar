@@ -38,13 +38,13 @@ const SignUpScreen = () => {
     if (!firstName.trim()) newErrors.firstName = t("first_name_required");
     else if (!/^[a-zA-Z\u0600-\u06FF]+$/.test(firstName.trim()))
       newErrors.firstName = t("only_letters");
-    else if (firstName.length < 3 || firstName.length > 30)
+    else if (firstName.length < 3 || firstName.length > 10)
       newErrors.firstName = t("length");
 
     if (!lastName.trim()) newErrors.lastName = t("last_name_required");
     else if (!/^[a-zA-Z\u0600-\u06FF]+$/.test(lastName.trim()))
       newErrors.lastName = t("only_letters");
-    else if (lastName.length < 2 || lastName.length > 30)
+    else if (lastName.length < 3 || lastName.length > 10)
       newErrors.lastName = t("length");
 
     if (!email.trim()) newErrors.email = t("email_required");
