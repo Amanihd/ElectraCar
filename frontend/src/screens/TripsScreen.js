@@ -64,7 +64,7 @@ const TripsScreen = ({ route, navigation }) => {
 
   const vehicle = selectedVehicle || {
     id: 0,
-    make: "No Car Selected",
+    make: t("no_car_selected"),
     model: "",
     trim: "",
   };

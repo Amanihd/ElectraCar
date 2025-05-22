@@ -276,6 +276,8 @@
   
   
   "select_one": "Select one",
-  "reset": "Reset"
+  "reset": "Reset",
+
+   "no_car_selected": "No Car Selected"
 
 }
