@@ -1,10 +1,11 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import LottieView from "lottie-react-native";
 import { useTranslation } from 'react-i18next';
 
 const AddVehicleScreen = () => {
+  const route = useRoute();
   const navigation = useNavigation();
   const { t, i18n } = useTranslation();
   const isRTL = i18n.dir() === 'rtl';
@@ -13,6 +14,10 @@ const AddVehicleScreen = () => {
   const arabicTextStyle = isRTL ? styles.arabicText : {};
   const arabicTitleStyle = isRTL ? styles.arabicTitle : {};
   const arabicButtonTextStyle = isRTL ? styles.arabicButtonText : {};
+
+  useEffect(() => {
+  console.log("AddVehicleScreen params:", route.params);
+}, []);
 
   return (
     <View style={styles.container}>
@@ -33,7 +38,7 @@ const AddVehicleScreen = () => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Make')}
+       onPress={() => navigation.navigate('Make', { fromVehicleModal: route?.params?.fromVehicleModal })}
       >
         <Text style={[styles.buttonText, arabicButtonTextStyle]}>
           {t('add_vehicle_screen.add_vehicle')}

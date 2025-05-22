@@ -16,21 +16,31 @@ import BookmarkModal from "../components/Trip/BookmarkModal";
 
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
+import { TripContext } from "../context/TripContext";
 
 const TripsScreen = ({ route, navigation }) => {
+  const {
+    tripName,
+    setTripName,
+    start,
+    setStart,
+    destination,
+    setDestination,
+  } = useContext(TripContext);
+
   const { t } = useTranslation();
   const { isLoggedIn } = useContext(AuthContext);
   const { userLocation } = useContext(UserLocationContext);
   const { selectedVehicle } = useContext(VehicleContext);
   const { batteryLevel, setBatteryLevel } = useContext(BatteryContext);
-  const [start, setStart] = useState(route.params?.start || userLocation);
-  const [destination, setDestination] = useState(
-    route.params?.destination || null
-  );
+  // const [start, setStart] = useState(route.params?.start || userLocation);
+  // const [destination, setDestination] = useState(
+  //   route.params?.destination || null
+  // );
   const [modalStage, setModalStage] = useState(null);
   const [showBookmarkModal, setShowBookmarkModal] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
-  const [tripName, setTripName] = useState("");
+  // const [tripName, setTripName] = useState("");
   const [loading, setLoading] = useState(true);
 
   const isRTL = i18next.language === "ar";
@@ -53,15 +63,21 @@ const TripsScreen = ({ route, navigation }) => {
   }
 
   const vehicle = selectedVehicle || {
-    id: 1,
-    make: "Test Car",
-    model: "X",
-    trim: "Y",
+    id: 0,
+    make: "No Car Selected",
+    model: "",
+    trim: "",
   };
 
   const getVehicleMaxRange = (id) => {
     const v = vehicleData.find((v) => v.id === id);
     return v ? v.range_km : 0;
+  };
+
+  const handleReset = () => {
+    setTripName("");
+    setStart(userLocation);
+    setDestination(null);
   };
 
   const handleSelectLocation = (type) => {
@@ -82,7 +98,8 @@ const TripsScreen = ({ route, navigation }) => {
 
   const handleVehicleModalNo = () => {
     setModalStage(null);
-    navigation.navigate("VehiclePickScreen");
+    console.log("Navigating to VehiclePickScreen from modal");
+    navigation.navigate("VehiclePickScreen", { fromVehicleModal: true });
   };
 
   const handleBatteryContinue = () => {
@@ -157,26 +174,40 @@ const TripsScreen = ({ route, navigation }) => {
         <TextInput
           placeholder={t("trip_name_placeholder")}
           style={[styles.input, arFontFamilySmiBold]}
-          value={tripName}
+          value={tripName || ""}
           onChangeText={setTripName}
         />
 
         <TripInput
           label="📍"
-          value={start?.display_name}
+          value={start?.display_name || ""}
           onPress={() => handleSelectLocation("start")}
         />
 
         <TripInput
           label="🏁"
-          value={destination?.display_name}
+          value={destination?.display_name || ""}
           onPress={() => handleSelectLocation("destination")}
         />
 
         <PlanButton
-          disabled={!start || !destination}
+          disabled={!start || !destination || !tripName.trim()}
           onPress={handlePlanTrip}
         />
+
+        <Text
+          onPress={handleReset}
+          style={{
+            marginTop: 10,
+            textAlign: "center",
+            color: "#000C66",
+            fontSize: 15,
+            textDecorationLine: "underline",
+            ...arFontFamilySmiBold,
+          }}
+        >
+          {t("reset")}
+        </Text>
       </ScrollView>
 
       <VehicleConfirmModal

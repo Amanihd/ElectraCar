@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import vehicles from '../data/vehicles.json';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const MakeScreen = () => {
+  const route = useRoute();
   const navigation = useNavigation();
   const [makes, setMakes] = useState([]);
+
+
 
   useEffect(() => {
     const uniqueMakes = [...new Set(vehicles.map(v => v.make))];
     setMakes(uniqueMakes);
   }, []);
 
-  const handleMakePress = (make) => {
-    navigation.navigate('Model', { make });
+ const handleMakePress = (make) => {
+    navigation.navigate('Model', {
+      make,
+      fromVehicleModal: route?.params?.fromVehicleModal,
+    });
   };
 
   const renderItem = ({ item }) => (

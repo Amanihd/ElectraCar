@@ -11,7 +11,8 @@ import VehicleButton from "../components/VehicleButton";
 import { useTranslation } from "react-i18next";
 import { VehicleContext } from "../context/VehicleContext";
 
-const VehiclePickScreen = () => {
+const VehiclePickScreen = ({ route }) => {
+  console.log("VehiclePickScreen params:", route.params);
   const [selectedId, setSelectedId] = useState(null);
   const { vehicles, setSelectedVehicle } = useContext(VehicleContext);
   const navigation = useNavigation();
@@ -22,22 +23,47 @@ const VehiclePickScreen = () => {
   // if no vehicle added
   useEffect(() => {
     if (vehicles.length === 0) {
-      navigation.replace("AddVehicle");
+      navigation.replace("AddVehicle", {
+        fromVehicleModal: route?.params?.fromVehicleModal,
+      });
     }
   }, [vehicles]);
+
+  // const handleSelect = () => {
+  //   const chosen = vehicles.find((v) => v.id === selectedId);
+  //   if (chosen) {
+  //     setSelectedVehicle(chosen);
+  //     navigation.navigate('MainTabs', { screen: 'Me' })
+  //   } else {
+  //     navigation.navigate("AddVehicle");
+  //   }
+  // };
 
   const handleSelect = () => {
     const chosen = vehicles.find((v) => v.id === selectedId);
     if (chosen) {
       setSelectedVehicle(chosen);
-      navigation.navigate('MainTabs', { screen: 'Me' })
+
+      if (route?.params?.fromVehicleModal) {
+        navigation.navigate("MainTabs", {
+          screen: "Trips",
+          params: { reopenVehicleModal: true },
+        });
+      } else {
+        navigation.navigate("MainTabs", { screen: "Me" });
+      }
     } else {
-      navigation.navigate("AddVehicle");
+      navigation.navigate("AddVehicle", {
+        fromVehicleModal: route?.params?.fromVehicleModal || false,
+      });
     }
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => setSelectedId(item.id)} style={styles.item}>
+    <TouchableOpacity
+      onPress={() => setSelectedId(item.id)}
+      style={styles.item}
+    >
       <Text style={styles.vehicleText}>
         {item.make} {item.model} ({item.trim})
       </Text>
@@ -53,14 +79,16 @@ const VehiclePickScreen = () => {
         keyExtractor={(item) => item.id.toString()}
       />
 
-      <TouchableOpacity onPress={() => navigation.navigate("ManageVehiclesScreen")}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ManageVehiclesScreen")}
+      >
         <Text style={[styles.link, arabicTextStyle]}>
           {t("vehicle_pick.manage")}
         </Text>
       </TouchableOpacity>
 
-      <VehicleButton 
-        label={t("vehicle_pick.add_vehicle")} 
+      <VehicleButton
+        label={t("vehicle_pick.add_vehicle")}
         onPress={handleSelect}
         isRTL={isRTL}
       />
@@ -87,9 +115,7 @@ const styles = StyleSheet.create({
   },
   arabicText: {
     fontFamily: "IBM-Regular",
-    
   },
 });
 
 export default VehiclePickScreen;
-

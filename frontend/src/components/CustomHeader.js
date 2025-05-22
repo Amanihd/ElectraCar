@@ -12,7 +12,12 @@ import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
 import { Ionicons } from "@expo/vector-icons";
 
-const CustomHeader = ({ titleKey, isArrow = true,headerShown=true }) => {
+const CustomHeader = ({
+  titleKey,
+  isArrow = true,
+  headerShown = true,
+  fromVehicleModal = false,
+}) => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const isRTL = i18next.language === "ar";
@@ -25,7 +30,17 @@ const CustomHeader = ({ titleKey, isArrow = true,headerShown=true }) => {
       ]}
     >
       {isArrow && (
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={() => {
+            if (fromVehicleModal) {
+              navigation.navigate("MainTabs", {
+                screen: "Trips",
+              });
+            } else {
+              navigation.goBack();
+            }
+          }}
+        >
           <Ionicons
             name={isRTL ? "arrow-forward" : "arrow-back"}
             size={24}
@@ -34,19 +49,21 @@ const CustomHeader = ({ titleKey, isArrow = true,headerShown=true }) => {
         </TouchableOpacity>
       )}
 
-      {headerShown && <Text
-        style={[
-          styles.headerText,
-          {
-            fontFamily: isRTL ? "IBM-SemiBold" : "System",
-            textAlign: isRTL ? "right" : "left",
-            marginLeft: isRTL ? 0 : 16,
-            marginRight: isRTL ? 16 : 0,
-          },
-        ]}
-      >
-        {t(titleKey)}
-      </Text>}
+      {headerShown && (
+        <Text
+          style={[
+            styles.headerText,
+            {
+              fontFamily: isRTL ? "IBM-SemiBold" : "System",
+              textAlign: isRTL ? "right" : "left",
+              marginLeft: isRTL ? 0 : 16,
+              marginRight: isRTL ? 16 : 0,
+            },
+          ]}
+        >
+          {t(titleKey)}
+        </Text>
+      )}
     </View>
   );
 };

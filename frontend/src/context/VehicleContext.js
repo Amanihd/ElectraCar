@@ -7,7 +7,10 @@ export const VehicleProvider = ({ children }) => {
   const [selectedVehicle, setSelectedVehicle] = useState(null); // Currently selected one
 
   const addVehicle = (vehicle) => {
-    setVehicles((prev) => [...prev, { ...vehicle, id: Date.now() }]);
+    setVehicles((prev) => [
+      ...prev,
+      { ...vehicle, id: vehicle.id ?? Date.now() },
+    ]);
   };
 
   const deleteVehicle = (id) => {

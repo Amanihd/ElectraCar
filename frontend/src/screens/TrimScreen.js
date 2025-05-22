@@ -5,14 +5,19 @@ import vehicles from '../data/vehicles.json';
 
 const TrimScreen = () => {
   const navigation = useNavigation();
-  const { make, model } = useRoute().params;
+ const { make, model, fromVehicleModal } = useRoute().params;
 
   const trims = vehicles
     .filter(v => v.make === make && v.model === model)
     .map(v => v.trim);
 
   const handleTrimPress = (trim) => {
-    navigation.navigate('Vehicle Summary', { make, model, trim });
+    navigation.navigate('Vehicle Summary', { 
+      make, 
+      model, 
+      trim,
+      fromVehicleModal, 
+    });
   };
 
   return (

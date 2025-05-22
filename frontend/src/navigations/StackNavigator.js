@@ -67,8 +67,7 @@ const StackNavigator = () => {
       <Stack.Screen
         name="ChargingStationDetails"
         component={ChargingStationDetails}
-        options={
-          { headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="DirectionsScreen"
@@ -87,7 +86,6 @@ const StackNavigator = () => {
       <Stack.Screen
         name="FAQ"
         component={FAQScreen}
-       
         options={{
           header: () => <CustomHeader titleKey="faq" />, // Use the custom header here
         }}
@@ -126,52 +124,56 @@ const StackNavigator = () => {
         name="AddVehicle"
         component={AddVehicleScreen}
         options={{
-          header: () => <CustomHeader titleKey="add_screen" isArrow={false} />, 
-          
+          header: () => <CustomHeader titleKey="add_screen" isArrow={false} />,
         }}
       />
-      
+
       <Stack.Screen
         name="Make"
         component={MakeScreen}
         options={{
           header: () => <CustomHeader titleKey="make_screen" />,
         }}
-        />
+      />
       <Stack.Screen
         name="Model"
         component={ModelScreen}
         options={{
-          header: () => <CustomHeader titleKey="model_screen" />, 
+          header: () => <CustomHeader titleKey="model_screen" />,
         }}
       />
       <Stack.Screen
         name="Trim"
         component={TrimScreen}
         options={{
-          header: () => <CustomHeader titleKey="trim_screen" />, 
+          header: () => <CustomHeader titleKey="trim_screen" />,
         }}
       />
       <Stack.Screen
         name="Vehicle Summary"
         component={VehicleSummaryScreen}
         options={{
-          header: () => <CustomHeader titleKey="vehicle_summary_screen" />, 
+          header: () => <CustomHeader titleKey="vehicle_summary_screen" />,
         }}
       />
       <Stack.Screen
         name="VehiclePickScreen"
         component={VehiclePickScreen}
-        options={{
-          header: () => <CustomHeader titleKey="picK_vehicle_screen" />, 
-        }}
+        options={({ route }) => ({
+          header: () => (
+            <CustomHeader
+              titleKey="picK_vehicle_screen"
+              fromVehicleModal={route?.params?.fromVehicleModal}
+            />
+          ),
+        })}
       />
-      
+
       <Stack.Screen
         name="ManageVehiclesScreen"
         component={ManageVehiclesScreen}
         options={{
-          header: () => <CustomHeader titleKey="manage_vehicles_screen" />, 
+          header: () => <CustomHeader titleKey="manage_vehicles_screen" />,
         }}
       />
       {/* For trips screen */}
@@ -179,54 +181,48 @@ const StackNavigator = () => {
         name="SearchLocation"
         component={SearchLocationScreen}
         options={{
-          header: () => <CustomHeader titleKey="search" />, 
+          header: () => <CustomHeader titleKey="search" />,
         }}
       />
-      <Stack.Screen
-        name="Trips"
-        component={TripsScreen}
-        options={{
-          header: () => <CustomHeader titleKey="trips" />, 
-        }}
-      />
+
       <Stack.Screen
         name="TripMap"
         component={TripMapScreen}
         options={{
-          header: () => <CustomHeader titleKey="my_trip" />, 
+          header: () => <CustomHeader titleKey="my_trip" />,
         }}
       />
+
       {/* All about sign up, auth, sign in, join */}
       <Stack.Screen
         name="SignUp"
-        
         component={SignUpScreen}
         options={{
-          header: () => <CustomHeader titleKey="sign_up_screen" />, 
+          header: () => <CustomHeader titleKey="sign_up_screen" />,
         }}
       />
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}
         options={{
-          header: () => <CustomHeader titleKey="sign_in" />, 
+          header: () => <CustomHeader titleKey="sign_in" />,
         }}
       />
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{
-          header: () => <CustomHeader titleKey="forgot_password" />, 
+          header: () => <CustomHeader titleKey="forgot_password" />,
         }}
       />
       <Stack.Screen
         name="ResetPassword"
         component={ResetPasswordScreen}
         options={{
-          header: () => <CustomHeader titleKey="reset_password_screen" />, 
+          header: () => <CustomHeader titleKey="reset_password_screen" />,
         }}
       />
-      
+
       <Stack.Screen
         name="MyProfile"
         component={MyProfileScreen}

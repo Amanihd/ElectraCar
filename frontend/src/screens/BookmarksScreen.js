@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Image,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -15,18 +16,6 @@ import i18next from "../services/i18next";
 const { width } = Dimensions.get("window");
 const CARD_MARGIN = 8;
 const CARD_WIDTH = (width - 60) / 2;
-
-const getRandomBlueShade = () => {
-  const shades = [
-    "#93C5FD", // light blue
-    "#60A5FA",
-    "#3B82F6",
-    "#2563EB",
-    "#1D4ED8",
-    "#1E40AF", // dark blue
-  ];
-  return shades[Math.floor(Math.random() * shades.length)];
-};
 
 const BookmarksScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -40,7 +29,6 @@ const BookmarksScreen = ({ navigation }) => {
     : { fontWeight: "bold" };
   const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
-
   useEffect(() => {
     if (!isLoggedIn) {
       navigation.navigate("Join");
@@ -51,12 +39,8 @@ const BookmarksScreen = ({ navigation }) => {
         { id: "3", title: "Weekend" },
         { id: "4", title: "Park" },
         { id: "5", title: "Uni" },
-      ].map((item) => ({
-        ...item,
-        color: getRandomBlueShade(),
-      }));
-
-   setBookmarks(mockData);
+      ];
+      setBookmarks(mockData);
       setLoading(false);
     }
   }, [isLoggedIn]);
@@ -86,9 +70,15 @@ const BookmarksScreen = ({ navigation }) => {
             autoPlay
             loop
           />
-          <Text style={[styles.title,arFontFamilySmiBold]}>{t("bookmark_title")}</Text>
-          <Text style={[styles.subtitle,arFontFamilyRegular]}>{t("no_bookmarks")}</Text>
-          <Text style={[styles.subtitle,arFontFamilyRegular]}> {t("start_adding_bookmark")}</Text>
+          <Text style={[styles.title, arFontFamilySmiBold]}>
+            {t("bookmark_title")}
+          </Text>
+          <Text style={[styles.subtitle, arFontFamilyRegular]}>
+            {t("no_bookmarks")}
+          </Text>
+          <Text style={[styles.subtitle, arFontFamilyRegular]}>
+            {t("start_adding_bookmark")}
+          </Text>
         </View>
       ) : (
         <FlatList
@@ -103,12 +93,18 @@ const BookmarksScreen = ({ navigation }) => {
               onPress={() => handleBookmarkPress(item.id)}
               style={styles.card}
             >
-              <View
-                style={[styles.colorBox, { backgroundColor: item.color }]}
+              <Image
+                source={require("../../assets/images/bookmark-banner.jpg")}
+                style={styles.imageBox}
+                resizeMode="cover"
               />
-              <Text style={[styles.cardTitle,arFontFamilySmiBold]}>{item.title}</Text>
+              <Text style={[styles.cardTitle, arFontFamilySmiBold]}>
+                {item.title}
+              </Text>
               <TouchableOpacity onPress={() => handleRemoveBookmark(item.id)}>
-                <Text style={[styles.removeText,arFontFamilyRegular]}>{t("remove")}</Text>
+                <Text style={[styles.removeText, arFontFamilyRegular]}>
+                  {t("remove")}
+                </Text>
               </TouchableOpacity>
             </TouchableOpacity>
           )}
@@ -160,9 +156,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     paddingBottom: 8,
   },
-  colorBox: {
+  imageBox: {
     width: "100%",
-    height: "55%", // shortened height
+    height: "55%",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -175,7 +171,7 @@ const styles = StyleSheet.create({
   },
   removeText: {
     fontSize: 13,
-    color: "#6B7280", // Tailwind's gray-500
+    color: "#6B7280",
     marginTop: 4,
     textDecorationLine: "underline",
   },

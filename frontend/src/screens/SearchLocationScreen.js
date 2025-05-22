@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -13,14 +13,18 @@ import axios from "axios";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
+import { TripContext } from "../context/TripContext";
+
 
 const SearchLocationScreen = ({ route, navigation }) => {
   const { type, start, destination } = route.params;
+   const { setStart, setDestination } = useContext(TripContext);
+
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
-  
+
   const isRTL = i18next.language === "ar";
 
   const rtlTextAlign = { textAlign: isRTL ? "right" : "left" };
@@ -66,34 +70,54 @@ const SearchLocationScreen = ({ route, navigation }) => {
 
   const handleSelectLocation = (item) => {
     if (type === "start") {
-      navigation.navigate("Trips", { start: item, destination });
+      setStart(item);
     } else {
-      navigation.navigate("Trips", { start, destination: item });
+      setDestination(item);
     }
+    navigation.goBack();  // ترجع للشاشة السابقة
+  
+    // if (type === "start") {
+    //   navigation.navigate("MainTabs", {
+    //     screen: "Trips",
+    //     params: { start: item, destination },
+    //   });
+    // } else {
+    //   navigation.navigate("MainTabs", {
+    //     screen: "Trips",
+    //     params: { start, destination: item },
+    //   });
+    // }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.searchRow}>
         <TextInput
-         placeholder={
-          type === "start"
-            ? t("search_start_point")
-            : t("search_destination_point")
-        }
+          placeholder={
+            type === "start"
+              ? t("search_start_point")
+              : t("search_destination_point")
+          }
           value={query}
           onChangeText={setQuery}
           onSubmitEditing={handleSubmitSearch}
           returnKeyType="search"
-          style={[styles.input,arFontFamilyRegular]}
+          style={[styles.input, arFontFamilyRegular]}
         />
-        <TouchableOpacity onPress={handleSubmitSearch} style={styles.iconContainer}>
+        <TouchableOpacity
+          onPress={handleSubmitSearch}
+          style={styles.iconContainer}
+        >
           <Ionicons name="search" size={24} color="#000C66" />
         </TouchableOpacity>
       </View>
 
       {loading && (
-        <ActivityIndicator size="large" color="#000C66" style={{ marginBottom: 15 }} />
+        <ActivityIndicator
+          size="large"
+          color="#000C66"
+          style={{ marginBottom: 15 }}
+        />
       )}
 
       <FlatList

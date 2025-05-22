@@ -7,6 +7,7 @@ import { BatteryProvider } from "./src/context/BatteryContext";
 import { AuthProvider } from "./src/context/AuthContext";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import { TripProvider } from "./src/context/TripContext";
 
 const loadFonts = () => {
   return Font.loadAsync({
@@ -35,14 +36,16 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <UserLocationProvider>
+    <UserLocationProvider>
+      <TripProvider>
         <VehicleProvider>
           <BatteryProvider>
             <MainContainer />
           </BatteryProvider>
         </VehicleProvider>
-      </UserLocationProvider>
-    </AuthProvider>
+      </TripProvider>
+    </UserLocationProvider>
+  </AuthProvider>
   );
 };
 

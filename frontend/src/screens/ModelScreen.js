@@ -5,14 +5,18 @@ import vehicles from '../data/vehicles.json';
 
 const ModelScreen = () => {
   const navigation = useNavigation();
-  const { make } = useRoute().params;
+   const { make, fromVehicleModal } = useRoute().params;
 
   const models = [
     ...new Set(vehicles.filter(v => v.make === make).map(v => v.model))
   ];
 
-  const handleModelPress = (model) => {
-    navigation.navigate('Trim', { make, model });
+ const handleModelPress = (model) => {
+    navigation.navigate('Trim', {
+      make,
+      model,
+      fromVehicleModal, 
+    });
   };
 
   return (

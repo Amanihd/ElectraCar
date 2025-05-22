@@ -7,31 +7,47 @@ const VehicleConfirmModal = ({ visible, vehicle, onYes, onNo }) => {
   const { t } = useTranslation();
 
   const isRTL = i18next.language === "ar";
-    const arFontFamilySmiBold = isRTL
-      ? { fontFamily: "IBM-SemiBold" }
-      : { fontWeight: "bold" };
-    const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
-  
+  const arFontFamilySmiBold = isRTL
+    ? { fontFamily: "IBM-SemiBold" }
+    : { fontWeight: "bold" };
+  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
   if (!visible) return null;
 
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={[styles.title,arFontFamilySmiBold]}>{t("is_this_your_vehicle")}</Text>
-        <Text style={[styles.text,arFontFamilyRegular]}>
-          {vehicle.make} - {vehicle.model} ({vehicle.trim})
+        <Text style={[styles.title, arFontFamilySmiBold]}>
+          {t("is_this_your_vehicle")}
+        </Text>
+        <Text style={[styles.text, arFontFamilyRegular]}>
+          {vehicle.id === 0
+            ? vehicle.make
+            : `${vehicle.make} - ${vehicle.model} (${vehicle.trim})`}
         </Text>
         <View style={styles.buttons}>
-          <Pressable style={styles.button} onPress={onYes}>
-            <Text style={[styles.buttonText,arFontFamilySmiBold]}>{t("yes")}</Text>
-          </Pressable>
+          {vehicle.id !== 0 && (
+            <Pressable style={styles.button} onPress={onYes}>
+              <Text style={[styles.buttonText, arFontFamilySmiBold]}>
+                {t("yes")}
+              </Text>
+            </Pressable>
+          )}
           <Pressable
-            style={[styles.button, { backgroundColor: "#ccc" }]}
+            style={[
+              styles.button,
+              { backgroundColor: vehicle.id === 0 ? "#000C66" : "#ccc" },
+            ]}
             onPress={onNo}
           >
-            <Text style={[styles.buttonText, { color: "#000" },arFontFamilySmiBold]}>
-              {t("no")}
+            <Text
+              style={[
+                styles.buttonText,
+                { color: vehicle.id === 0 ? "#fff" : "#000" },
+                arFontFamilySmiBold,
+              ]}
+            >
+              {vehicle.id === 0 ? t("select_one") : t("no")}
             </Text>
           </Pressable>
         </View>
@@ -56,7 +72,7 @@ const styles = StyleSheet.create({
     maxWidth: 320,
     alignItems: "center",
   },
-  title: { fontSize: 18,color: "#000C66" },
+  title: { fontSize: 18, color: "#000C66" },
   text: {
     fontSize: 16,
     marginVertical: 20,
