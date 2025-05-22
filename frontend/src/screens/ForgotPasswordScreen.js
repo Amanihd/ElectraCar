@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,6 @@ import { useTranslation } from 'react-i18next';
 import CustomInput from '../components/CustomInput';
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
-
 
 const containsArabic = (text) => /[\u0600-\u06FF]/.test(text);
 
@@ -60,58 +59,66 @@ const ForgotPasswordScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={styles.outerContainer}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
     >
-      <ScrollView 
+      <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
-        <View style={styles.inner}>
-          <Logo />
-          <Text style={[styles.title, getTitleStyle(t('forgot_password_title'))]}>
-            {t('forgot_password_title')}
-          </Text>
-          <Text style={[styles.subtitle, getTextStyle(t('forgot_password_subtitle'))]}>
-            {t('forgot_password_subtitle')}
-          </Text>
-
-          <CustomInput
-            placeholder={t('enter_email')}
-            value={email}
-            onChangeText={setEmail}
-            error={error}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            isRTL={containsArabic(t('enter_email'))}
-          />
-
-          <TouchableOpacity 
-            style={styles.button} 
-            onPress={handleSubmit}
-          >
-            <Text style={[styles.buttonText, getButtonTextStyle(t('send_reset_link'))]}>
-              {t('send_reset_link')}
+        <View style={styles.centeredContent}>
+          <View style={styles.formContainer}>
+            <Logo />
+            <Text style={[styles.title, getTitleStyle(t('forgot_password_title'))]}>
+              {t('forgot_password_title')}
             </Text>
-          </TouchableOpacity>
+            <Text style={[styles.subtitle, getTextStyle(t('forgot_password_subtitle'))]}>
+              {t('forgot_password_subtitle')}
+            </Text>
+
+            <CustomInput
+              placeholder={t('enter_email')}
+              value={email}
+              onChangeText={setEmail}
+              error={error}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              isRTL={containsArabic(t('enter_email'))}
+            />
+
+            <TouchableOpacity 
+              style={styles.button} 
+              onPress={handleSubmit}
+            >
+              <Text style={[styles.buttonText, getButtonTextStyle(t('send_reset_link'))]}>
+                {t('send_reset_link')}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
+        <Footer />
       </ScrollView>
-      <Footer />
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  outerContainer: {
+  container: {
     flex: 1,
     backgroundColor: '#f2f2f2',
   },
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
-  inner: {
+  centeredContent: {
+    flex: 1,
+    justifyContent: 'center',
+    
+  },
+  formContainer: {
     padding: 20,
   },
   title: {

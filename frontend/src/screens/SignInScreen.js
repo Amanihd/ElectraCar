@@ -52,77 +52,83 @@ const SignInScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={styles.outerContainer}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
     >
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.inner}>
-        
-        <Logo />
-        <Text style={[styles.title, arabicTitleStyle]}>
-          {t('sign_in')}
-        </Text>
-
-        <CustomInput
-          placeholder={t('email')}
-          value={email}
-          onChangeText={setEmail}
-          error={errors.email}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          isRTL={isRTL}
-        />
-
-        <CustomInput
-          placeholder={t('password')}
-          value={password}
-          onChangeText={setPassword}
-          error={errors.password}
-          secureTextEntry={!showPassword}
-          isRTL={isRTL}
-        />
-
-        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-          <Text style={[styles.buttonText, arabicButtonTextStyle]}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+        bounces={false}
+      >
+        <View style={styles.content}>
+          <Logo />
+          <Text style={[styles.title, arabicTitleStyle]}>
             {t('sign_in')}
           </Text>
-        </TouchableOpacity>
 
-        <View style={[styles.linksContainer, isRTL && styles.rtlLinksContainer]}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={[styles.text, arabicTextStyle]}>
-              {t('not_a_member') + ' '}
-              <Text style={[styles.linkText, arabicTextStyle]}>
-                {t('sign_up')}
+          <CustomInput
+            placeholder={t('email')}
+            value={email}
+            onChangeText={setEmail}
+            error={errors.email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            isRTL={isRTL}
+          />
+
+          <CustomInput
+            placeholder={t('password')}
+            value={password}
+            onChangeText={setPassword}
+            error={errors.password}
+            secureTextEntry={!showPassword}
+            isRTL={isRTL}
+          />
+
+          <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+            <Text style={[styles.buttonText, arabicButtonTextStyle]}>
+              {t('sign_in')}
+            </Text>
+          </TouchableOpacity>
+
+          <View style={[styles.linksContainer, isRTL && styles.rtlLinksContainer]}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+              <Text style={[styles.text, arabicTextStyle]}>
+                {t('not_a_member') + ' '}
+                <Text style={[styles.linkText, arabicTextStyle]}>
+                  {t('sign_up')}
+                </Text>
               </Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+            <Text style={[styles.linkText, arabicTextStyle]}>
+              {t('forgot_password_question')}
             </Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-          <Text style={[styles.linkText, arabicTextStyle]}>
-            {t('forgot_password_question')}
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <Footer />
+        <Footer />
       </ScrollView>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  outerContainer: {
+  container: {
     flex: 1,
     justifyContent: 'space-between',
     backgroundColor: '#f2f2f2',
   },
-  inner: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center', // Center vertically
+  },
+  content: {
+    paddingHorizontal: 20,
+    paddingVertical: 90,
   },
   title: {
     fontSize: 22,
@@ -141,6 +147,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
+    marginBottom: 10,
   },
   buttonText: {
     color: '#fff',
@@ -163,11 +170,6 @@ const styles = StyleSheet.create({
   text: {
     color: '#666',
   },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: "space-between",
-    paddingVertical: 30,
-  },
   arabicText: {
     fontFamily: 'IBM-SemiBold',
     fontWeight: undefined,
@@ -177,7 +179,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  
 });
 
 export default SignInScreen;
