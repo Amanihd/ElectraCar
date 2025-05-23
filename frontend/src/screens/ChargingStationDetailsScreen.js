@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import StationHeader from "../components/StationHeader";
@@ -6,7 +6,10 @@ import SectionDetail from "../components/SectionDetail";
 import GetDirectionsButton from "../components/GetDirectionsButton";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
+import { TripContext } from "../context/TripContext";
+
 const ChargingStationDetails = ({ route, navigation }) => {
+  const { setDestination, setTripName } = useContext(TripContext);
   const { t } = useTranslation();
   const station = route?.params?.station;
   const userLocation = route?.params?.userLocation;
@@ -20,9 +23,39 @@ const ChargingStationDetails = ({ route, navigation }) => {
     );
   }
 
-  const handleGetDirections = () => {
+  const handleGetDirections = async () => {
     if (!station) return;
-    navigation.navigate("DirectionsScreen", { station, userLocation });
+
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${station.latitude}&lon=${station.longitude}`,
+        {
+          headers: {
+            "User-Agent": "ElectraCarApp/1.0 (your@email.com)",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      setDestination({
+        latitude: station.latitude,
+        longitude: station.longitude,
+        display_name: data.display_name,
+      });
+
+      setTripName(station.title); // optional
+
+      navigation.navigate("MainTabs", {
+        screen: "Trips",
+      });
+    } catch (error) {
+      console.error("Failed to fetch station location name:", error);
+    }
   };
 
   return (

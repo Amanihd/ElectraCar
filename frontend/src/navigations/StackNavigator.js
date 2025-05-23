@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ChargingStationDetails from "../screens/ChargingStationDetailsScreen";
-import DirectionsScreen from "../screens/DirectionsScreen";
+//import DirectionsScreen from "../screens/DirectionsScreen";
 import JoinScreen from "../screens/JoinScreen";
 import FAQScreen from "../screens/FAQScreen";
 import TermsOfUseScreen from "../screens/TermsOfUseScreen";
@@ -69,19 +69,21 @@ const StackNavigator = () => {
         component={ChargingStationDetails}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="DirectionsScreen"
         component={DirectionsScreen}
         options={{
           header: () => <CustomHeader titleKey="directions" />, // Use the custom header here
         }}
-      />
+      /> */}
       <Stack.Screen
         name="Join"
         component={JoinScreen}
-        options={{
-          header: () => <CustomHeader titleKey="Join_screen" />, // Use the custom header here
-        }}
+        options={({ navigation }) => ({
+          header: () => (
+            <CustomHeader titleKey="Join_screen" goHomeOnBack={true} />
+          ),
+        })}
       />
       <Stack.Screen
         name="FAQ"

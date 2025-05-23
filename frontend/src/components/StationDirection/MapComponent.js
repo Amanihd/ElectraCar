@@ -21,12 +21,7 @@ const MapComponent = ({
       showsUserLocation={true} // Show user's location on the map
       followsUserLocation={true} // Follow user's location
     >
-      {/* User's current location */}
-      {/* <Marker coordinate={userLocation} title="Your Location">
-        <Ionicons name="location-sharp" size={30} color="blue" />
-      </Marker> */}
-
-      {/* Charging station location */}
+   
       <Marker
         coordinate={{
           latitude: station.latitude,

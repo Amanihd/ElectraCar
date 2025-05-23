@@ -33,14 +33,11 @@ const TripsScreen = ({ route, navigation }) => {
   const { userLocation } = useContext(UserLocationContext);
   const { selectedVehicle } = useContext(VehicleContext);
   const { batteryLevel, setBatteryLevel } = useContext(BatteryContext);
-  // const [start, setStart] = useState(route.params?.start || userLocation);
-  // const [destination, setDestination] = useState(
-  //   route.params?.destination || null
-  // );
+  
   const [modalStage, setModalStage] = useState(null);
   const [showBookmarkModal, setShowBookmarkModal] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
-  // const [tripName, setTripName] = useState("");
+ 
   const [loading, setLoading] = useState(true);
 
   const isRTL = i18next.language === "ar";
@@ -151,6 +148,14 @@ const TripsScreen = ({ route, navigation }) => {
       console.error("Error fetching trip route:", error);
     }
   };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={{ fontSize: 16 }}>{t("loading")}...</Text>
+      </View>
+    );
+  }
 
   return (
     <>
@@ -265,6 +270,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5F7FA",
   },
 });
 

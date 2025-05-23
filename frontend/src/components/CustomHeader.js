@@ -1,12 +1,6 @@
 // CustomHeader.js
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  I18nManager,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
@@ -17,6 +11,7 @@ const CustomHeader = ({
   isArrow = true,
   headerShown = true,
   fromVehicleModal = false,
+  goHomeOnBack = false,
 }) => {
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -32,10 +27,10 @@ const CustomHeader = ({
       {isArrow && (
         <TouchableOpacity
           onPress={() => {
-            if (fromVehicleModal) {
-              navigation.navigate("MainTabs", {
-                screen: "Trips",
-              });
+            if (goHomeOnBack) {
+              navigation.navigate("MainTabs", { screen: "Home" });
+            } else if (fromVehicleModal) {
+              navigation.navigate("MainTabs", { screen: "Trips" });
             } else {
               navigation.goBack();
             }
