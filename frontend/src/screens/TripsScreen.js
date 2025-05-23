@@ -17,6 +17,7 @@ import BookmarkModal from "../components/Trip/BookmarkModal";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
 import { TripContext } from "../context/TripContext";
+import BatteryWarningModal from "../components/Trip/BatteryWarningModal";
 
 const TripsScreen = ({ route, navigation }) => {
   const {
@@ -33,12 +34,13 @@ const TripsScreen = ({ route, navigation }) => {
   const { userLocation } = useContext(UserLocationContext);
   const { selectedVehicle } = useContext(VehicleContext);
   const { batteryLevel, setBatteryLevel } = useContext(BatteryContext);
-  
+
   const [modalStage, setModalStage] = useState(null);
   const [showBookmarkModal, setShowBookmarkModal] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
- 
+
   const [loading, setLoading] = useState(true);
+  const [showBatteryWarningModal, setShowBatteryWarningModal] = useState(false);
 
   const isRTL = i18next.language === "ar";
 
@@ -136,14 +138,21 @@ const TripsScreen = ({ route, navigation }) => {
     // Submit this tripData to backend
 
     try {
-      navigation.navigate("TripMap", {
-        start: { lat: 31.9815471, lng: 35.9434113 },
-        streets: [
-          //  { lat: 31.9634, lng: 35.9304 }, // Example start point in Amman
-          { lat: 31.9824522, lng: 35.9412327 }, // Example middle point
-        ],
-        destination: { lat: 31.97, lng: 35.94 }, // Example destination in Amman
-      });
+      const simulatedResponseStatus = 200; // Change this to 200 to test success path
+
+      if (simulatedResponseStatus === 300) {
+        // Show battery warning modal
+        setShowBatteryWarningModal(true);
+      } else {
+        navigation.navigate("TripMap", {
+          start: { lat: 31.9815471, lng: 35.9434113 },
+          streets: [
+            //  { lat: 31.9634, lng: 35.9304 }, // Example start point in Amman
+            { lat: 31.9824522, lng: 35.9412327 }, // Example middle point
+          ],
+          destination: { lat: 31.97, lng: 35.94 }, // Example destination in Amman
+        });
+      }
     } catch (error) {
       console.error("Error fetching trip route:", error);
     }
@@ -230,6 +239,11 @@ const TripsScreen = ({ route, navigation }) => {
       />
 
       <BookmarkModal visible={showBookmarkModal} onSave={handleSaveBookmark} />
+
+      <BatteryWarningModal
+        visible={showBatteryWarningModal}
+        onClose={() => setShowBatteryWarningModal(false)}
+      />
     </>
   );
 };

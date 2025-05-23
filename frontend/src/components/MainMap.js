@@ -87,6 +87,7 @@ const MainMap = ({ getlocation, filterTypes }) => {
       <StationCount count={filteredStations.length} />
 
       <ResetLocationButton onPress={resetMapToUserLocation} />
+      
     </View>
   );
 };
