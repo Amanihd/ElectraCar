@@ -1,7 +1,8 @@
-import React from "react";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "react-native-vector-icons";
+import ChargingStationMarker from "../mainMapComponents/ChargingStationMarker";
+import chargingStations from "../../data/stations.json";
 
 const MapComponent = ({
   userLocation,
@@ -21,7 +22,6 @@ const MapComponent = ({
       showsUserLocation={true} // Show user's location on the map
       followsUserLocation={true} // Follow user's location
     >
-   
       <Marker
         coordinate={{
           latitude: station.latitude,
@@ -44,6 +44,14 @@ const MapComponent = ({
           strokeWidth={3}
         />
       )}
+
+      {chargingStations.map((s) => (
+        <ChargingStationMarker
+          key={s.id}
+          station={s}
+          userLocation={userLocation}
+        />
+      ))}
     </MapView>
   );
 };
