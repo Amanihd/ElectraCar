@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,29 +9,34 @@ import {
 import { Ionicons, Feather } from '@expo/vector-icons';
 import { AuthContext } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
-
-import i18next from '../services/i18next';
+import { useNavigation } from '@react-navigation/native';
 
 const MyProfileScreen = () => {
   const { t, i18n } = useTranslation();
+  const navigation = useNavigation();
   const { user, updateUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [tempProfile, setTempProfile] = useState({ ...user });
+
+  const isRTL = i18n.dir() === 'rtl';
+  const font = isRTL ? { fontFamily: 'IBM-SemiBold' } : {};
+
+  
+  useEffect(() => {
+    if (!user) {
+      navigation.replace('Join'); 
+    }
+  }, [user, navigation]);
 
   const handleSave = () => {
     updateUser(tempProfile);
     setIsEditing(false);
   };
 
-  const isRTL = i18n.dir() === 'rtl';
-  const font = isRTL ? { fontFamily: 'IBM-SemiBold' } : {};
-
-  if (!user) return <Text>{t('loading')}</Text>;
+  if (!user) return null; // prevent rendering while redirecting
 
   return (
     <View style={styles.container}>
-      
-
       <View style={styles.avatarContainer}>
         <Ionicons name="person-circle-outline" size={120} color="#000C66" />
       </View>
@@ -98,7 +103,6 @@ const MyProfileScreen = () => {
           )}
         </View>
 
-        {/* Button */}
         <TouchableOpacity
           style={isEditing ? styles.saveButton : styles.editButton}
           onPress={isEditing ? handleSave : () => setIsEditing(true)}
@@ -113,6 +117,7 @@ const MyProfileScreen = () => {
 };
 
 export default MyProfileScreen;
+
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f2f2f2', padding: 20 },
