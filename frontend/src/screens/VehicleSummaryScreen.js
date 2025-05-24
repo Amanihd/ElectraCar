@@ -13,7 +13,11 @@ const VehicleSummaryScreen = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.dir() === "rtl";
 
-  const { addVehicle, setSelectedVehicle } = useContext(VehicleContext);
+  const {
+    addVehicle,
+    setSelectedVehicle,
+    vehicles,
+  } = useContext(VehicleContext);
 
   const arabicTextStyle = isRTL ? styles.arabicText : {};
   const textAlignmentStyle = isRTL ? styles.rtlText : styles.ltrText;
@@ -28,8 +32,14 @@ const VehicleSummaryScreen = () => {
       return;
     }
 
-    addVehicle(fullVehicle);
-    setSelectedVehicle(fullVehicle);
+    const alreadyExists = vehicles.some(
+      (v) => v.make === make && v.model === model && v.trim === trim
+    );
+
+    if (!alreadyExists) {
+      addVehicle(fullVehicle);
+      setSelectedVehicle(fullVehicle);
+    }
 
     navigation.navigate("VehiclePickScreen", {
       fromVehicleModal: fromVehicleModal || false,

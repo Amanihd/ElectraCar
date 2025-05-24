@@ -33,7 +33,7 @@ const MyProfileScreen = () => {
     setIsEditing(false);
   };
 
-  if (!user) return null; // prevent rendering while redirecting
+  if (!user) return null; 
 
   return (
     <View style={styles.container}>
