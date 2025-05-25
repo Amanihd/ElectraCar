@@ -138,7 +138,7 @@ const TripsScreen = ({ route, navigation }) => {
     // Submit this tripData to backend
 
     try {
-      const simulatedResponseStatus = 200; // Change this to 200 to test success path
+      const simulatedResponseStatus = 300; // Change this to 200 to test success path
 
       if (simulatedResponseStatus === 300) {
         // Show battery warning modal
