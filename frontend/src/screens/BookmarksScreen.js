@@ -12,6 +12,9 @@ import { AuthContext } from "../context/AuthContext";
 import LottieView from "lottie-react-native";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
+import axios from "axios";
+import Toast from "react-native-root-toast";
+import { useFocusEffect } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 const CARD_MARGIN = 8;
@@ -19,7 +22,7 @@ const CARD_WIDTH = (width - 60) / 2;
 
 const BookmarksScreen = ({ navigation }) => {
   const { t } = useTranslation();
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, token } = useContext(AuthContext);
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,33 +32,121 @@ const BookmarksScreen = ({ navigation }) => {
     : { fontWeight: "bold" };
   const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigation.navigate("Join");
-    } else {
-      const mockData = [
-        { id: "1", title: "Trip to home" },
-        { id: "2", title: "Office Route" },
-        { id: "3", title: "Weekend" },
-        { id: "4", title: "Park" },
-        { id: "5", title: "Uni" },
-      ];
-      setBookmarks(mockData);
-      setLoading(false);
-    }
-  }, [isLoggedIn]);
+  const handleBookmarkPress = async (tripId) => {
+    try {
+      const response = await axios.get(
+        `https://d650-91-186-254-248.ngrok-free.app/api/bookmarks/${tripId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-  const handleBookmarkPress = (tripId) => {
-    navigation.navigate("TripMap", {
-      start: { lat: 31.9815471, lng: 35.9434113 },
-      streets: [{ lat: 31.9824522, lng: 35.9412327 }],
-      destination: { lat: 31.97, lng: 35.94 },
-    });
+      const item = response.data;
+
+      const start = { lat: item.sourceLat, lng: item.sourceLon };
+      const destination = {
+        lat: item.destinationLat,
+        lng: item.destinationLon,
+      };
+
+      const streets = item.path.map((p) => ({
+        lat: p.lat,
+        lng: p.lon,
+      }));
+      const totalDistanceKm = item.totalDistanceKm;
+      const estimatedTimeMinutes = item.estimatedTimeMinutes;
+      
+      navigation.navigate("TripMap", {
+        start,
+        streets,
+        destination,
+        totalDistanceKm,
+        estimatedTimeMinutes,
+      });
+    } catch (error) {
+      console.error("Error fetching trip data:", error);
+    }
   };
 
-  const handleRemoveBookmark = (tripId) => {
-    setBookmarks((prev) => prev.filter((item) => item.id !== tripId));
-    // Later: also send request to backend to delete
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isLoggedIn) {
+        const fetchSelectedBookmarks = async () => {
+          setLoading(true);
+          try {
+            const response = await axios.get(
+              "https://d650-91-186-254-248.ngrok-free.app/api/bookmarks",
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            const data = response.data;
+
+            const formatted = data.map((item) => ({
+              id: item.id.toString(),
+              title: item.bookmarkName,
+              start: { lat: item.sourceLat, lng: item.sourceLon },
+              destination: {
+                lat: item.destinationLat,
+                lng: item.destinationLon,
+              }, // fix typo destinalonLon -> destinationLon
+              streets: item.path.map((p) => ({ lat: p.lat, lng: p.lon })),
+            }));
+            setBookmarks(formatted);
+          } catch (error) {
+            console.error("Error fetching selected bookmarks:", error);
+            setBookmarks([]);
+          } finally {
+            setLoading(false);
+          }
+        };
+
+        fetchSelectedBookmarks();
+      } else {
+        navigation.navigate("Join");
+      }
+    }, [isLoggedIn, token, navigation])
+  );
+
+  const handleRemoveBookmark = async (tripId) => {
+    try {
+      await axios.delete(
+        `https://d650-91-186-254-248.ngrok-free.appp/api/bookmarks/${tripId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setBookmarks((prev) => prev.filter((item) => item.id !== tripId));
+
+      Toast.show(t("bookmark_removed"), {
+        duration: Toast.durations.SHORT,
+        position: Toast.positions.BOTTOM,
+        shadow: false,
+        animation: true,
+        backgroundColor: "#333",
+        textColor: "#fff",
+        opacity: 0.9,
+        containerStyle: {
+          borderRadius: 5,
+          paddingHorizontal: 12,
+          paddingVertical: 8,
+          marginBottom: 60, // <-- moves toast up a bit from the bottom
+        },
+        textStyle: {
+          fontWeight: "500",
+          fontSize: 14,
+        },
+      });
+    } catch (error) {
+      console.error("❌ Error removing bookmark:", error);
+    }
   };
 
   if (loading) return null;

@@ -268,5 +268,7 @@
 
   "battery_not_enough_title": "Battery Not Enough",
   "battery_not_enough_message": "Your battery level is not enough for this trip.",
-  "ok": "OK"
+  "ok": "OK",
+
+  "bookmark_removed": "Bookmark removed"
 }

@@ -7,11 +7,20 @@ import InfoComponent from "../components/StationDirection/InfoComponent";
 import TrackingButton from "../components/StationDirection/TrackingButton";
 
 const TripMapScreen = ({ route }) => {
-  const { start, streets, destination } = route.params;
+  const normalizeCoord = (coord) => ({
+    lat: parseFloat(coord.lat),
+    lng: parseFloat(coord.lng !== undefined ? coord.lng : coord.lon),
+  });
+  const fixedStart = normalizeCoord(route.params.start);
+  const fixedDestination = normalizeCoord(route.params.destination);
+  const fixedStreets = route.params.streets.map(normalizeCoord);
+  const { totalDistanceKm, estimatedTimeMinutes } = route.params;
+
   const [currentLocation, setCurrentLocation] = useState({
-    latitude: start.lat,
-    longitude: start.lng,
-  });  
+    latitude: fixedStart.lat,
+    longitude: fixedStart.lng,
+  });
+
   const [routeCoords, setRouteCoords] = useState([]);
   const [routeInfo, setRouteInfo] = useState({ distance: "", duration: "" });
   const [isTracking, setIsTracking] = useState(false);
@@ -61,19 +70,36 @@ const TripMapScreen = ({ route }) => {
   }, [currentLocation]);
 
   const fetchRoute = async (startLoc) => {
-    const allPoints = [
+    const MAX_POINTS = 30;
+
+    // Combine all points first
+    const fullRoute = [
       [startLoc.longitude, startLoc.latitude],
-      ...streets.map((p) => [p.lng, p.lat]),
-      [destination.lng, destination.lat],
+      ...fixedStreets.map((p) => [p.lng, p.lat]),
+      [fixedDestination.lng, fixedDestination.lat],
     ];
 
-    const hasInvalidCoords = allPoints.some(
+    const pickStartAndEndPoints = (points, count = 10) => {
+      if (points.length <= count * 2) return points;
+
+      const startPoints = points.slice(0, count);
+      const endPoints = points.slice(points.length - count);
+
+      return [...startPoints, ...endPoints];
+    };
+
+    const reducedRoute = pickStartAndEndPoints(fullRoute, 5);
+
+    const hasInvalidCoords = reducedRoute.some(
       ([lng, lat]) =>
-        typeof lng !== "number" || typeof lat !== "number" || isNaN(lng) || isNaN(lat)
+        typeof lng !== "number" ||
+        typeof lat !== "number" ||
+        isNaN(lng) ||
+        isNaN(lat)
     );
 
     if (hasInvalidCoords) {
-      console.error("❌ Invalid coordinates:", allPoints);
+      console.error("❌ Invalid coordinates:", reducedRoute);
       return;
     }
 
@@ -81,11 +107,12 @@ const TripMapScreen = ({ route }) => {
       const res = await axios.post(
         "https://api.openrouteservice.org/v2/directions/driving-car/geojson",
         {
-          coordinates: allPoints,
+          coordinates: reducedRoute,
         },
         {
           headers: {
-            Authorization: "5b3ce3597851110001cf62482a8efc0d76304656ad6058c5dc8f9864",
+            Authorization:
+              "5b3ce3597851110001cf62482a8efc0d76304656ad6058c5dc8f9864",
             "Content-Type": "application/json",
           },
         }
@@ -96,16 +123,11 @@ const TripMapScreen = ({ route }) => {
         longitude: c[0],
       }));
 
-      const segment = res.data.features[0].properties.segments[0];
-
       setRouteCoords(coords);
-      const distance = segment.distance / 1000;
-      const duration = segment.duration / 60;
-      const bufferedDuration = duration * 1.3;
 
       setRouteInfo({
-        distance: distance.toFixed(2),
-        duration: bufferedDuration.toFixed(0),
+        distance: totalDistanceKm.toFixed(2),
+        duration: estimatedTimeMinutes.toFixed(0),
       });
     } catch (err) {
       console.error("Error fetching route:", err);
@@ -123,8 +145,8 @@ const TripMapScreen = ({ route }) => {
         <MapComponent
           userLocation={currentLocation}
           station={{
-            latitude: destination.lat,
-            longitude: destination.lng,
+            latitude: fixedDestination.lat,
+            longitude: fixedDestination.lng,
             title: "Destination",
           }}
           routeCoordinates={routeCoords}

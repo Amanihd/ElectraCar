@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
 import { TripContext } from "../context/TripContext";
 import BatteryWarningModal from "../components/Trip/BatteryWarningModal";
+import axios from "axios";
 
 const TripsScreen = ({ route, navigation }) => {
   const {
@@ -30,7 +31,7 @@ const TripsScreen = ({ route, navigation }) => {
   } = useContext(TripContext);
 
   const { t } = useTranslation();
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, token } = useContext(AuthContext);
   const { userLocation } = useContext(UserLocationContext);
   const { selectedVehicle } = useContext(VehicleContext);
   const { batteryLevel, setBatteryLevel } = useContext(BatteryContext);
@@ -106,56 +107,98 @@ const TripsScreen = ({ route, navigation }) => {
     setShowBookmarkModal(true);
   };
 
-  const handleSaveBookmark = (bookmarkChoice) => {
+  const handleSaveBookmark = async (bookmarkChoice) => {
     setIsBookmark(bookmarkChoice);
     setShowBookmarkModal(false);
 
     const maxRange = getVehicleMaxRange(vehicle.id);
     const driveableDistance = (maxRange * batteryLevel) / 100;
 
-    const tripData = {
-      title: tripName.trim() || "Unnamed Trip",
-      start: {
-        lat: parseFloat(start.latitude || start.lat),
-        lon: parseFloat(start.longitude || start.lon),
-      },
-      destination: {
-        lat: parseFloat(destination.latitude || destination.lat),
-        lon: parseFloat(destination.longitude || destination.lon),
-      },
-      selectedCar: {
-        id: vehicle.id,
-        make: vehicle.make,
-        model: vehicle.model,
-        trim: vehicle.trim,
-      },
-      maxRange,
-      driveableDistance,
-      isBookmark: bookmarkChoice,
+    const startCoords = {
+      lat: parseFloat(start.latitude || start.lat),
+      lon: parseFloat(start.longitude || start.lon),
     };
 
-    console.log("Trip data to send:", tripData);
-    // Submit this tripData to backend
+    const destCoords = {
+      lat: parseFloat(destination.latitude || destination.lat),
+      lon: parseFloat(destination.longitude || destination.lon),
+    };
+
+    const requestBody = {
+      sourceLat: Number(startCoords.lat),
+      sourceLon: Number(startCoords.lon),
+      destinationLat: Number(destCoords.lat),
+      destinationLon: Number(destCoords.lon),
+      initialChargeDistanceKm: Number(driveableDistance),
+      maxDriveKm: Number(maxRange),
+      bookmarked: Boolean(bookmarkChoice), // convert to real boolean
+      ...(bookmarkChoice ? { bookmarkName: tripName } : {}),
+    };
+
+    console.log("start:", start);
+    console.log("destination:", destination);
+    console.log("vehicle:", vehicle);
+    console.log("batteryLevel:", batteryLevel);
+    console.log("token:", token);
+
+    console.log("Sending request:", requestBody);
+    console.log("📦 Payload to send:", JSON.stringify(requestBody, null, 2));
 
     try {
-      const simulatedResponseStatus = 300; // Change this to 200 to test success path
+      const response = await axios.post(
+        "https://d650-91-186-254-248.ngrok-free.app/api/path/find",
+        requestBody,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("✅ Response data:", response.data);
 
-      if (simulatedResponseStatus === 300) {
-        // Show battery warning modal
+      if (response.status === 300) {
         setShowBatteryWarningModal(true);
-      } else {
-        navigation.navigate("TripMap", {
-          start: { lat: 31.9815471, lng: 35.9434113 },
-          streets: [
-            //  { lat: 31.9634, lng: 35.9304 }, // Example start point in Amman
-            { lat: 31.9824522, lng: 35.9412327 }, // Example middle point
-          ],
-          destination: { lat: 31.97, lng: 35.94 }, // Example destination in Amman
-        });
+        return;
       }
+
+      const { path, totalDistanceKm, estimatedTimeMinutes } = response.data;
+
+      if (!Array.isArray(path) || path.length < 2) {
+        console.error("❌ Invalid path received:", path);
+        return;
+      }
+
+      // Convert to { lat, lng }
+      const convertedPath = path.map((p) => ({
+        lat: p.lat,
+        lng: p.lon,
+      }));
+
+      const tripStart = convertedPath[0];
+      console.log("Trip start:", tripStart);
+
+      const tripDestination = convertedPath[convertedPath.length - 1];
+      console.log("Trip destination:", tripDestination);
+
+      const streets = convertedPath.slice(1, -1); // middle points only
+      console.log("Streets (middle points):", streets);
+
+      navigation.navigate("TripMap", {
+        start: tripStart,
+        streets,
+        destination: tripDestination,
+        totalDistanceKm,
+        estimatedTimeMinutes,
+      });
     } catch (error) {
-      console.error("Error fetching trip route:", error);
+      console.error("❌ Full Axios error response:", {
+        status: error.response?.status,
+        data: error.response?.data,
+        headers: error.response?.headers,
+      });
     }
+
+    console.log("🔴 Error details:", error.response?.data || error.message);
   };
 
   if (loading) {

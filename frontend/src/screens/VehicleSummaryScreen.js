@@ -6,23 +6,24 @@ import LottieView from "lottie-react-native";
 import VehicleButton from "../components/VehicleButton";
 import { VehicleContext } from "../context/VehicleContext";
 import allVehiclesData from "../data/vehicles.json";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 const VehicleSummaryScreen = () => {
   const { make, model, trim, fromVehicleModal } = useRoute().params;
   const navigation = useNavigation();
   const { t, i18n } = useTranslation();
   const isRTL = i18n.dir() === "rtl";
-
-  const {
-    addVehicle,
-    setSelectedVehicle,
-    vehicles,
-  } = useContext(VehicleContext);
+  const { token } = useContext(AuthContext);
+  const { addVehicle, setSelectedVehicle, vehicles } =
+    useContext(VehicleContext);
 
   const arabicTextStyle = isRTL ? styles.arabicText : {};
   const textAlignmentStyle = isRTL ? styles.rtlText : styles.ltrText;
 
-  const handleAddVehicle = () => {
+
+
+  const handleAddVehicle = async () => {
     const fullVehicle = allVehiclesData.find(
       (v) => v.make === make && v.model === model && v.trim === trim
     );
@@ -36,14 +37,48 @@ const VehicleSummaryScreen = () => {
       (v) => v.make === make && v.model === model && v.trim === trim
     );
 
-    if (!alreadyExists) {
-      addVehicle(fullVehicle);
-      setSelectedVehicle(fullVehicle);
+    if (alreadyExists) {
+      navigation.navigate("VehiclePickScreen", {
+        fromVehicleModal: fromVehicleModal || false,
+      });
+      return;
     }
 
-    navigation.navigate("VehiclePickScreen", {
-      fromVehicleModal: fromVehicleModal || false,
-    });
+    try {
+      const payload = {
+        make: fullVehicle.make,
+        model: fullVehicle.model,
+        trim: fullVehicle.trim,
+        batteryCapacityKwh: fullVehicle.battery_capacity_kWh,
+        rangeKm: fullVehicle.range_km,
+        chargingTimeH: fullVehicle.charging_time_h,
+        selected: true,
+      };
+
+      const response = await axios.post(
+        "https://d650-91-186-254-248.ngrok-free.app/api/vehicles",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Vehicle added:", response.data);
+
+      // Optional: sync state with backend response
+      addVehicle(response.data);
+      setSelectedVehicle(response.data);
+
+      navigation.navigate("VehiclePickScreen", {
+        fromVehicleModal: fromVehicleModal || false,
+      });
+    } catch (error) {
+      console.error(
+        "Failed to add vehicle:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   return (

@@ -267,5 +267,7 @@
 
   "battery_not_enough_title": "البطارية غير كافية",
   "battery_not_enough_message": "مستوى البطارية لديك غير كافٍ لهذه الرحلة.",
-  "ok": "حسناً"
+  "ok": "حسناً",
+
+   "bookmark_removed": "تم حذف مفضلة"
 }

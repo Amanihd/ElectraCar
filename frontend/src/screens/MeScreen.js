@@ -60,7 +60,7 @@ const MeScreen = () => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <UserProfileCard
-          name={user.name}
+          name={user.username}
           email={user.email}
           onSignOut={logout}
         />

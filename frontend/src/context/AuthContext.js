@@ -1,60 +1,62 @@
+
+
+import * as SecureStore from "expo-secure-store";
 import React, { createContext, useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true); // prevent flashing logout
 
   useEffect(() => {
-    const loadAuth = async () => {
+    const restoreSession = async () => {
       try {
-        const savedUser = await AsyncStorage.getItem("user");
-        if (savedUser) {
-          setUser(JSON.parse(savedUser));
+        const storedToken = await SecureStore.getItemAsync("token");
+        if (storedToken) {
+          setToken(storedToken);
+          const res = await axios.get("https://d650-91-186-254-248.ngrok-free.app/api/user/me", {
+            headers: { Authorization: `Bearer ${storedToken}` },
+          });
+          setUser(res.data);
           setIsLoggedIn(true);
         }
       } catch (error) {
-        console.error("Error loading user from AsyncStorage", error);
+        console.log("Session restore failed", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    loadAuth();
+    restoreSession();
   }, []);
 
-  const login = async (userData) => {
-    try {
-      setUser(userData);
-      setIsLoggedIn(true);
-      await AsyncStorage.setItem("user", JSON.stringify(userData));
-    } catch (error) {
-      console.error("Login error", error);
-    }
+  const login = async (userData, jwtToken) => {
+    setUser(userData);
+    setToken(jwtToken);
+    setIsLoggedIn(true);
+    await SecureStore.setItemAsync("token", jwtToken);
   };
 
   const logout = async () => {
-    try {
-      setUser(null);
-      setIsLoggedIn(false);
-      await AsyncStorage.removeItem("user");
-    } catch (error) {
-      console.error("Logout error", error);
-    }
+    setUser(null);
+    setToken(null);
+    setIsLoggedIn(false);
+    await SecureStore.deleteItemAsync("token");
   };
 
-  const updateUser = async (newUserData) => {
-    try {
-      setUser(newUserData);
-      await AsyncStorage.setItem("user", JSON.stringify(newUserData));
-    } catch (error) {
-      console.error("Error updating user", error);
-    }
+  const updateUser = (newUserData) => {
+    setUser(newUserData);
   };
+
+  if (loading) return null; // or splash screen
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoggedIn, login, logout, updateUser }}
+      value={{ user, token, isLoggedIn, login, logout, updateUser }}
     >
       {children}
     </AuthContext.Provider>

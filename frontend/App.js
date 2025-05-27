@@ -8,6 +8,7 @@ import { AuthProvider } from "./src/context/AuthContext";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import { TripProvider } from "./src/context/TripContext";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 const loadFonts = () => {
   return Font.loadAsync({
@@ -35,17 +36,19 @@ const App = () => {
   }
 
   return (
-    <AuthProvider>
-    <UserLocationProvider>
-      <TripProvider>
-        <VehicleProvider>
-          <BatteryProvider>
-            <MainContainer />
-          </BatteryProvider>
-        </VehicleProvider>
-      </TripProvider>
-    </UserLocationProvider>
-  </AuthProvider>
+    <RootSiblingParent>
+      <AuthProvider>
+        <UserLocationProvider>
+          <TripProvider>
+            <VehicleProvider>
+              <BatteryProvider>
+                <MainContainer />
+              </BatteryProvider>
+            </VehicleProvider>
+          </TripProvider>
+        </UserLocationProvider>
+      </AuthProvider>
+    </RootSiblingParent>
   );
 };
 

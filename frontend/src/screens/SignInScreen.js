@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -7,22 +7,24 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../context/AuthContext';
-import CustomInput from '../components/CustomInput';
-import Logo from '../components/Logo';
-import Footer from '../components/Footer';
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import { AuthContext } from "../context/AuthContext";
+import CustomInput from "../components/CustomInput";
+import Logo from "../components/Logo";
+import Footer from "../components/Footer";
+import axios from "axios";
 
 const SignInScreen = () => {
   const navigation = useNavigation();
-  const { login } = useContext(AuthContext);
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
+  const { login, updateUser } = useContext(AuthContext);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === "rtl";
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -33,27 +35,57 @@ const SignInScreen = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!email.trim()) newErrors.email = t('email_required');
+    if (!email.trim()) newErrors.email = t("email_required");
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
-      newErrors.email = t('invalid_email_signin');
+      newErrors.email = t("invalid_email_signin");
 
-    if (!password.trim()) newErrors.password = t('password_required');
+    if (!password.trim()) newErrors.password = t("password_required");
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSignIn = () => {
-    if (validate()) {
-      login({ name: 'John Doe', email });
-      navigation.navigate('MainTabs', { screen: 'Me' });
+const handleSignIn = async () => {
+  if (validate()) {
+    try {
+      // 1. Call login API
+      const loginResponse = await axios.post(
+        "https://d650-91-186-254-248.ngrok-free.app/api/user/login",
+        {
+          userEmail: email,
+          password: password,
+        }
+      );
+      const { jwtToken } = loginResponse.data;
+
+      // 2. Save token in context immediately (user null for now)
+      login(null, jwtToken);
+
+      // 3. Fetch user info with token
+      const userResponse = await axios.get("https://d650-91-186-254-248.ngrok-free.app/api/user/me", {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
+
+      // 4. Save user info in context
+      updateUser(userResponse.data);
+
+      // 5. Navigate after successful login and user fetch
+      navigation.navigate("MainTabs", { screen: "Me" });
+    } catch (error) {
+      if (error.response) {
+        console.log("Login failed:", error.response.data);
+      } else {
+        console.log("Login failed:", error.message);
+      }
     }
-  };
+  }
+};
+
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
     >
       <ScrollView
@@ -63,12 +95,10 @@ const SignInScreen = () => {
       >
         <View style={styles.content}>
           <Logo />
-          <Text style={[styles.title, arabicTitleStyle]}>
-            {t('sign_in')}
-          </Text>
+          <Text style={[styles.title, arabicTitleStyle]}>{t("sign_in")}</Text>
 
           <CustomInput
-            placeholder={t('email')}
+            placeholder={t("email")}
             value={email}
             onChangeText={setEmail}
             error={errors.email}
@@ -78,7 +108,7 @@ const SignInScreen = () => {
           />
 
           <CustomInput
-            placeholder={t('password')}
+            placeholder={t("password")}
             value={password}
             onChangeText={setPassword}
             error={errors.password}
@@ -88,24 +118,28 @@ const SignInScreen = () => {
 
           <TouchableOpacity style={styles.button} onPress={handleSignIn}>
             <Text style={[styles.buttonText, arabicButtonTextStyle]}>
-              {t('sign_in')}
+              {t("sign_in")}
             </Text>
           </TouchableOpacity>
 
-          <View style={[styles.linksContainer, isRTL && styles.rtlLinksContainer]}>
-            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <View
+            style={[styles.linksContainer, isRTL && styles.rtlLinksContainer]}
+          >
+            <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
               <Text style={[styles.text, arabicTextStyle]}>
-                {t('not_a_member') + ' '}
+                {t("not_a_member") + " "}
                 <Text style={[styles.linkText, arabicTextStyle]}>
-                  {t('sign_up')}
+                  {t("sign_up")}
                 </Text>
               </Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
             <Text style={[styles.linkText, arabicTextStyle]}>
-              {t('forgot_password_question')}
+              {t("forgot_password_question")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -119,12 +153,12 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: '#f2f2f2',
+    justifyContent: "space-between",
+    backgroundColor: "#f2f2f2",
   },
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: 'center', // Center vertically
+    justifyContent: "center", // Center vertically
   },
   content: {
     paddingHorizontal: 20,
@@ -132,52 +166,52 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 24,
-    textAlign: 'center',
-    color: 'black',
+    textAlign: "center",
+    color: "black",
   },
   arabicTitle: {
-    fontFamily: 'IBM-SemiBold',
+    fontFamily: "IBM-SemiBold",
     fontWeight: undefined,
   },
   button: {
-    backgroundColor: '#000C66',
+    backgroundColor: "#000C66",
     paddingVertical: 12,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 20,
     marginBottom: 10,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   arabicButtonText: {
-    fontFamily: 'IBM-SemiBold',
+    fontFamily: "IBM-SemiBold",
     fontWeight: undefined,
   },
   linksContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     marginTop: 20,
     marginBottom: 10,
   },
   rtlLinksContainer: {
-    flexDirection: 'row-reverse',
+    flexDirection: "row-reverse",
   },
   text: {
-    color: '#666',
+    color: "#666",
   },
   arabicText: {
-    fontFamily: 'IBM-SemiBold',
+    fontFamily: "IBM-SemiBold",
     fontWeight: undefined,
   },
   linkText: {
-    color: '#000C66',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "#000C66",
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 

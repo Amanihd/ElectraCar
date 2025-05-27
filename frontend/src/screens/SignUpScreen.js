@@ -16,12 +16,13 @@ import Footer from "../components/Footer";
 import TermsLinks from "../components/TermsLinks";
 import CustomInput from "../components/CustomInput";
 import JoinButton from "../components/JoinButton";
+import axios from "axios";
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
   const { t, i18n } = useTranslation();
   const { login } = useContext(AuthContext);
-  const isRTL = i18n.dir() === 'rtl';
+  const isRTL = i18n.dir() === "rtl";
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -52,8 +53,7 @@ const SignUpScreen = () => {
       newErrors.email = t("invalid_email");
 
     if (!password.trim()) newErrors.password = t("password_required");
-    else if (password.length < 8)
-      newErrors.password = t("password_short");
+    else if (password.length < 8) newErrors.password = t("password_short");
     else if (!/(?=.*[a-zA-Z])(?=.*[0-9])/.test(password))
       newErrors.password = t("password_mixed");
 
@@ -61,14 +61,34 @@ const SignUpScreen = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleJoin = () => {
+  
+
+  const handleJoin = async () => {
     if (validate()) {
       const newUser = {
-        name: `${firstName} ${lastName}`,
-        email,
+        username: `${firstName}${lastName}`.toLowerCase(),
+        email: email.trim(),
+        password: password,
+        roles: ["user"],
       };
-      login(newUser);
-      navigation.navigate("MainTabs", { screen: "Me" });
+
+      try {
+        const response = await axios.post(
+          "https://d650-91-186-254-248.ngrok-free.app/api/user/signup",
+          newUser
+        );
+        const { jwtToken } = response.data;
+
+        login(newUser, jwtToken);
+
+        navigation.navigate("MainTabs", { screen: "Me" });
+      } catch (error) {
+        if (error.response) {
+          console.log("Signup failed:", error.response.data); // ⬅️ This shows backend's error message
+        } else {
+          console.log("Signup failed:", error.message);
+        }
+      }
     }
   };
 
@@ -78,12 +98,13 @@ const SignUpScreen = () => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
     >
-      <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+      >
         <View style={styles.inner}>
           <Logo />
-          <Text style={[styles.title, arabicTitleStyle]}>
-            {t("title")}
-          </Text>
+          <Text style={[styles.title, arabicTitleStyle]}>{t("title")}</Text>
 
           <CustomInput
             placeholder={t("first_name")}
@@ -154,13 +175,13 @@ const styles = StyleSheet.create({
     color: "black",
   },
   arabicTitle: {
-    fontFamily: 'IBM-SemiBold',
+    fontFamily: "IBM-SemiBold",
     fontWeight: undefined,
-    writingDirection: 'rtl',
+    writingDirection: "rtl",
   },
   arabicText: {
-    fontFamily: 'IBM-Regular',
+    fontFamily: "IBM-Regular",
     fontWeight: undefined,
-    writingDirection: 'rtl',
+    writingDirection: "rtl",
   },
 });
