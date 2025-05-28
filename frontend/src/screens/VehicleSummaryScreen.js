@@ -56,7 +56,7 @@ const VehicleSummaryScreen = () => {
       };
 
       const response = await axios.post(
-        "https://d650-91-186-254-248.ngrok-free.app/api/vehicles",
+        "https://electracar.onrender.com/api/vehicles",
         payload,
         {
           headers: {

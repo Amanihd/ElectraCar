@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         const storedToken = await SecureStore.getItemAsync("token");
         if (storedToken) {
           setToken(storedToken);
-          const res = await axios.get("https://d650-91-186-254-248.ngrok-free.app/api/user/me", {
+          const res = await axios.get("https://electracar.onrender.com/api/user/me", {
             headers: { Authorization: `Bearer ${storedToken}` },
           });
           setUser(res.data);

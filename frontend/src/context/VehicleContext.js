@@ -25,7 +25,7 @@ export const VehicleProvider = ({ children }) => {
         );
 
         const response = await axios.get(
-          "https://d650-91-186-254-248.ngrok-free.app/api/vehicles/me",
+          "https://electracar.onrender.com/api/vehicles/me",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -81,7 +81,7 @@ export const VehicleProvider = ({ children }) => {
     // Optionally update backend selection here
     try {
       await axios.put(
-        `https://d650-91-186-254-248.ngrok-free.app/api/vehicles/select/${vehicle.id}`,
+        `https://electracar.onrender.com/api/vehicles/select/${vehicle.id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -89,6 +89,37 @@ export const VehicleProvider = ({ children }) => {
       console.error("Failed to update selected vehicle on backend", error);
     }
   };
+  /////////// delete vehicle API
+  const deleteVehicle = async (vehicleId) => {
+  try {
+    const response = await axios.delete(
+      `https://electracar.onrender.com/api/vehicles/${vehicleId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log(response.data.message); // should say "deleted"
+
+    // Remove from state
+    setVehicles((prevVehicles) =>
+      prevVehicles.filter((v) => v.id !== vehicleId)
+    );
+
+    // If deleted vehicle was selected, clear it
+    if (selectedVehicle?.id === vehicleId) {
+      setSelectedVehicle(null);
+      await SecureStore.deleteItemAsync("selectedVehicleId");
+    }
+
+  } catch (error) {
+    console.error("Failed to delete vehicle", error);
+    throw error; // let UI screen decide how to alert
+  }
+};
+
 
   return (
     <VehicleContext.Provider
@@ -98,6 +129,7 @@ export const VehicleProvider = ({ children }) => {
         selectedVehicle,
         setSelectedVehicle: selectVehicle,
         addVehicle,
+        deleteVehicle,
         loading,
       }}
     >

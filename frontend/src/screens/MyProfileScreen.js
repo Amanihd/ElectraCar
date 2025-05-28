@@ -32,7 +32,7 @@ const MyProfileScreen = () => {
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        "https://d650-91-186-254-248.ngrok-free.app/api/user/username",
+        "https://electracar.onrender.com/api/user/username",
         {
           newUsername: tempProfile.username,
         },
