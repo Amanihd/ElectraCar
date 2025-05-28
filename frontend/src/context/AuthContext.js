@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         const storedToken = await SecureStore.getItemAsync("token");
         if (storedToken) {
           setToken(storedToken);
-          const res = await axios.get("https://d650-91-186-254-248.ngrok-free.app/api/user/me", {
+          const res = await axios.get("https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/user/me", {
             headers: { Authorization: `Bearer ${storedToken}` },
           });
           setUser(res.data);

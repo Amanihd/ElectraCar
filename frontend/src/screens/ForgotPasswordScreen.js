@@ -48,7 +48,7 @@ const ForgotPasswordScreen = () => {
     if (validate()) {
       try {
         const response = await axios.post(
-          "https://d650-91-186-254-248.ngrok-free.app/api/password/request",
+          "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/password/request",
           { email }
         );
 

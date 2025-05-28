@@ -72,18 +72,12 @@ const PasswordReset = () => {
     );
   };
 
-  // const handleReset = () => {
-  //   if (validate()) {
-  //     // Here will be backend logic
-  //     showCustomAlert();
-  //   }
-  // };
 
   const handleReset = async () => {
     if (validate()) {
       try {
         const response = await axios.post(
-          "https://d650-91-186-254-248.ngrok-free.app/api/password/reset",
+          "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/password/reset",
           {
             token: resetToken,
             newPassword: newPassword,
@@ -91,7 +85,7 @@ const PasswordReset = () => {
         );
 
         if (response.status === 200) {
-          // Optionally, you can check response.data.message === 'password updated'
+          
           showCustomAlert();
         } else {
           Alert.alert(t("error"), t("something_went_wrong"));

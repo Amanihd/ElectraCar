@@ -25,7 +25,7 @@ export const VehicleProvider = ({ children }) => {
         );
 
         const response = await axios.get(
-          "https://d650-91-186-254-248.ngrok-free.app/api/vehicles/me",
+          "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/vehicles/me",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -81,7 +81,7 @@ export const VehicleProvider = ({ children }) => {
     // Optionally update backend selection here
     try {
       await axios.put(
-        `https://d650-91-186-254-248.ngrok-free.app/api/vehicles/select/${vehicle.id}`,
+        `https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/vehicles/select/${vehicle.id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

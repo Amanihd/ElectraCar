@@ -35,7 +35,7 @@ const BookmarksScreen = ({ navigation }) => {
   const handleBookmarkPress = async (tripId) => {
     try {
       const response = await axios.get(
-        `https://d650-91-186-254-248.ngrok-free.app/api/bookmarks/${tripId}`,
+        `https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/bookmarks/${tripId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ const BookmarksScreen = ({ navigation }) => {
           setLoading(true);
           try {
             const response = await axios.get(
-              "https://d650-91-186-254-248.ngrok-free.app/api/bookmarks",
+              "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/bookmarks",
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ const BookmarksScreen = ({ navigation }) => {
   const handleRemoveBookmark = async (tripId) => {
     try {
       await axios.delete(
-        `https://d650-91-186-254-248.ngrok-free.appp/api/bookmarks/${tripId}`,
+        `https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/bookmarks/${tripId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

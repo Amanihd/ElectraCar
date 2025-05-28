@@ -32,7 +32,7 @@ const MyProfileScreen = () => {
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        "https://d650-91-186-254-248.ngrok-free.app/api/user/username",
+        "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/user/username",
         {
           newUsername: tempProfile.username,
         },
