@@ -13,11 +13,11 @@ const InfoComponent = ({ routeInfo }) => {
 
   const getMinutesLabel = (minutes) => {
     if (minutes === 1 || minutes >= 11) {
-      return t("minute"); // min
+      return t("minute"); 
     } else if (minutes === 2) {
-      return t("two_minutes"); // 2 mins
+      return t("two_minutes"); 
     } else {
-      return t("minutes"); // mins
+      return t("minutes");
     }
   };
 

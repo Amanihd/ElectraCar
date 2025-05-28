@@ -14,9 +14,7 @@ import i18next from "../services/i18next";
 const SearchStationScreen = ({ route, navigation }) => {
   const { t } = useTranslation();
   const isRTL = i18next.language === "ar";
-  const arFontFamilySmiBold = isRTL
-    ? { fontFamily: "IBM-SemiBold" }
-    : { fontWeight: "bold" };
+
   const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
   const { userLocation } = route.params;
@@ -32,7 +30,7 @@ const SearchStationScreen = ({ route, navigation }) => {
   };
 
   const handleStationPress = (station) => {
-    navigation.navigate("ChargingStationDetails", { station, userLocation }); // send station data to detail screen
+    navigation.navigate("ChargingStationDetails", { station, userLocation }); 
   };
 
   return (

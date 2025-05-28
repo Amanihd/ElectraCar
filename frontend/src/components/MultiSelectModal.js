@@ -1,5 +1,4 @@
-// components/MultiSelectModal.js
-import React from "react";
+
 import {
   View,
   Text,
@@ -8,7 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // or 'react-native-vector-icons'
+import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
 

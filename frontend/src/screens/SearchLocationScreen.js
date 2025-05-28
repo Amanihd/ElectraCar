@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ import { TripContext } from "../context/TripContext";
 
 
 const SearchLocationScreen = ({ route, navigation }) => {
-  const { type, start, destination } = route.params;
+  const { type } = route.params;
    const { setStart, setDestination } = useContext(TripContext);
 
   const [query, setQuery] = useState("");
@@ -27,10 +27,7 @@ const SearchLocationScreen = ({ route, navigation }) => {
 
   const isRTL = i18next.language === "ar";
 
-  const rtlTextAlign = { textAlign: isRTL ? "right" : "left" };
-  const arFontFamilySmiBold = isRTL
-    ? { fontFamily: "IBM-SemiBold" }
-    : { fontWeight: "bold" };
+ 
   const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
 
   const handleSubmitSearch = async () => {
@@ -74,19 +71,8 @@ const SearchLocationScreen = ({ route, navigation }) => {
     } else {
       setDestination(item);
     }
-    navigation.goBack();  // ترجع للشاشة السابقة
-  
-    // if (type === "start") {
-    //   navigation.navigate("MainTabs", {
-    //     screen: "Trips",
-    //     params: { start: item, destination },
-    //   });
-    // } else {
-    //   navigation.navigate("MainTabs", {
-    //     screen: "Trips",
-    //     params: { start, destination: item },
-    //   });
-    // }
+    navigation.goBack();  
+
   };
 
   return (

@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
     width: "50%", 
     height: 60,
     alignSelf: "center",
-    backgroundColor: "#003366", // Dark blue color
+    backgroundColor: "#003366", 
     paddingVertical: 15,
-    borderRadius: 10, // Rounded corners
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonMargin: {
-    marginTop: 90, // Adjust this to push it further down
+    marginTop: 90, 
   },
 });
 

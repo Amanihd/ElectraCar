@@ -15,7 +15,7 @@ const LanguageModal = ({ visible, onRequestClose, changeLanguage }) => {
   const languages = {
     en: { key: "English" },
     ar: { key: "Arabic" },
-    // Add more languages as needed
+   
   };
   const isRTL = i18next.language === "ar";
   const arFontFamilySmiBold = isRTL
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     width: 280,
     paddingVertical: 20,
     paddingHorizontal: 15,
-    elevation: 10, // adds subtle shadow for depth
+    elevation: 10,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -77,15 +77,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f8f8",
     alignItems: "center",
     justifyContent: "center",
-    elevation: 3, // subtle elevation for the button
+    elevation: 3, 
     transition: "background-color 0.3s",
   },
   languageButtonPressed: {
-    backgroundColor: "#e0e0e0", // on press background color
+    backgroundColor: "#e0e0e0",
   },
   languageText: {
     fontSize: 16,
-    color: "#333", // a soft dark color for text
+    color: "#333", 
   },
 });
 

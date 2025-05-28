@@ -1,5 +1,4 @@
-// CustomHeader.js
-import React from "react";
+
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -21,7 +20,7 @@ const CustomHeader = ({
     <View
       style={[
         styles.headerContainer,
-        { flexDirection: isRTL ? "row-reverse" : "row" }, // Flip layout direction for RTL
+        { flexDirection: isRTL ? "row-reverse" : "row" }, 
       ]}
     >
       {isArrow && (

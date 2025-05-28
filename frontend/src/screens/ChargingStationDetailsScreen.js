@@ -48,7 +48,7 @@ const ChargingStationDetails = ({ route, navigation }) => {
         display_name: data.display_name,
       });
 
-      setTripName(station.title); // optional
+      setTripName(station.title); 
 
       navigation.navigate("MainTabs", {
         screen: "Trips",
@@ -80,27 +80,27 @@ const ChargingStationDetails = ({ route, navigation }) => {
         />
       </View>
 
-      {/* Station Header */}
+     
       <StationHeader title={station.title} address={station.address} />
 
-      {/* Directions Button */}
+     
       <GetDirectionsButton onPress={handleGetDirections} />
 
-      {/* Details Section */}
+    
       <View style={styles.detailsWrapper}>
-        {/* Plug Type */}
+       
         <SectionDetail
           title={t("plug_type")}
           content={station.plugType[0] || t("not_applicable")}
         />
 
-        {/* Cost */}
+       
         <SectionDetail
           title={t("cost")}
           content={station.cost ? `$${station.cost}` : t("not_applicable")}
         />
 
-        {/* Parking */}
+       
         <SectionDetail
           title={t("parking")}
           content={
@@ -112,7 +112,7 @@ const ChargingStationDetails = ({ route, navigation }) => {
           }
         />
 
-        {/* Amenities */}
+       
         <SectionDetail
           title={t("amenities")}
           content={
@@ -122,19 +122,19 @@ const ChargingStationDetails = ({ route, navigation }) => {
           }
         />
 
-        {/* Plug Score */}
+       
         <SectionDetail
           title={t("plug_score")}
           content={station.plugScore ? station.plugScore : t("not_applicable")}
         />
 
-        {/* Fast Charging */}
+       
         <SectionDetail
           title={t("fast_charging")}
           content={station.isFast ? t("yes") : t("no")}
         />
 
-        {/* Availability */}
+       
         <SectionDetail
           title={t("availability")}
           content={station.isAvailable ? t("available") : t("not_available")}

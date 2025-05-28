@@ -20,12 +20,12 @@ const BatteryLevelModal = ({
 
   if (!visible) return null;
 
-  // Handle input change and ensure the value is between 0 and 100
+  
   const handleInputChange = (value) => {
     if (value === "" || /^[0-9\b]+$/.test(value)) {
       const newValue = Math.min(Math.max(parseInt(value) || 0, 0), 100);
       setInputValue(newValue.toString());
-      onValueChange(newValue); // Update the value directly when input changes
+      onValueChange(newValue); 
     }
   };
 
@@ -37,7 +37,7 @@ const BatteryLevelModal = ({
           {batteryLevel}% {t("charged")}
         </Text>
 
-        {/* Input for manual entry */}
+      
         <TextInput
           style={styles.input}
           keyboardType="numeric"

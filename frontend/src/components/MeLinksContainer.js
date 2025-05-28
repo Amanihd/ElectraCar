@@ -5,18 +5,18 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import MeLink from "./MeLink"; // Import your MeLink component
-import { useTranslation } from "react-i18next"; // For translation
-import LanguageModal from "./LanguageModal"; // Your modal component
+import MeLink from "./MeLink"; 
+import { useTranslation } from "react-i18next"; 
+import LanguageModal from "./LanguageModal";
 
 const MeLinksContainer = ({ navigation }) => {
-  const { t, i18n } = useTranslation(); // Hook to get translation function and i18n instance
-  const [visible, setVisible] = useState(false); // For controlling the modal visibility
+  const { t, i18n } = useTranslation(); 
+  const [visible, setVisible] = useState(false);
   const isRTL = i18n.language === "ar";
 
   const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang); // Change the language
-    setVisible(false); // Close the modal after selection
+    i18n.changeLanguage(lang);
+    setVisible(false); 
   };
 
   return (
@@ -52,12 +52,12 @@ const MeLinksContainer = ({ navigation }) => {
         isRTL={isRTL}
       />
 
-      {/* Language Selection Button */}
+     
       <TouchableOpacity style={styles.button} onPress={() => setVisible(true)}>
         <Text style={[styles.buttonText,isRTL && { fontFamily: "IBM-Regular" }]}>{t("change-language")}</Text>
       </TouchableOpacity>
 
-      {/* Language Modal */}
+     
       <LanguageModal
         visible={visible}
         onRequestClose={() => setVisible(false)}

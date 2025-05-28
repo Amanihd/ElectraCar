@@ -40,7 +40,7 @@ const MainMap = ({ getlocation, filterTypes }) => {
         longitude: location.coords.longitude,
       });
 
-      // Use local charging station data
+      
       setChargingStations(chargingStationsData);
     };
 

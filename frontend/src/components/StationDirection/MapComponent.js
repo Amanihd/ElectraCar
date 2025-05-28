@@ -19,8 +19,8 @@ const MapComponent = ({
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}
-      showsUserLocation={true} // Show user's location on the map
-      followsUserLocation={true} // Follow user's location
+      showsUserLocation={true} 
+      followsUserLocation={true} 
     >
       <Marker
         coordinate={{
@@ -36,7 +36,7 @@ const MapComponent = ({
         )}
       </Marker>
 
-      {/* Directions (Polyline) */}
+    
       {routeCoordinates.length > 0 && (
         <Polyline
           coordinates={routeCoordinates}

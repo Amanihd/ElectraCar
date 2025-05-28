@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Marker } from "react-native-maps";
 import { FontAwesome5 } from "react-native-vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -18,7 +18,7 @@ const ChargingStationMarker = ({ station, userLocation }) => {
       }}
       title={station.title}
       description={station.address}
-      onPress={handlePress} // Add the onPress handler here
+      onPress={handlePress} 
     >
       <FontAwesome5 name="charging-station" size={20} color="#00A86B" />
     </Marker>

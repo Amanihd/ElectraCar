@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import BottomBar from "../components/BottomBar";
 import MainMap from "../components/MainMap";

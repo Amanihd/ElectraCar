@@ -1,4 +1,4 @@
-import React from "react";
+
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import i18next from "../../services/i18next";

@@ -1,7 +1,7 @@
-import React from "react";
+
 import { createStackNavigator } from "@react-navigation/stack";
 import ChargingStationDetails from "../screens/ChargingStationDetailsScreen";
-//import DirectionsScreen from "../screens/DirectionsScreen";
+
 import JoinScreen from "../screens/JoinScreen";
 import FAQScreen from "../screens/FAQScreen";
 import TermsOfUseScreen from "../screens/TermsOfUseScreen";
@@ -10,7 +10,7 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import SupportScreen from "../screens/SupportScreen";
 import SearchStationScreen from "../screens/SearchStationScreen";
 
-// Add vehicle which is inside Me Screen
+
 import AddVehicleScreen from "../screens/AddVehicleScreen";
 import MakeScreen from "../screens/MakeScreen";
 import ModelScreen from "../screens/ModelScreen";
@@ -19,9 +19,8 @@ import VehicleSummaryScreen from "../screens/VehicleSummaryScreen";
 import VehiclePickScreen from "../screens/VehiclePickScreen";
 import ManageVehiclesScreen from "../screens/ManageVehiclesScreen";
 import SearchLocationScreen from "../screens/SearchLocationScreen";
-import TripsScreen from "../screens/TripsScreen";
 
-// All about Sign a user
+
 import SignUpScreen from "../screens/SignUpScreen";
 import SignInScreen from "../screens/SignInScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
@@ -32,7 +31,7 @@ import TripMapScreen from "../screens/TripMapScreen";
 
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
-import CustomButton from "../components/CustomButton";
+
 import CustomHeader from "../components/CustomHeader";
 
 const Stack = createStackNavigator();
@@ -69,13 +68,7 @@ const StackNavigator = () => {
         component={ChargingStationDetails}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen
-        name="DirectionsScreen"
-        component={DirectionsScreen}
-        options={{
-          header: () => <CustomHeader titleKey="directions" />, // Use the custom header here
-        }}
-      /> */}
+     
       <Stack.Screen
         name="Join"
         component={JoinScreen}
@@ -89,39 +82,39 @@ const StackNavigator = () => {
         name="FAQ"
         component={FAQScreen}
         options={{
-          header: () => <CustomHeader titleKey="faq" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="faq" />, 
         }}
       />
       <Stack.Screen
         name="Support"
         component={SupportScreen}
         options={{
-          header: () => <CustomHeader titleKey="support" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="support" />, 
         }}
       />
       <Stack.Screen
         name="TermsOfUse"
         component={TermsOfUseScreen}
         options={{
-          header: () => <CustomHeader titleKey="termsOfUse" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="termsOfUse" />, 
         }}
       />
       <Stack.Screen
         name="PrivacyPolicy"
         component={PrivacyPolicyScreen}
         options={{
-          header: () => <CustomHeader titleKey="privacyPolicy" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="privacyPolicy" />, 
         }}
       />
       <Stack.Screen
         name="SearchStation"
         component={SearchStationScreen}
         options={{
-          header: () => <CustomHeader titleKey="search_station" />, // Use the custom header here
+          header: () => <CustomHeader titleKey="search_station" />, 
         }}
       />
 
-      {/* All about vehicles */}
+    
       <Stack.Screen
         name="AddVehicle"
         component={AddVehicleScreen}
@@ -178,7 +171,7 @@ const StackNavigator = () => {
           header: () => <CustomHeader titleKey="manage_vehicles_screen" />,
         }}
       />
-      {/* For trips screen */}
+     
       <Stack.Screen
         name="SearchLocation"
         component={SearchLocationScreen}
@@ -195,7 +188,7 @@ const StackNavigator = () => {
         }}
       />
 
-      {/* All about sign up, auth, sign in, join */}
+    
       <Stack.Screen
         name="SignUp"
         component={SignUpScreen}

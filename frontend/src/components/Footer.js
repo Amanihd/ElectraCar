@@ -1,5 +1,4 @@
-// Footer.js
-import React from "react";
+
 import { View, Text, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";
@@ -23,10 +22,10 @@ const styles = StyleSheet.create({
   footer: {
     padding: 30,
     alignItems: "center",
-    marginTop: "auto", // This ensures the footer stays at the bottom of the screen
+    marginTop: "auto", 
   },
   footerText: {
-    color: "#888", // Gray color for the copyright text
+    color: "#888", 
     fontSize: 14,
   },
 });

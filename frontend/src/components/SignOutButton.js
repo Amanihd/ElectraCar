@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const SignOutButton = ({ onPress }) => (
@@ -9,13 +9,13 @@ const SignOutButton = ({ onPress }) => (
 
 const styles = StyleSheet.create({
   signOutButton: {
-    backgroundColor: "#ddd", // Gray background for button
+    backgroundColor: "#ddd", 
     paddingVertical: 12,
     borderRadius: 5,
-    alignItems: 'center', // Center the text inside the button
+    alignItems: 'center', 
   },
   signOutText: {
-    color: 'black', // Black text color
+    color: 'black',
     fontSize: 16,
   },
 });

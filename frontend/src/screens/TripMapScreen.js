@@ -34,7 +34,6 @@ const TripMapScreen = ({ route }) => {
     requestLocationPermission();
 
     if (isTracking) {
-      let subscription = null;
       Location.watchPositionAsync(
         { accuracy: Location.Accuracy.High, distanceInterval: 10 },
         (location) => {
@@ -70,9 +69,9 @@ const TripMapScreen = ({ route }) => {
   }, [currentLocation]);
 
   const fetchRoute = async (startLoc) => {
-    const MAX_POINTS = 30;
+   
 
-    // Combine all points first
+    
     const fullRoute = [
       [startLoc.longitude, startLoc.latitude],
       ...fixedStreets.map((p) => [p.lng, p.lat]),

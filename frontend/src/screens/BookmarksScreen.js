@@ -7,7 +7,7 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import LottieView from "lottie-react-native";
 import { useTranslation } from "react-i18next";
@@ -35,7 +35,7 @@ const BookmarksScreen = ({ navigation }) => {
   const handleBookmarkPress = async (tripId) => {
     try {
       const response = await axios.get(
-        `https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/bookmarks/${tripId}`,
+        `https://electracar.onrender.com/api/bookmarks/${tripId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ const BookmarksScreen = ({ navigation }) => {
           setLoading(true);
           try {
             const response = await axios.get(
-              "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/bookmarks",
+              "https://electracar.onrender.com/api/bookmarks",
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ const BookmarksScreen = ({ navigation }) => {
               destination: {
                 lat: item.destinationLat,
                 lng: item.destinationLon,
-              }, // fix typo destinalonLon -> destinationLon
+              }, 
               streets: item.path.map((p) => ({ lat: p.lat, lng: p.lon })),
             }));
             setBookmarks(formatted);
@@ -115,7 +115,7 @@ const BookmarksScreen = ({ navigation }) => {
   const handleRemoveBookmark = async (tripId) => {
     try {
       await axios.delete(
-        `https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/bookmarks/${tripId}`,
+        `https://electracar.onrender.com/api/bookmarks/${tripId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -137,7 +137,7 @@ const BookmarksScreen = ({ navigation }) => {
           borderRadius: 5,
           paddingHorizontal: 12,
           paddingVertical: 8,
-          marginBottom: 60, // <-- moves toast up a bit from the bottom
+          marginBottom: 60, 
         },
         textStyle: {
           fontWeight: "500",

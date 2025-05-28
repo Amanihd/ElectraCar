@@ -1,5 +1,4 @@
-// TabNavigator.js
-import React from "react";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "../screens/HomeScreen";
@@ -43,7 +42,7 @@ const BottomTabNavigator = () => {
         headerTitleStyle: {
           fontFamily: fontSemiBold, 
         },
-        tabBarStyle: { padding: 10, height: 100 },//for new update
+        tabBarStyle: { padding: 10, height: 100 },
       })}
     >
       <Tab.Screen

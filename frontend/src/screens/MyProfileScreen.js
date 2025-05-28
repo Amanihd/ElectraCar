@@ -38,7 +38,7 @@ const MyProfileScreen = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, // ← Make sure you pull token from context
+            Authorization: `Bearer ${token}`,
           },
         }
       );

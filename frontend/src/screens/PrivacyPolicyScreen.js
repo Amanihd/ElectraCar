@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
-import React from "react";
+import {  Text, ScrollView, StyleSheet } from "react-native";
+
 import Footer from "../components/Footer";
 import { useTranslation } from "react-i18next";
 import i18next from "../services/i18next";

@@ -45,14 +45,14 @@ const BottomBar = ({
     setPlugTypeModalVisible(false);
 
     setFilterTypes((prev) => {
-      // Remove any existing plugType filter
+     
       const newFilters = prev.filter((type) => type.filter !== "plugType");
 
       if (selectedPlugTypes.length > 0) {
-        // Add updated plugType filter object
+        
         return [...newFilters, { filter: "plugType", selectedPlugTypes }];
       } else {
-        // No plug types selected → return only the other filters
+       
         return newFilters;
       }
     });
@@ -105,7 +105,7 @@ const BottomBar = ({
         />
       </ScrollView>
 
-      {/* Reusable MultiSelect Modal for Plug Types */}
+    
       <MultiSelectModal
         visible={plugTypeModalVisible}
         onClose={() => setPlugTypeModalVisible(false)}

@@ -48,7 +48,7 @@ const TripsScreen = ({ route, navigation }) => {
   const arFontFamilySmiBold = isRTL
     ? { fontFamily: "IBM-SemiBold" }
     : { fontWeight: "bold" };
-  const arFontFamilyRegular = isRTL ? { fontFamily: "IBM-Regular" } : {};
+ 
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -59,7 +59,7 @@ const TripsScreen = ({ route, navigation }) => {
   }, [isLoggedIn]);
 
   if (loading) {
-    return null; // Don't render anything while loading
+    return null; 
   }
 
   const vehicle = selectedVehicle || {
@@ -131,7 +131,7 @@ const TripsScreen = ({ route, navigation }) => {
       destinationLon: Number(destCoords.lon),
       initialChargeDistanceKm: Number(driveableDistance),
       maxDriveKm: Number(maxRange),
-      bookmarked: Boolean(bookmarkChoice), // convert to real boolean
+      bookmarked: Boolean(bookmarkChoice), 
       ...(bookmarkChoice ? { bookmarkName: tripName } : {}),
     };
 
@@ -168,7 +168,7 @@ const TripsScreen = ({ route, navigation }) => {
         return;
       }
 
-      // Convert to { lat, lng }
+      
       const convertedPath = path.map((p) => ({
         lat: p.lat,
         lng: p.lon,
@@ -180,7 +180,7 @@ const TripsScreen = ({ route, navigation }) => {
       const tripDestination = convertedPath[convertedPath.length - 1];
       console.log("Trip destination:", tripDestination);
 
-      const streets = convertedPath.slice(1, -1); // middle points only
+      const streets = convertedPath.slice(1, -1); 
       console.log("Streets (middle points):", streets);
 
       navigation.navigate("TripMap", {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import  { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -35,7 +35,7 @@ const VehiclePickScreen = ({ route }) => {
 
         setVehicles(response.data);
 
-        // **Add this block here**
+       
         const selectedVehicle = response.data.find(
           (vehicle) => vehicle.selected === true
         );
