@@ -45,7 +45,7 @@ const SignUpScreen = () => {
     if (!lastName.trim()) newErrors.lastName = t("last_name_required");
     else if (!/^[a-zA-Z\u0600-\u06FF]+$/.test(lastName.trim()))
       newErrors.lastName = t("only_letters");
-    else if (lastName.length < 3 || lastName.length > 10)
+    else if (lastName.length < 3 || lastName.length > 15)
       newErrors.lastName = t("length");
 
     if (!email.trim()) newErrors.email = t("email_required");
@@ -74,7 +74,7 @@ const SignUpScreen = () => {
 
       try {
         const response = await axios.post(
-          "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/user/signup",
+          "https://electracar.onrender.com/api/user/signup",
           newUser
         );
         const { jwtToken } = response.data;

@@ -210,7 +210,7 @@
   "first_name_required": "First name is required",
   "last_name_required": "Last name is required",
   "only_letters": "Only letters allowed",
-  "length": "Must be 3–10 characters",
+  "length": "Must be 3–15 characters",
   "email_required": "Email is required",
   "invalid_email": "Invalid email",
   "password_required": "Password is required",
@@ -270,5 +270,12 @@
   "battery_not_enough_message": "Your battery level is not enough for this trip.",
   "ok": "OK",
 
-  "bookmark_removed": "Bookmark removed"
+  "bookmark_removed": "Bookmark removed",
+  
+  "sign_in_failed": "Sign in failed. Please check your email and password.",
+  "something_went_wrong": "Something went wrong. Please try again."
+  
+
+
+
 }

@@ -1,3 +1,4 @@
+
 import React, { useState, useContext } from "react";
 import {
   View,
@@ -27,6 +28,7 @@ const SignInScreen = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Arabic text styles
   const arabicTextStyle = isRTL ? styles.arabicText : {};
@@ -45,42 +47,46 @@ const SignInScreen = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSignIn = async () => {
-  if (validate()) {
-    try {
-      // 1. Call login API
-      const loginResponse = await axios.post(
-        "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/user/login",
-        {
-          userEmail: email,
-          password: password,
+  const handleSignIn = async () => {
+    setErrorMessage(""); // Clear previous error
+    if (validate()) {
+      try {
+        // 1. Call sign-in API
+        const loginResponse = await axios.post(
+          "https://electracar.onrender.com/api/user/login",
+          {
+            userEmail: email,
+            password: password,
+          }
+        );
+        const { jwtToken } = loginResponse.data;
+
+        // 2. Save token in context immediately (user null for now)
+        login(null, jwtToken);
+
+        // 3. Fetch user info with token
+        const userResponse = await axios.get(
+          "https://electracar.onrender.com/api/user/me",
+          {
+            headers: { Authorization: `Bearer ${jwtToken}` },
+          }
+        );
+
+        // 4. Save user info in context
+        updateUser(userResponse.data);
+
+        // 5. Navigate after successful sign in and user fetch
+        navigation.navigate("MainTabs", { screen: "Me" });
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          // Unauthorized — wrong email or password
+          setErrorMessage(t("sign_in_failed"));
+        } else {
+          setErrorMessage(t("something_went_wrong"));
         }
-      );
-      const { jwtToken } = loginResponse.data;
-
-      // 2. Save token in context immediately (user null for now)
-      login(null, jwtToken);
-
-      // 3. Fetch user info with token
-      const userResponse = await axios.get("https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/user/me", {
-        headers: { Authorization: `Bearer ${jwtToken}` },
-      });
-
-      // 4. Save user info in context
-      updateUser(userResponse.data);
-
-      // 5. Navigate after successful login and user fetch
-      navigation.navigate("MainTabs", { screen: "Me" });
-    } catch (error) {
-      if (error.response) {
-        console.log("Login failed:", error.response.data);
-      } else {
-        console.log("Login failed:", error.message);
       }
     }
-  }
-};
-
+  };
 
   return (
     <KeyboardAvoidingView
@@ -116,6 +122,10 @@ const handleSignIn = async () => {
             isRTL={isRTL}
           />
 
+          {errorMessage ? (
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
+          ) : null}
+
           <TouchableOpacity style={styles.button} onPress={handleSignIn}>
             <Text style={[styles.buttonText, arabicButtonTextStyle]}>
               {t("sign_in")}
@@ -135,9 +145,7 @@ const handleSignIn = async () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            onPress={() => navigation.navigate("ForgotPassword")}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
             <Text style={[styles.linkText, arabicTextStyle]}>
               {t("forgot_password_question")}
             </Text>
@@ -213,6 +221,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  errorMessage: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 10,
+  },
 });
 
 export default SignInScreen;
+

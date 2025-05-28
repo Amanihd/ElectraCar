@@ -77,7 +77,7 @@ const PasswordReset = () => {
     if (validate()) {
       try {
         const response = await axios.post(
-          "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/password/reset",
+          "https://electracar.onrender.com/api/password/reset",
           {
             token: resetToken,
             newPassword: newPassword,

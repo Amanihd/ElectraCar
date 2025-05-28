@@ -29,7 +29,7 @@ const VehiclePickScreen = ({ route }) => {
     const fetchVehicles = async () => {
       try {
         const response = await axios.get(
-          "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/vehicles/me",
+          "https://electracar.onrender.com/api/vehicles/me",
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -66,7 +66,7 @@ const VehiclePickScreen = ({ route }) => {
   const handleSelectVehicle = async (vehicleId) => {
     try {
       const response = await axios.put(
-        `https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/vehicles/select/${vehicleId}`,
+        `https://electracar.onrender.com/api/vehicles/select/${vehicleId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

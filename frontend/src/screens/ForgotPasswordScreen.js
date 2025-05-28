@@ -48,7 +48,7 @@ const ForgotPasswordScreen = () => {
     if (validate()) {
       try {
         const response = await axios.post(
-          "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/password/request",
+          "https://electracar.onrender.com/api/password/request",
           { email }
         );
 
