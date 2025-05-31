@@ -48,7 +48,6 @@ const TripsScreen = ({ route, navigation }) => {
   const arFontFamilySmiBold = isRTL
     ? { fontFamily: "IBM-SemiBold" }
     : { fontWeight: "bold" };
- 
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -59,7 +58,7 @@ const TripsScreen = ({ route, navigation }) => {
   }, [isLoggedIn]);
 
   if (loading) {
-    return null; 
+    return null;
   }
 
   const vehicle = selectedVehicle || {
@@ -131,7 +130,7 @@ const TripsScreen = ({ route, navigation }) => {
       destinationLon: Number(destCoords.lon),
       initialChargeDistanceKm: Number(driveableDistance),
       maxDriveKm: Number(maxRange),
-      bookmarked: Boolean(bookmarkChoice), 
+      bookmarked: Boolean(bookmarkChoice),
       ...(bookmarkChoice ? { bookmarkName: tripName } : {}),
     };
 
@@ -146,7 +145,7 @@ const TripsScreen = ({ route, navigation }) => {
 
     try {
       const response = await axios.post(
-        "https://b0ab-2a01-9700-40a8-1c00-e448-6fcf-ad5c-860.ngrok-free.app/api/path/find",
+        "https://2e7d-2a01-9700-40a8-1c00-d189-fd77-bd5b-523c.ngrok-free.app/api/path/find",
         requestBody,
         {
           headers: {
@@ -168,7 +167,6 @@ const TripsScreen = ({ route, navigation }) => {
         return;
       }
 
-      
       const convertedPath = path.map((p) => ({
         lat: p.lat,
         lng: p.lon,
@@ -180,7 +178,7 @@ const TripsScreen = ({ route, navigation }) => {
       const tripDestination = convertedPath[convertedPath.length - 1];
       console.log("Trip destination:", tripDestination);
 
-      const streets = convertedPath.slice(1, -1); 
+      const streets = convertedPath.slice(1, -1);
       console.log("Streets (middle points):", streets);
 
       navigation.navigate("TripMap", {

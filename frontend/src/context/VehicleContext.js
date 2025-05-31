@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
@@ -6,15 +6,75 @@ import { AuthContext } from "./AuthContext";
 export const VehicleContext = createContext();
 
 export const VehicleProvider = ({ children }) => {
-  const { token } = useContext(AuthContext); // Get token here
+  const { token, isLoggedIn } = useContext(AuthContext);
 
   const [vehicles, setVehicles] = useState([]);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //   useEffect(() => {
+  //     const loadVehicles = async () => {
+  //       if (!token) {
+  //         setLoading(false);
+  //         return;
+  //       }
+
+  //       try {
+  //         const cachedSelectedId = await SecureStore.getItemAsync(
+  //           "selectedVehicleId"
+  //         );
+
+  //         const response = await axios.get(
+  // "https://electracar.onrender.com/api/vehicles/me",
+  //           {
+  //             headers: { Authorization: `Bearer ${token}` },
+  //           }
+  //         );
+
+  //         const fetchedVehicles = response.data;
+  //         setVehicles(fetchedVehicles);
+
+  //         if (cachedSelectedId) {
+  //           const cachedVehicle = fetchedVehicles.find(
+  //             (v) => v.id.toString() === cachedSelectedId
+  //           );
+  //           if (cachedVehicle) {
+  //             setSelectedVehicle(cachedVehicle);
+  //           } else {
+  //             const backendSelected = fetchedVehicles.find((v) => v.selected);
+  //             if (backendSelected) {
+  //               setSelectedVehicle(backendSelected);
+  //               await SecureStore.setItemAsync(
+  //                 "selectedVehicleId",
+  //                 backendSelected.id.toString()
+  //               );
+  //             }
+  //           }
+  //         } else {
+  //           const backendSelected = fetchedVehicles.find((v) => v.selected);
+  //           if (backendSelected) {
+  //             setSelectedVehicle(backendSelected);
+  //             await SecureStore.setItemAsync(
+  //               "selectedVehicleId",
+  //               backendSelected.id.toString()
+  //             );
+  //           }
+  //         }
+  //       } catch (error) {
+  //         console.error("Failed to load vehicles", error);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     };
+
+  //     loadVehicles();
+  //   }, [token]);
+
   useEffect(() => {
     const loadVehicles = async () => {
-      if (!token) {
+      if (!token || !isLoggedIn) {
+        setVehicles([]);
+        setSelectedVehicle(null);
         setLoading(false);
         return;
       }
@@ -25,7 +85,7 @@ export const VehicleProvider = ({ children }) => {
         );
 
         const response = await axios.get(
-"https://electracar.onrender.com/api/vehicles/me",
+          "https://electracar.onrender.com/api/vehicles/me",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -61,14 +121,18 @@ export const VehicleProvider = ({ children }) => {
           }
         }
       } catch (error) {
-        console.error("Failed to load vehicles", error);
+        if (error.response?.status === 403) {
+          console.warn("403: Token invalid or user is not authorized.");
+        } else {
+          console.error("Failed to load vehicles", error);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     loadVehicles();
-  }, [token]);
+  }, [token, isLoggedIn]);
 
   const addVehicle = (newVehicle) => {
     setVehicles((prev) => [...prev, newVehicle]);
@@ -89,37 +153,36 @@ export const VehicleProvider = ({ children }) => {
       console.error("Failed to update selected vehicle on backend", error);
     }
   };
+
   /////////// delete vehicle API
   const deleteVehicle = async (vehicleId) => {
-  try {
-    const response = await axios.delete(
-      `https://electracar.onrender.com/api/vehicles/${vehicleId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    try {
+      const response = await axios.delete(
+        `https://electracar.onrender.com/api/vehicles/${vehicleId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data.message); // should say "deleted"
+
+      // Remove from state
+      setVehicles((prevVehicles) =>
+        prevVehicles.filter((v) => v.id !== vehicleId)
+      );
+
+      // If deleted vehicle was selected, clear it
+      if (selectedVehicle?.id === vehicleId) {
+        setSelectedVehicle(null);
+        await SecureStore.deleteItemAsync("selectedVehicleId");
       }
-    );
-
-    console.log(response.data.message); // should say "deleted"
-
-    // Remove from state
-    setVehicles((prevVehicles) =>
-      prevVehicles.filter((v) => v.id !== vehicleId)
-    );
-
-    // If deleted vehicle was selected, clear it
-    if (selectedVehicle?.id === vehicleId) {
-      setSelectedVehicle(null);
-      await SecureStore.deleteItemAsync("selectedVehicleId");
+    } catch (error) {
+      console.error("Failed to delete vehicle", error);
+      throw error; // let UI screen decide how to alert
     }
-
-  } catch (error) {
-    console.error("Failed to delete vehicle", error);
-    throw error; // let UI screen decide how to alert
-  }
-};
-
+  };
 
   return (
     <VehicleContext.Provider

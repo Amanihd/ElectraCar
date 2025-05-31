@@ -15,16 +15,17 @@ const fetchStations = async () => {
     latitude: station.AddressInfo.Latitude,
     longitude: station.AddressInfo.Longitude,
     cost: station.UsageCost || null,
-    amenities: station.MetadataValues || [],
+    amenities: station.MetadataValues || [], //like wifi ,cafe,..
     plugType:
-      station.Connections?.map((conn) => conn.ConnectionType?.Title) || [],
-    plugScore: station.UserComments?.[0]?.Rating || null,
+      station.Connections?.map((conn) => conn.ConnectionType?.Title) || [], //connection is an array of pluges
+    plugScore: station.UserComments?.[0]?.Rating || null, //rating
     parking: station.NumberOfPoints || null,
     isFast: station.Connections?.some((conn) => conn.PowerKW >= 22),
-    numConnections: station.Connections?.length || 0,
+    numConnections: station.Connections?.length || 0, //number of pluges
     isAvailable: station.StatusType?.IsOperational ?? null,
   }));
 
+  //fs -> file system it is a library in node.js
   fs.writeFileSync("./stations.json", JSON.stringify(filteredData, null, 2));
   console.log("Data saved to stations.json");
 };

@@ -8,8 +8,10 @@ export default function useFilteredStations(chargingStations, filterTypes) {
   return useMemo(() => {
     return chargingStations.filter((station) => {
       if (filterTypes.length === 0) return true;
+      //return all stations
 
       return filterTypes.some((filter) => {
+        //return station that at leaset Compatible with filters 
         if (filter === "available" && station.isAvailable) return true;
         if (filter === "2plus" && station.numConnections >= 2) return true;
         if (filter === "fast" && station.isFast) return true;
@@ -22,6 +24,7 @@ export default function useFilteredStations(chargingStations, filterTypes) {
           filter.selectedPlugTypes.some((plug) =>
             station.plugType.includes(plug)
           )
+          //return station that at leaset have one of plug type that user seleceted
         ) {
           return true;
         }

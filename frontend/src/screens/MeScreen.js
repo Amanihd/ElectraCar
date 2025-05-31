@@ -42,8 +42,8 @@ const MeScreen = () => {
           <View style={{ marginTop: 60 }}>
             <MeLinksContainer navigation={navigation} />
           </View>
+          <Footer />
         </ScrollView>
-        <Footer />
       </View>
     );
   }

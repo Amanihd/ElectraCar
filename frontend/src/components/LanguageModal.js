@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -38,16 +38,18 @@ const LanguageModal = ({ visible, onRequestClose, changeLanguage }) => {
                 style={styles.languageButton}
                 onPress={() => changeLanguage(item)}
               >
-                <Text style={[styles.languageText,arFontFamilySmiBold]}>
-                  {t(languages[item].key)}
-                </Text>
+                <Text style={[styles.languageText,arFontFamilySmiBold]}> 
+                  {t(languages[item].key)} 
+                </Text> 
               </TouchableOpacity>
+              //if item is en then key english 
             )}
-            keyExtractor={(item) => item}
+            keyExtractor={(item) => item} //key en or ar for flat list
           />
         </View>
       </View>
-    </Modal>
+    </Modal> 
+    
   );
 };
 

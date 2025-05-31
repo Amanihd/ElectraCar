@@ -6,7 +6,7 @@ export const TripContext = createContext();
 export const TripProvider = ({ children }) => {
   const { userLocation } = useContext(UserLocationContext);
 
-  const [start, setStart] = useState(userLocation || null);
+  const [start, setStart] = useState(userLocation || null); //set start by defult to userlocation
   const [destination, setDestination] = useState(null);
   const [tripName, setTripName] = useState("");
 

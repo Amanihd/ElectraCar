@@ -19,6 +19,7 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+      //route is tab that we declared , so i will check each one to decide the icon name
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === "Map") iconName = focused ? "map" : "map-outline";

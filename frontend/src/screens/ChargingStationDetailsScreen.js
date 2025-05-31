@@ -12,7 +12,6 @@ const ChargingStationDetails = ({ route, navigation }) => {
   const { setDestination, setTripName } = useContext(TripContext);
   const { t } = useTranslation();
   const station = route?.params?.station;
-  const userLocation = route?.params?.userLocation;
   const isRTL = i18next.language === "ar";
 
   if (!station) {
@@ -117,7 +116,7 @@ const ChargingStationDetails = ({ route, navigation }) => {
           title={t("amenities")}
           content={
             station.amenities.length > 0
-              ? station.amenities.join(", ")
+              ? station.amenities.join(", ") //this is array so puts all elements and put comma between them
               : t("no_amenities_listed")
           }
         />

@@ -1,4 +1,3 @@
-
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -20,7 +19,7 @@ const CustomHeader = ({
     <View
       style={[
         styles.headerContainer,
-        { flexDirection: isRTL ? "row-reverse" : "row" }, 
+        { flexDirection: isRTL ? "row-reverse" : "row" },
       ]}
     >
       {isArrow && (
@@ -28,8 +27,10 @@ const CustomHeader = ({
           onPress={() => {
             if (goHomeOnBack) {
               navigation.navigate("MainTabs", { screen: "Home" });
+              //for back from join screen
             } else if (fromVehicleModal) {
               navigation.navigate("MainTabs", { screen: "Trips" });
+              //for back from vehicle pick/add screen
             } else {
               navigation.goBack();
             }

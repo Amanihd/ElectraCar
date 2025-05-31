@@ -33,13 +33,18 @@ const BottomBar = ({
         ? prevFilters.filter((item) => item !== filter)
         : [...prevFilters, filter]
     );
+
+    //prevFilters is an array of all filters
+    //item filter element in that array
   };
 
   const togglePlugTypeSelection = (type) => {
     setSelectedPlugTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
     );
-  };
+  }; //prev is an array selectedPlugTypes
+     //t element in this array
+     //prev.filter bring all elements in that array except type cuz it user remove it
 
   const handlePlugTypeDone = () => {
     setPlugTypeModalVisible(false);
@@ -51,6 +56,7 @@ const BottomBar = ({
       if (selectedPlugTypes.length > 0) {
         
         return [...newFilters, { filter: "plugType", selectedPlugTypes }];
+        //newFilters all previous filters + we add the newly selectedPlugTypes 
       } else {
        
         return newFilters;

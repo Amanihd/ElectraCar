@@ -70,13 +70,15 @@ const MainMap = ({ getlocation, filterTypes }) => {
         initialRegion={{
           latitude: userLocation.latitude,
           longitude: userLocation.longitude,
-          latitudeDelta: 0.01,
+          latitudeDelta: 0.01, 
           longitudeDelta: 0.01,
         }}
       >
         {userLocation && <Marker coordinate={userLocation} pinColor="blue" />}
 
+
         {filteredStations.map((station, index) => (
+          //index for map
           <ChargingStationMarker
             key={index}
             station={station}

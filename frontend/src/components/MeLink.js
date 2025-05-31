@@ -1,5 +1,4 @@
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
-import React from "react";
 import { FontAwesome5 } from "react-native-vector-icons";
 
 const MeLink = ({ title, icon, onPress, isRTL }) => {

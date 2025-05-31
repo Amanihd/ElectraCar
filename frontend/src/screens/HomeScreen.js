@@ -8,7 +8,7 @@ const HomeScreen = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [filterTypes, setFilterTypes] = useState([]);
   const { setUserLocation: setContextUserLocation } =
-    useContext(UserLocationContext);
+    useContext(UserLocationContext); // I renmae it to setContextUserLocation cuz i already have setUserLocation
 
   useEffect(() => {
     const fetchLocationName = async () => {
